@@ -58,19 +58,19 @@ std::cout << "Hello world !\n";
 #### Portée des variables 
 Soit la classe A.
 Trois types :
--automatique
+- automatique
 ```cpp
 A myClass(...);
 ```
 myClass est détruit (son destructeur est appelé) à la fin du bloc courant.
 
--dynamique
+- dynamique
 ```cpp
 A *myClass=new myClass(...);
 ```
 myClass est un pointeur alloué qui survit au bloc courant, sa destruction ne peut se faire qu'avec un delete
 
--statique
+- statique : variable globale
 
 
 ## Annexe 2 : lire et écrire dans un fichier en C++
