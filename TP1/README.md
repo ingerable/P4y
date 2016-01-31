@@ -50,7 +50,8 @@ A myClass;
 
 #### Librairie standard
 Namespace std
-Fonction d'affichage sur la sortie standard :
+
+Exemple, fonction d'affichage sur la sortie standard :
 ```cpp
 std::cout << "Hello world !\n";
 ```
