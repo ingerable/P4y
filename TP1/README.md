@@ -3,13 +3,13 @@
 Séance de prise en main des outils git, du langage C++, de la lecture/écriture d'image au format PGM, des manipulations de pixels.
 
 Travail demandé :
--analyser la classe Image8b 
--compiler et exécuter le programme main.cpp
--modifier la fonction main() de manière à construire une image type damier (un pixel blanc, un pixel noir, etc.)
--écrire une fonction permettant de lire un fichier au format PGM binaire et de créer l'image correspondante
--écrire une fonction permettant d'écrire une image dans une fichier au format PGM binaire 
--écrire un programme qui prend en paramètres le nom de l'image d'entrée, le nom de l'image de sortie, une valeur de seuil, et qui effectue un seuillage sur l'image d'entrée et écrit le résultat
--même chose que précédemment, mais le programme calcule le négatif de l'image d'entrée
+- analyser la classe Image8b 
+- compiler et exécuter le programme main.cpp
+- modifier la fonction main() de manière à construire une image type damier (un pixel blanc, un pixel noir, etc.)
+- écrire une fonction permettant de lire un fichier au format PGM binaire et de créer l'image correspondante
+- écrire une fonction permettant d'écrire une image dans une fichier au format PGM binaire 
+- écrire un programme qui prend en paramètres le nom de l'image d'entrée, le nom de l'image de sortie, une valeur de seuil, et qui effectue un seuillage sur l'image d'entrée et écrit le résultat
+- même chose que précédemment, mais le programme calcule le négatif de l'image d'entrée
 
 ## Annexe 1 : notions de base en c++
 
