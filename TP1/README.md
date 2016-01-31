@@ -27,8 +27,8 @@ Travail demandé :
 g++ main.cpp image.cpp -o TP1
 ```
 ### Documentation
-http://www.cplusplus.com
-http://en.cppreference.com/w/
+- http://www.cplusplus.com
+- http://en.cppreference.com/w/
 
 ### Notions de base
 #### Espaces de nom :
