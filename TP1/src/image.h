@@ -37,6 +37,7 @@ public:
     int getWidth();
     int getHeight();
     int getSize();
+    unsigned char *getData();
     
     /// affiche sur la sortie standard la valeur des pixels de l'image
     void print();

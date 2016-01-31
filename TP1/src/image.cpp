@@ -86,6 +86,11 @@ int Image8b::getSize()
     return size;
 }
     
+unsigned char* Image8b::getData()
+{
+    return data;
+}
+    
 void Image8b::print()
 {
     
