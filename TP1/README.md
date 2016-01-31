@@ -14,14 +14,14 @@ Travail demandé :
 ## Annexe 1 : notions de base en c++
 
 ### Structure d'un programme
--fichiers .h et .cpp
--les classes et fonctions définies dans un fichier foo.cpp sont déclarées généralement dans un fichier foo.h
+- fichiers .h et .cpp
+- les classes et fonctions définies dans un fichier foo.cpp sont déclarées généralement dans un fichier foo.h
 
 ### Compilation
--les fichiers .cpp sont compilés en fichiers objets .o
--les fichiers objets sont liés pour construire l'exécutable
--la compilation séparée (qui s'appuie généralement sur un Makefile) permet de recompiler uniquement le fichier .cpp nécessaire
--le TP1 se compile de la manière suivante :
+- les fichiers .cpp sont compilés en fichiers objets .o
+- les fichiers objets sont liés pour construire l'exécutable
+- la compilation séparée (qui s'appuie généralement sur un Makefile) permet de recompiler uniquement le fichier .cpp nécessaire
+- le TP1 se compile de la manière suivante :
 
 ```sh
 g++ main.cpp image.cpp -o TP1
@@ -75,11 +75,11 @@ myClass est un pointeur alloué qui survit au bloc courant, sa destruction ne pe
 
 ## Annexe 2 : lire et écrire dans un fichier en C++
 
--std::ifstream et std::ofstream pour ouvrir un fichier en lecture, en écriture
--std::string : type de base pour les string en C++
--std::getline(file,line) : récupère dans la string line la ligne suivante du fichier file
--std::stringstream sstr(line) : construit un flux à partir d'une string
--sstr >> x >> y : écrit de manière structurée à partir du flux dans les entiers x et y 
+- std::ifstream et std::ofstream pour ouvrir un fichier en lecture, en écriture
+- std::string : type de base pour les string en C++
+- std::getline(file,line) : récupère dans la string line la ligne suivante du fichier file
+- std::stringstream sstr(line) : construit un flux à partir d'une string
+- sstr >> x >> y : écrit de manière structurée à partir du flux dans les entiers x et y 
 
 
 
