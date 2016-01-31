@@ -46,7 +46,7 @@ ou
 ```cpp
 using namespace foo; 
 A myClass;
-``
+```
 
 #### Librairie standard
 Namespace std
