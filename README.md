@@ -14,7 +14,7 @@ Vous pouvez maintenant **cloner** votre dépôt sur votre machine de travail afi
 ```sh
 git clone https://git.unistra.fr/[votre login]/P4y.git
 ```
-Vous vous retrouvez alors devant un dossier P4x qui contient une copie locale de votre dépôt.
+Vous vous retrouvez alors avec un dossier P4y qui contient une copie locale de votre dépôt.
 
 ---
 
