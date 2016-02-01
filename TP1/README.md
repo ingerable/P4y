@@ -1,6 +1,21 @@
 # Traitement d'images en C++
 
+# Principe général des TP 
+
+- Durant la séance de TP, faire des commits réguliers, à bon escient et commentés de manière pertinente. 
+- A la fin de la séance, faire un push de votre travail
+
+L'évaluation des TP P4y repose sur :
+
+-le contenu et la pertinence des commits réalisés
+-le sondage d'auto-évaluation à remplir sur Moodle, à la fin de chaque séance 
+-une évaluation individuelle avec votre enseignant (deux fois par étudiant, ordre de passage fourni lors de la première séance de TP).
+L'évaluation reposera sur vos réalisations mais également sur votre capacité à vous auto-évaluer.
+
+# Séance 1
+
 Séance de prise en main des outils git, du langage C++, de la lecture/écriture d'image au format PGM, des manipulations de pixels.
+
 
 Travail demandé :
 - analyser la classe Image8b 
