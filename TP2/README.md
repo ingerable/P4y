@@ -6,11 +6,13 @@ Interpolation, rééchantillonnage, quantification.
 On appelle redimensionnement (ou rééchantillonnage) d'une image le fait de changer sa taille, soit en enlevant des échantillons (sous-échantillonnage) soit en en ajoutant (sur-échantillonnage).
 
 On va écrire un programme permettant de rééchantillonner une image en considèrant que le redimensionnement conservera le rapport hauteur/largeur de l’image (autrement dit l’image ne sera pas déformée). Soient r le facteur (ou ratio) de redimensionnement, l et h la largeur et la hauteur de l'image. Après redimensionnement, l’image aura une largeur de l*r et une hauteur de h *r.
-- si r < 1 la taille de l’image est diminuée et on applique à l’image un sous-échantillonnage ;- si r > 1 la taille de l’image est augmentée et on applique à l’image un sur-échantillonnage. 
+- si r < 1 la taille de l’image est diminuée et on applique à l’image un sous-échantillonnage ;
+- si r > 1 la taille de l’image est augmentée et on applique à l’image un sur-échantillonnage. 
 
 Deux types de méthodes d'interpolation seront implantés : par plus proche voisin et par interpolation bilinéaire.
 
 1. Écrire une fonction ``subsample`` qui sous-échantillonne une image d'un facteur donné en paramètres (avec l'une des deux méthodes citées précédemment, le type étant passé en paramètre de la fonction); 
+
 2. Écrire une fonction ``oversample`` qui sur-échantillonne une image d'un facteur donné en paramètres (avec l'une des deux méthodes citées précédemment, le type étant passé en paramètre de la fonction).
 
 ## Quantification
