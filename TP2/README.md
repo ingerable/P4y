@@ -1,6 +1,11 @@
 # Semaine 2
 
-Interpolation, rééchantillonnage, quantification.
+Thèmes abordés :  rééchantillonnage, interpolation, quantification.
+
+## Test et illustrations
+
+-  Pour chaque méthode, créer un programme spécifique permettant de montrer le bon fonctionnement des fonctions ;
+-  Créer un document au format de votre choix (markdown, html ou pdf) dans lequel vous illustrerez les résultats de vos programmes de test, en indiquant, pour chaque jeu d'essai, les paramètres utilisés.
 
 ## Redimensionnement
 On appelle redimensionnement (ou rééchantillonnage) d'une image le fait de changer sa taille, soit en enlevant des échantillons (sous-échantillonnage) soit en en ajoutant (sur-échantillonnage).
@@ -11,9 +16,9 @@ On va écrire un programme permettant de rééchantillonner une image en conside
 
 Deux types de méthodes d'interpolation seront implantés : par plus proche voisin et par interpolation bilinéaire.
 
-1. Écrire une fonction ``subsample`` qui sous-échantillonne une image d'un facteur donné en paramètres (avec l'une des deux méthodes citées précédemment, le type étant passé en paramètre de la fonction); 
+1. Écrire une fonction ``subsample`` qui sous-échantillonne une image d'un facteur donné en paramètre (avec l'une des deux méthodes citées précédemment, le type étant passé en paramètre de la fonction); 
 
-2. Écrire une fonction ``oversample`` qui sur-échantillonne une image d'un facteur donné en paramètres (avec l'une des deux méthodes citées précédemment, le type étant passé en paramètre de la fonction).
+2. Écrire une fonction ``oversample`` qui sur-échantillonne une image d'un facteur donné en paramètre (avec l'une des deux méthodes citées précédemment, le type étant passé en paramètre de la fonction).
 
 ## Quantification
 On appelle quantification le processus consistant à réduire le nombre de couleurs/niveaux de gris d'une image.
