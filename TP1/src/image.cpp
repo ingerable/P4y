@@ -8,6 +8,7 @@
 
 #include "image.h"
 #include <iostream>
+#include <cstring> // memcpy
 
 namespace P4y {
     
