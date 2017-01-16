@@ -91,11 +91,14 @@ myClass est un pointeur alloué qui survit au bloc courant, sa destruction ne pe
 
 ## Annexe 2 : lire et écrire dans un fichier en C++
 
+- http://www.cplusplus.com/doc/tutorial/files/
 - std::ifstream et std::ofstream pour ouvrir un fichier en lecture, en écriture
 - std::string : type de base pour les string en C++
 - std::getline(file,line) : récupère dans la string line la ligne suivante du fichier file
 - std::stringstream sstr(line) : construit un flux à partir d'une string
-- sstr >> x >> y : écrit de manière structurée à partir du flux dans les entiers x et y 
+- sstr >> x >> y : écrit de manière structurée à partir du flux dans les entiers x et y
+- méthodes read() et write() des classes std::ifstream, std::ofstream, std::fstream pour lire ou écrire des données binaires (paquets d'octets)
+
 
 
 

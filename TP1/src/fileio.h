@@ -9,6 +9,9 @@
 #ifndef fileio_h
 #define fileio_h
 
+#include <iostream>
+#include "image.h"
+
 namespace P4y {
 
 class FileIO {

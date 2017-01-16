@@ -34,9 +34,9 @@ public:
     
     ///destructeur : instructions pour désallouer les ressources de la classe (ici, le pointeur data)
     ~Image8b();
-    int getWidth();
-    int getHeight();
-    int getSize();
+    int getWidth() const;
+    int getHeight() const;
+    int getSize() const;
     unsigned char *getData();
     
     /// affiche sur la sortie standard la valeur des pixels de l'image

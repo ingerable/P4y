@@ -72,17 +72,17 @@ Image8b::~Image8b()
     }
 }
 
-int Image8b::getWidth()
+int Image8b::getWidth() const
 {
     return width;
 }
 
-int Image8b::getHeight()
+int Image8b::getHeight() const
 {
     return height;
 }
     
-int Image8b::getSize()
+int Image8b::getSize() const
 {
     return size;
 }
