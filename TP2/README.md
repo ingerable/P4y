@@ -33,3 +33,9 @@ a^2+b^2=c^2
 ```
 
 $`\frac{x}{y}`$
+```math
+I'(i,j)=\sum_{k=0}^{N-1} \sum_{l=0}^{N-1} M(k,l) I(i+k-c_x,j+l-c_y)
+```
+
+où $`c_x=\frac{N}{2}`$, $`c_y=\frac{N}{2}`$ sont les coordonnées du centre du masque M.
+
