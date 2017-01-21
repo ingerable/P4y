@@ -26,16 +26,3 @@ On appelle quantification le processus consistant à réduire le nombre de coule
 Écrire la fonction ``quantize`` qui quantifie une image 8 bits passée en paramètre d'un facteur 2^k, avec k passé en paramètre. Après quantification, le nombre de niveaux de gris de l'image est divisé par 2^k, et l'image est normalisée : les niveaux de gris sont rééchelonnés dans l'intervalle [0,255].
 
 Par exemple, pour k=7, on obtient une image binaire : les pixels ayant une intensité inférieure à 128 dans l'image originale ont une intensité de 0 dans l'image d'arrivée ; les pixels ayant une intensité supérieure à 128 ont une intensité de 255 dans l'image d'arrivée.
-
-Test :
-```math
-a^2+b^2=c^2
-```
-
-$`\frac{x}{y}`$
-```math
-I'(i,j)=\sum_{k=0}^{N-1} \sum_{l=0}^{N-1} M(k,l) I(i+k-c_x,j+l-c_y)
-```
-
-où $`c_x=\frac{N}{2}`$, $`c_y=\frac{N}{2}`$ sont les coordonnées du centre du masque M.
-
