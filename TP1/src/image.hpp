@@ -11,15 +11,15 @@
 #include <cstring> // memcpy
 
 template<class T>
-Image<T>::Image(int dx, int dy, T *data):dx(0),dy(0),data(nullptr)
+Image<T>::Image(int dx, int dy, T *data):dx(0),dy(0),data(0)
 {
     if(dx>=0 && dy>=0) {
         this->dx=dx;
         this->dy=dy;
         this->size=dx*dy;
         this->data=new T[this->size];
-        if(data != nullptr) {
-            memcpy(this->data, data, size);
+        if(data != 0) {
+            memcpy(this->data, data, size*sizeof(T));
         }
     }    
 }
@@ -60,7 +60,7 @@ Image<T> &Image<T>::operator=(const Image<T> &image)
 template<class T>    
 Image<T>::~Image()
 {
-    if(data!=nullptr)
+    if(data!=0)
     {
         delete[] data;
     }
@@ -84,7 +84,7 @@ int Image<T>::getSize() const
     return size;
 }
     
-template<class T>
+template<class T> 
 T* Image<T>::getData() const
 {
     return data;
@@ -103,7 +103,7 @@ void Image<T>::print()
     for(int y=0; y<dy; y++) {
         for(int x=0; x<dx; x++) {
             std::cout.width(3);
-            std::cout << (int)(*this)(x,y) << "|";
+            std::cout << (double)(*this)(x,y) << "|";
         }
         std::cout << "\n";
         for(int x=0; x<dx; x++) {

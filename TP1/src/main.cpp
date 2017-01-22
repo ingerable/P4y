@@ -11,7 +11,6 @@
 #include <iostream>
 #include <cstdint>
 #include "image.h"
-#include "fileio.h"
 
 int main(int argc, const char * argv[]) {
     if(argc !=3) {
@@ -29,15 +28,25 @@ int main(int argc, const char * argv[]) {
         }
     }
     
+    std::cout <<"Image A :\n";
     A.print();
 
     uint8_t buffer[]={0,1,2,
                      3,4,5,
                      6,7,8,
                      9,10,11};
+
     Image<uint8_t> B(3,4,buffer);
     
+    std::cout <<"Image B :\n";
     B.print();
+
+    double buffer2[]={0.1,0.2,0.3,
+                     0.4,0.5,0.6};
+
+    Image <double> C(3,2,buffer2);
+    std::cout <<"Image C :\n";
+    C.print();
     
     return 0;
 }

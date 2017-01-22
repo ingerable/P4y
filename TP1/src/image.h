@@ -26,7 +26,7 @@ private:
     
 public:
     /// construit une image de taille (dx,dy) (par défaut 0) avec le buffer data (optionnel)
-    Image(int dx=0, int dy=0, T *data=nullptr);
+    Image(int dx=0, int dy=0, T *data=0);
     
     /// constructeur de copie, permettant d'écrire Image B; Image A(B);
     Image(const Image& image);
