@@ -12,59 +12,57 @@
 #include "image.h"
 #include "fileio.h"
 
-namespace P4y {
-
 // read binary grayscale PGM 
-int FileIO::readPGM(const std::string &inputFile, Image8b &result)
+Image <uint8_t> readPGM(const std::string &inputFile)
 {
+    Image <uint8_t> error;
     std::ifstream file(inputFile);
     if(file.is_open()) {
         std::string line;
         std::getline(file,line);
         // only binary, greyscale PGM
         if(line=="P5") {
-            int width,height,maxValue;
+            int dx,dy,maxValue;
             std::getline(file,line);
             // remove comments beginning by '#'
-            while(line[0]=='#') std::getline(file,line);
+            while(line[0]=='#') 
+                std::getline(file,line);
             std::stringstream ss(line);
-            ss >> width >> height;
+            ss >> dx >> dy;
             std::getline(file,line);
             ss.clear();
             ss.str(line);
             ss>>maxValue;
-            std::cout << "Reading header.\nFile "<<inputFile<< "\nwidth "  << width << "\nheight " <<height << "\nmaxValue " << maxValue << "\n";
-            int bufSize=width*height;
-            char *buffer=new char[bufSize];
-            file.read(buffer,bufSize);
-            Image8b tmp(width,height,reinterpret_cast<unsigned char*> (buffer));
-            result=tmp;
+            std::cout << "Reading header.\nFile "<<inputFile<< "\ndx : "  << dx << "\ndy : " <<dy << "\nmaxValue : " << maxValue << "\n";
+            int size=dx*dy;
+            uint8_t *buffer=new uint8_t[size];
+            file.read((char *)buffer,size);
+            Image <uint8_t> result(dx,dy,buffer);
             delete[] buffer;
+            return result;
+            
         }
-        else return -1;
-        
         file.close();
     }
-    else return -1;
-    
-    return 0;
+   
+    return error;
 }
 
 // write binary greyscale PGM
-int FileIO::writePGM(P4y::Image8b &image8b, const std::string &outputFile)
+int writePGM(const Image<uint8_t> &image, const std::string &outputFile)
 {
     std::ofstream file(outputFile,std::ios_base::trunc  | std::ios_base::binary);
     if(file.is_open()) {
         std::string line;
         
-        int width=image8b.getWidth();
-        int height=image8b.getHeight();
-        int size=width*height;
+        int dx=image.getDx();
+        int dy=image.getDy();
+        int size=dx*dy;
         
-        file << "P5\n" << width << " " << height << "\n" << "255" ;
+        file << "P5\n" << dx << " " << dy << "\n" << "255" ;
         file << "\n";
         
-        file.write(reinterpret_cast<char *> (image8b.getData()),size);
+        file.write((char *)image.getData(),size);
         
         file << "\n";
         
@@ -74,8 +72,3 @@ int FileIO::writePGM(P4y::Image8b &image8b, const std::string &outputFile)
     
     return 0;
 }
-
-    
-}
-
-// namespace P4y

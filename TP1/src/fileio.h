@@ -10,17 +10,12 @@
 #define fileio_h
 
 #include <iostream>
+#include <cstdint>
 #include "image.h"
 
-namespace P4y {
+Image<uint8_t> readPGM(const std::string &inputFile);
+int writePGM(const Image<uint8_t> &image8b, const std::string &outputFile);
 
-class FileIO {
-public:
-    static int readPGM(const std::string &inputFile, Image8b &result);
-    static int writePGM(Image8b &image8b, const std::string &outputFile);
-};
     
-    
-} // namespace P4y
 
 #endif /* fileio_h */

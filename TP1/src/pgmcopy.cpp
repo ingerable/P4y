@@ -11,7 +11,6 @@
 #include "image.h"
 #include "fileio.h"
 
-using namespace P4y;
 
 int main(int argc, const char * argv[]) {
     if(argc !=3) {
@@ -21,12 +20,8 @@ int main(int argc, const char * argv[]) {
     std::string inputFile=argv[1];
     std::string outputFile=argv[2];
     
-    Image8b in;
-    // lecture
-    FileIO::readPGM(inputFile, in);
-    
-    // écriture
-    FileIO::writePGM(in,outputFile);
+    Image<uint8_t> in=readPGM(inputFile);
+    writePGM(in,outputFile);
     
     return 0;
 }

@@ -6,30 +6,39 @@
 //  Copyright © 2016 Benoit Naegel. All rights reserved.
 //
 
+#include <unistd.h>
 #include <cstdlib>
 #include <iostream>
+#include <cstdint>
 #include "image.h"
 #include "fileio.h"
 
-using namespace P4y;
-
 int main(int argc, const char * argv[]) {
     if(argc !=3) {
-        std::cout << "Usage : " << argv[0] << "<width> <height>\n";
+        std::cout << "Usage : " << argv[0] << "<dx> <dy>\n";
         exit(EXIT_FAILURE);
     }
-    int width=atoi(argv[1]);
-    int height=atoi(argv[2]);
+    int dx=atoi(argv[1]);
+    int dy=atoi(argv[2]);
     
-    Image8b A(width,height);
+    Image<uint8_t> A(dx,dy);
     
-    for(int y=0; y<A.getHeight(); y++) {
-        for(int x=0; x<A.getWidth(); x++) {
-            A(x,y)=(x+y)%256;
+    for(int y=0; y<A.getDy(); ++y) {
+        for(int x=0; x<A.getDx(); ++x) {
+            A(x,y)=(x+y)%10;
         }
     }
     
     A.print();
+
+    uint8_t buffer[]={0,1,2,
+                     3,4,5,
+                     6,7,8,
+                     9,10,11};
+    Image<uint8_t> B(3,4,buffer);
+    
+    B.print();
+    sleep(5);
     
     return 0;
 }
