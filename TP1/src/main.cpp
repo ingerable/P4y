@@ -38,7 +38,6 @@ int main(int argc, const char * argv[]) {
     Image<uint8_t> B(3,4,buffer);
     
     B.print();
-    sleep(5);
     
     return 0;
 }
