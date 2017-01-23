@@ -42,7 +42,7 @@ public:
     T *getData() const;
     
     /// affiche sur la sortie standard la valeur des pixels de l'image
-    void print();
+    void print() const;
     
     /// surcharge de l'opérateur () permettant d'écrire une valeur à la position (x,y) : A(x,y)=v
     T &operator()(const int &x, const int &y);
