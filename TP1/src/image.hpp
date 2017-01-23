@@ -90,7 +90,7 @@ T* Image<T>::getData() const
 }
 
 template<class T>
-void Image<T>::print()
+void Image<T>::print() const
 {
     
     for(int x=0; x<dx; x++) {
