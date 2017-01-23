@@ -6,7 +6,6 @@
 //  Copyright © 2016 Benoit Naegel. All rights reserved.
 //
 
-#include "image.h"
 #include <iostream>
 #include <cstring> // memcpy
 
