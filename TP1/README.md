@@ -53,11 +53,13 @@ namespace foo {
 	...
 }
 ```
-Accès par:
+Accès par :
+
 ```cpp
 foo::A myClass;
 ``` 
 ou
+
 ```cpp
 using namespace foo; 
 A myClass;
@@ -67,27 +69,30 @@ A myClass;
 Namespace `std`
 
 Exemple, fonction d'affichage sur la sortie standard :
+
 ```cpp
 std::cout << "Hello world !\n";
 ```
 
 #### Flux (stream)
 - un flux est une abstraction qui transforme une variable ou un objet en une séquence d'octets et vice-versa
-- l'opérateur `<<` transforme des objets en séquence d'octets
-	- Exemple, la fonction d'affichage sur la sortie standard :
+- l'opérateur `<<` transforme des objets en séquence d'octets. Exemple, la fonction d'affichage sur la sortie standard :
+	
 ```cpp
 std::cout << "Hello world !\n";
 ```
 transforme la chaîne de caractères `"Hello world !\n"` en une séquence d'octets envoyés sur la sortie standard (équivalent du `printf` en C).
 
-	- Autre exemple :
+- Autre exemple :
+
 ```cpp
 int i=42; double j=3.14;
 std::cout << "i= " << i << " j= " << j << "\n";
 ```
-concatène la chaîne `"i= "`, le contenu de la variable entière `i`, la chaîne `" j= "`, le contenu de la variable `j` de type `double` et enfin le caractère retour à la ligne
-- l'opérateur `>>` transforme une séquence d'octets en objets ou varibles.
-	- Exemple, la fonction de saisie (équivalent du `scanf` en C) :
+concatène la chaîne `"i= "`, le contenu de la variable entière `i`, la chaîne `" j= "`, le contenu de la variable `j` de type `double`, le caractère `"\n"` et envoie le tout sous forme de séquence d'octets à la sortie standard
+
+- l'opérateur `>>` transforme une séquence d'octets en objets ou varibles. Exemple, la fonction de saisie (équivalent du `scanf` en C) :
+
 	```cpp
 	int x; double y;
 	std::cin >> x >> y;
@@ -100,12 +105,14 @@ concatène la chaîne `"i= "`, le contenu de la variable entière `i`, la chaîn
 #### Portée des variables 
 
 - variable locale (ou automatique) :
+
 ```cpp
 A myClass(...);
 ```
-myClass est détruit (son destructeur est appelé) à la fin du bloc courant.
+`myClass` est détruit (et son destructeur est appelé) à la fin du bloc courant.
 
 - pointeur :
+
 ```cpp
 A *myClass=new myClass(...);
 ```
