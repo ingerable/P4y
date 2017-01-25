@@ -18,7 +18,7 @@ Séance de prise en main des outils `git`, du langage C++, de la lecture/écritu
 - écrire un programme qui prend en paramètres le nom de l'image d'entrée, le nom de l'image de sortie, une valeur de seuil, et qui effectue un seuillage sur l'image d'entrée et écrit le résultat
 - même chose que précédemment, mais le programme calcule le négatif de l'image d'entrée
 
-## Annexe 1 : notions de base en c++
+## Annexe 1 : notions de base en C++
 
 ### Structure d'un programme
 - similaire au C : fichiers .h et .cpp
