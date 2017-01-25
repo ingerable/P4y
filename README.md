@@ -83,5 +83,3 @@ Pour récupérer les commits ajoutés par vos enseignants sur le dépôt de réf
 git pull upstream master
 ```
 *master* est ici le nom de la **branche** dans laquelle vous travaillez, mais cela, c'est une autre histoire dont on n'a pas forcément besoin pour le moment..
-
-$`x^2`$
