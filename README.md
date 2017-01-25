@@ -84,4 +84,4 @@ git pull upstream master
 ```
 *master* est ici le nom de la **branche** dans laquelle vous travaillez, mais cela, c'est une autre histoire dont on n'a pas forcément besoin pour le moment..
 
-$x^2$
+$`x^2`$
