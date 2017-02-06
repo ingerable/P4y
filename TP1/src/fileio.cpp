@@ -83,5 +83,17 @@ void thresholding(Image<uint8_t> &image, const int value)
           }
       }
   }
+}
 
+//negate a picture
+
+void negation(Image<uint8_t> &image)
+{
+  for(int y=0; y<image.getDy(); ++y) // on parcourt les pixels de l'image entrée
+  {
+      for(int x=0; x<image.getDx(); ++x)
+      {
+            image(x,y)=255-image(x,y);
+      }
+  }
 }

@@ -63,9 +63,15 @@ int main(int argc, const char * argv[]) {
     D.print();
 
 
-    Image<uint8_t> E();
+    Image<uint8_t> E = readPGM(fichierPGM);
     std::cout<<"Image PGM :\n";
-    writePGM(readPGM(fichierPGM),"tst.pgm");
+    //writePGM(readPGM(fichierPGM),"tst.pgm");
+    //thresholding(E,120);
+    negation(E);
+    writePGM(E,"tst.pgm");
+
+
+
 
     return 0;
 }
