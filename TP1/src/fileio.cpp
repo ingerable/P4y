@@ -39,26 +39,8 @@ Image <uint8_t> readPGM(const std::string &inputFile)
       return res;
     }
 
-    return 0;
 }
 
-// renvoit vrai si les pixels entre les 2 images diffèrenvoit
-int compareImages(const Image<uint8_t> &image1, const Image<uint8_t> &image2)
-{
-  if(image1.getSize()!=image2.getSize())
-  {
-    std::cout<<"Les images n'ont pas le meme nombre de pixels";
-  }else{
-  /*  for(int i=0; i<=image1.getSize();i++)
-    {
-
-    }*/
-    //std::cout<<image1.getData();
-
-  }
-std::cout<<image1.getData();
-return 1;
-}
 
 // write binary greyscale PGM
 int writePGM(const Image<uint8_t> &image, const std::string &outputFile)
@@ -83,4 +65,23 @@ int writePGM(const Image<uint8_t> &image, const std::string &outputFile)
     else return -1;
 
     return 0;
+}
+
+//thresholding function with uint8_t picture, parameters are a picture and a thresholding value (0-255)
+
+void thresholding(Image<uint8_t> &image, const int value)
+{
+  for(int y=0; y<image.getDy(); ++y) // on parcourt les pixels de l'image entrée
+  {
+      for(int x=0; x<image.getDx(); ++x)
+      {
+        if(image(x,y)>value) // si la valeur du pixel est supérieur on lui affecte la valeur 255
+          {
+            image(x,y)=255;
+          }else{
+            image(x,y)=0; // sinon on lui affecte 0
+          }
+      }
+  }
+
 }
