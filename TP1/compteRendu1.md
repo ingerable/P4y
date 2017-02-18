@@ -1,3 +1,3 @@
-# ${1:P4y} VAN ASSCHE Jules OS2
+# VAN ASSCHE Jules OS2
 
 ##
