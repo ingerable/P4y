@@ -1,3 +1,3 @@
-# VAN ASSCHE Jules OS2
+# Compte rendu TP1/TP2
 
 ##
