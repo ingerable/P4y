@@ -9,38 +9,44 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <string>
 #include "image.h"
 #include "fileio.h"
 
-// read binary grayscale PGM
+// read binary grayscale PGM 
 Image <uint8_t> readPGM(const std::string &inputFile)
 {
-  int number_of_lines=0; // nbr de lignes
-  std::ifstream myFile(inputFile); // fichier
-  std::string line; // ligne courante
-  int dx;
-  int dy;
-  uint8_t *buffer;
-
-    if(myFile.is_open())
-    {
-      std::getline(myFile,line);
-      std::getline(myFile,line);
-      std::stringstream sstr(line);
-      sstr >> dx >> dy ;
-      printf("%d\n",dx );
-      printf("%d\n",dy );
-      buffer = new uint8_t [dx*dy]; /// on alloue la taille mémoire pour le buffer
-      std::getline(myFile,line);
-      myFile.read((char *) buffer,dx*dy);
-      Image<uint8_t> res(dx,dy,buffer);
-      myFile.close();
-      return res;
+    Image <uint8_t> result;
+    std::ifstream file(inputFile);
+    if(file.is_open()) {
+        std::string line;
+        std::getline(file,line);
+        // only binary, greyscale PGM
+        if(line=="P5") {
+            int dx,dy,maxValue;
+            std::getline(file,line);
+            // remove comments beginning by '#'
+            while(line[0]=='#') 
+                std::getline(file,line);
+            std::stringstream ss(line);
+            ss >> dx >> dy;
+            std::getline(file,line);
+            ss.clear();
+            ss.str(line);
+            ss>>maxValue;
+            std::cout << "Reading header.\nFile "<<inputFile<< "\ndx : "  << dx << "\ndy : " <<dy << "\nmaxValue : " << maxValue << "\n";
+            int size=dx*dy;
+            uint8_t *buffer=new uint8_t[size];
+            file.read((char *)buffer,size);
+            Image <uint8_t> result(dx,dy,buffer);
+            delete[] buffer;
+            return result;
+            
+        }
+        file.close();
     }
-
+   
+    return result;
 }
-
 
 // write binary greyscale PGM
 int writePGM(const Image<uint8_t> &image, const std::string &outputFile)
@@ -48,52 +54,22 @@ int writePGM(const Image<uint8_t> &image, const std::string &outputFile)
     std::ofstream file(outputFile,std::ios_base::trunc  | std::ios_base::binary);
     if(file.is_open()) {
         std::string line;
-
+        
         int dx=image.getDx();
         int dy=image.getDy();
         int size=dx*dy;
-
+        
         file << "P5\n" << dx << " " << dy << "\n" << "255" ;
         file << "\n";
-
+        
         file.write((char *)image.getData(),size);
-
+        
         file << "\n";
-
+        
         file.close();
     }
     else return -1;
-
+    
     return 0;
 }
 
-//thresholding function with uint8_t picture, parameters are a picture and a thresholding value (0-255)
-
-void thresholding(Image<uint8_t> &image, const int value)
-{
-  for(int y=0; y<image.getDy(); ++y) // on parcourt les pixels de l'image entrée
-  {
-      for(int x=0; x<image.getDx(); ++x)
-      {
-        if(image(x,y)>value) // si la valeur du pixel est supérieur on lui affecte la valeur 255
-          {
-            image(x,y)=255;
-          }else{
-            image(x,y)=0; // sinon on lui affecte 0
-          }
-      }
-  }
-}
-
-//negate a picture
-
-void negation(Image<uint8_t> &image)
-{
-  for(int y=0; y<image.getDy(); ++y) // on parcourt les pixels de l'image entrée
-  {
-      for(int x=0; x<image.getDx(); ++x)
-      {
-            image(x,y)=255-image(x,y);
-      }
-  }
-}
