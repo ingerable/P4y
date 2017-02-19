@@ -1,5 +1,21 @@
 # VAN ASSCHE Jules OS2
 
+## Damier
+
+On initialise une image de dimension dx dy puis on parcours chaque pixel de cette image
+en lui affectant alternativement 0 ou 255.
+```C++
+Image <uint8_t> D(dx,dy);
+    for(int y=0; y<D.getDy(); ++y)
+    {
+      int mod = 0;
+        for(int x=0; x<D.getDx(); ++x)
+        {
+          D(x,y)=((x+y)%2)*255;
+        }
+    }
+```
+
 ## Quantize
 
 Quantifier consiste à réduire le nombre de niveaux de gris (dans notre cas) d'une image
