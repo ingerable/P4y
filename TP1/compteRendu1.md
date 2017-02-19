@@ -73,6 +73,9 @@ Ensuite on parcours une nouvelle fois en cherchant le voisin le plus proche à c
 tandis que **i+(factor-(i%factor))** permet de determiner la position du voisin de droite
 ensuite il suffit de comparer les 2 et de choisir le plus proche.
 
+Résultat avec le tableau fourni dans l'énoncé : 
+![resultat NN1D](https://git.unistra.fr/j.vanassche/P4y/tree/master/tests/oneDimensionNN.png)
+
 ## Seuillage
 
 L'opération de seuillage consiste à affecter les valeurs 255 ou 0 aux pixels 
@@ -126,11 +129,48 @@ sur le pixel de l'image d'origine. L'arrondi permet de trouver le pixel le plus 
 * Redimensionnement **facteur 8**
 ![ResampleNN 2](./src/resultats/resampleNN8.PGM)
 
+**Test avec une image de synthèse 2D (résultat visible à l'oeil nu)**
+
+![resultat NN1D](https://git.unistra.fr/j.vanassche/P4y/tree/master/tests/resampleNN.png)
+
 ## Resample Bilinear Interpolation
 
+Pour l'interpolation bilinéaire nous devons utiliser 4 pixels voisins
+et effectuer 2 interpolations linéaires 2 pixels par 2 pixels.
 
+![interpolation](https://i.stack.imgur.com/a9ssZ.png)
 
+On trouve d'abord les 4 pixels voisins lors de chaque itération mais avant cela il faut faire attention
+à ne pas être au bord droit de l'image (pas de voisin de droite) ou encore à la dernière ligne
+(pas de voisin inférieur)
+```C++
+  if(x<img.getDx()-factor)
+      {
+        imgZ(x,y) = img(x/factor,y/factor);
+      }else if(y<img.getDx()-factor)
+      {
+        imgZ(x,y) = img(x/factor,y/factor);
+      }
+```
+Si aucune des précedentes conditions n'a été validée on passe au cas général
+en commencant par chercher les **4 pixels voisins** :
 
+```C++
+        x1 = x - (x%int(factor)); // pixel gauche
+        x2 = x1 + factor; // pixel droite
+        y1 = y - (y%int(factor)); // pixel haut
+        y2 = y1 + factor; // pixel bas
+```
+Ensuite on réalise les 2 interpolations linéaires : 
+```C++
+        r1 = ((x2 - x)/factor)*img(x1/factor,y1/factor) + ((x - x1)/factor)*img(x2/factor,y1/factor);
+        r2 = ((x2 - x)/factor)*img(x1/factor,y2/factor) + ((x - x1)/factor)*img(x2/factor,y2/factor);
+```
+
+Puis on calcule la valeur interpolée :
+```C++
+    imgZ(x,y) = ((y - y1)/factor)*r2 + ((y2 - y)/factor)*r1;
+```
 
 
 
