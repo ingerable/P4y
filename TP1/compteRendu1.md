@@ -73,6 +73,9 @@ Ensuite on parcours une nouvelle fois en cherchant le voisin le plus proche à c
 tandis que **i+(factor-(i%factor))** permet de determiner la position du voisin de droite
 ensuite il suffit de comparer les 2 et de choisir le plus proche.
 
+Résultat avec le tableau fourni dans l'énoncé : 
+![resultat NN1D](https://git.unistra.fr/j.vanassche/P4y/tree/master/tests/oneDimensionNN.png)
+
 ## Seuillage
 
 L'opération de seuillage consiste à affecter les valeurs 255 ou 0 aux pixels 
