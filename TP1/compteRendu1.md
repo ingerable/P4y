@@ -25,13 +25,13 @@
 ![Image d'origine](./src/lena.pgm)
  
 * Redimensionnement **facteur 2**
-![ResampleNN 2](./src/resultats/resampleNN2.pgm)
+![ResampleNN 2](./src/resultats/resampleNN2.PGM)
 
 * Redimensionnement **facteur 4**
-![ResampleNN 2](./src/resultats/resampleNN4.pgm)
+![ResampleNN 4](./src/resultats/resampleNN4.PGM)
 
 * Redimensionnement **facteur 8**
-![ResampleNN 2](./src/resultats/resampleNN8.pgm)
+![ResampleNN 2](./src/resultats/resampleNN8.PGM)
 
 
 
