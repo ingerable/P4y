@@ -20,7 +20,7 @@ Image <uint8_t> D(dx,dy);
 
 Quantifier consiste à réduire le nombre de niveaux de gris (dans notre cas) d'une image
 en fonction d'un facteur k.
-On commence par définir le nouveau nombre de valeurs de gris qui sera 256/2^k.
+On commence par définir le nouveau ***nombre de niveaux de gris*** qui sera 256/2^k.
 ```C++
 int v = 256/(1<<(8-k))-1;
 ```
@@ -31,6 +31,45 @@ et qui sera bien entendu dépendant de son ancienne valeur.
 double px1 = image(x,y)/(256/v);
 image(x,y) = (px1*255)/(floor(255/(k<<2)));
 ```
+## Redimensionnement une dimension NN
+
+On souhaite redimensionner une image d'un facteur n
+On commence par créer la nouvelle image (ici tableau 1D) puis on la remplit tout les ***n fois***
+
+```C++
+  int newTab[5*factor];
+  int j=0;
+
+  for(int k=0;k<5*factor;k++) 
+  {
+    if(k%factor==0)
+    {
+      newTab[k]=tab[j];
+      j++;
+    }else{
+      newTab[k]=0;
+    }
+  }
+```
+Les valeurs qui ne sont pas encore calculées sont initialisées à 0.
+Ensuite on parcours une nouvelle fois en cherchant le voisin le plus proche à chaque itération.
+```C++
+  for(int i=0;i<5*factor;i++) // pour chaque élément du nouveau tableau
+  {
+    if(i%factor!=0) // on ne traite pas les valeurs de l'ancienne image
+    {
+      if((i-(i%factor))>(i+(factor-(i%factor)))) // on compare la distance du voisin de droite et du voisin de gauche
+      {
+        newTab[i]=newTab[i+(factor-(i%factor))]; // on prends la valeur du voisin de droite
+      }else{
+        newTab[i]=newTab[i-(i%factor)]; // on prends la valeur du voisin de gauche
+      }
+    }
+```
+
+***i-(i%factor)*** permet de determiner la position du voisin de gauche
+tandis que ***i+(factor-(i%factor))*** permet de determiner la position du voisin de droite
+ensuite il suffit de comparer les 2 et de choisir le plus proche.
 
 ## Seuillage
 
