@@ -1,9 +1,12 @@
-# ${1:P4y} VAN ASSCHE Jules OS2
+# VAN ASSCHE Jules OS2
 
-##Seuillage
+## Seuillage
+
+* **Image d'origine**
+![Image d'origine](/src/lena.pgm)
 
 * Seuillage avec pour **seuil 128**
-![Seuillage 128](./src/resultats/seuillage128.pgm)
+![Seuillage 128](https://git.unistra.fr/j.vanassche/P4y/tree/master/TP1/src/resultats/seuillage128.pgm)
 
 * Seuillage avec pour **seuil 200**
 ![Seuillage 200](./src/resultats/seuillage200.pgm)
@@ -12,11 +15,11 @@
 ![Seuillage 50](./src/resultats/seuillage50.pgm)
 
 
-##Negatif
+## Negatif
 
 ![Negatif](/src/resultats/negatif.pgm)
 
-##ResampleNN
+## ResampleNN
 
 * **Image d'origine**
 ![Image d'origine](/src/lena.pgm)
