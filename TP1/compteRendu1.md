@@ -101,6 +101,9 @@ Pour faire le négatif d'une image il faut soustraire la valeur de chaque pixel 
 
 ![Negatif](./src/resultats/negatif.pgm)
 
+Pour s'assurer du résultat il est possible d'utiliser imageMagick et
+d'appliquer un effet négatif pour constater que l'on retombe sur l'image d'origine.
+
 ## ResampleNN
 
 Cette fois ci on veut redimensionner une image (2D).  On parcours de nouveau
