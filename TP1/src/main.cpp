@@ -15,8 +15,8 @@
 #include "treatments.h"
 
 int main(int argc, const char * argv[]) {
-    if(argc !=6) {
-        std::cout << "Usage : " << argv[0] << "<dx> <dy> <fichier.PGM> <seuil> <facteur de quantification>\n";
+    if(argc !=7) {
+        std::cout << "Usage : " << argv[0] << "<dx> <dy> <fichier.PGM> <seuil> <facteur de quantification> <facteur de redimensionnement>\n";
         exit(EXIT_FAILURE);
     }
     int dx = atoi(argv[1]);
@@ -24,6 +24,7 @@ int main(int argc, const char * argv[]) {
     std::string fichierPGM = argv[3];
     int seuil = atoi(argv[4]);
     int k = atoi(argv[5]);
+    int f = atoi(argv[6]);
 
     Image<uint8_t> A(dx,dy);
 
@@ -68,21 +69,21 @@ int main(int argc, const char * argv[]) {
 
     Image<uint8_t> E = readPGM(fichierPGM);
     std::cout<<"Image PGM :\n";
-    /*writePGM(readPGM(fichierPGM),"tst.pgm");
-    thresholding(E,seuil);
-    writePGM(E,"seuillage.pgm");
-    E = readPGM(fichierPGM);
-    negation(E);
-    writePGM(E,"negatif.pgm");
-    E = readPGM(fichierPGM);*/
+    //writePGM(readPGM(fichierPGM),"tst.pgm");
+    //thresholding(E,seuil);
+    //writePGM(E,"./resultats/seuillage"+std::to_string(seuil)+".pgm");
+    //E = readPGM(fichierPGM);
+    //negation(E);
+    //writePGM(E,"./resultats/negatif.pgm");
+    //E = readPGM(fichierPGM);
     //quantize(E,k);
     //writePGM(E,"quantize.pgm");
     //int oneDimension[5]={1,3,5,7,9};
     //resampleOneDimension(oneDimension,2);
     //resampleOneDimensionBilinear(oneDimension,2);
-    writePGM(resampleBilinearInterpolation(E,5),"BItest.PGM");
+    //writePGM(resampleBilinearInterpolation(E,5),"BItest.PGM");
     E = readPGM(fichierPGM);
-    writePGM(resampleNN(E,5),"NNtest.PGM");
+    writePGM(resampleNN(E,f),"./resultats/resampleNN"+std::to_string(f)+".PGM");
 
 
 
