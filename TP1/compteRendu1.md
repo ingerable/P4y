@@ -31,7 +31,9 @@ et qui sera bien entendu dépendant de son ancienne valeur.
 double px1 = image(x,y)/(256/v);
 image(x,y) = (px1*255)/(floor(255/(k<<2)));
 ```
-## Redimensionnement une dimension NN
+
+
+## Redimensionnement tableau une dimension NN
 
 On souhaite redimensionner une image d'un facteur n
 On commence par créer la nouvelle image (ici tableau 1D) puis on la remplit tout les ***n fois***
