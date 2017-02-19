@@ -2,6 +2,10 @@
 
 ## Seuillage
 
+L'opération de seuillage consiste à affecter les valeurs 255 ou 0 aux pixels 
+en fonction de leurs valeurs par rapport à une certaine valeur de seuil.
+Si valeurPixel>seuil le pixel prends la valeur 255 sinon 0.
+
 * **Image d'origine**
 ![Image d'origine](./src/lena.pgm)
 
