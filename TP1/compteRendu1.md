@@ -94,7 +94,8 @@ Si valeurPixel>seuil le pixel prends la valeur 255 sinon 0.
 * Seuillage avec pour **seuil 50**
 ![Seuillage 50](./src/resultats/seuillage50.pgm)
 
-
+Grace à imageMagick on peut compter le nombre de valeurs de gris dans une image et vérifier qu'il y en ait bien 2.
+![imageMagick](https://git.unistra.fr/j.vanassche/P4y/tree/master/tests/seuillage.png)
 ## Negatif
 
 Pour faire le négatif d'une image il faut soustraire la valeur de chaque pixel à 255.
