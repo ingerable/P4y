@@ -100,6 +100,8 @@ Pour faire le négatif d'une image il faut soustraire la valeur de chaque pixel 
 
 ## ResampleNN
 
+Cette fois ci on veut redimensionner une image (2D).  On parcours de nouveau
+l'image à l'aide d'une double boucle.
 
 * **Image d'origine**
 ![Image d'origine](./src/lena.pgm)
