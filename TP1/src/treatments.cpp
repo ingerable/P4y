@@ -47,8 +47,7 @@ void negation(Image<uint8_t> &image)
 
 void quantize(Image<uint8_t> &image, int k)
 {
-  int v = 256/(2<<(7-k)); // on divise 256 par 2^k-1, nombre de valeurs de gris
-  printf("%s%d\n","nbr de valeurs:",v );
+  int v = 256/(1<<(8-k))-1; // on divise 256 par 2^k-1, nombre de valeurs de gris
   for(int y=0; y<image.getDy(); ++y) // on parcourt les pixels de l'image entrée
   {
       for(int x=0; x<image.getDx(); ++x)
@@ -113,7 +112,7 @@ void resampleOneDimensionBilinear(int tab[], int factor)
     {
       if(i!=(5*factor-1))//cas de la dernière valeur (pas de voisin de droite)
       {
-        newTab[i]=((newTab[i-(i%factor)]+newTab[i+(factor-(i%factor))])/factor); // on prends la valeur du voisin de gauche
+        newTab[i]=((newTab[i-(i%factor)]+newTab[i+(factor-(i%factor))])*(factor/(i%factor)));
       }else{
         newTab[i]=newTab[i-1];
       }
@@ -139,19 +138,35 @@ Image<uint8_t> resampleNN(Image<uint8_t> &img, int factor)
   return imgZ;
 }
 
+
 Image<uint8_t> resampleBilinearInterpolation(Image<uint8_t> &img, int factor)
 {
   //nouvelle image
   Image<uint8_t> imgZ(img.getDx()*factor ,img.getDy()*factor);
+  float x1, x2, y1, y2;
+  uint8_t r1, r2;
+
   for(int y = 0; y < imgZ.getDy(); y++) // on parcourt chaque pixel
   {
     for(int x = 0; x < imgZ.getDx(); x++)
     {
-      uint8_t xG = img(x/factor,y/factor); // pixel gauche
-      uint8_t xD = img(int((x+1)/factor),y/factor); // pixel droit
-      uint8_t yH = img(x/factor,y/factor); // pixel haut
-      uint8_t yB = img(x/factor,int((y+1)/factor)); // pixel bas
-      imgZ(x,y) = (int((xG+xD)/2),int((yH+yB)/2)); // moyenne des pixels voisins pour chaque axe
+      if(x<img.getDx()-factor)
+      {
+        imgZ(x,y) = img(x/factor,y/factor);
+      }else if(y<img.getDx()-factor)
+      {
+        imgZ(x,y) = img(x/factor,y/factor);
+      }else{
+        x1 = x - (x%int(factor)); // pixel gauche
+        x2 = x1 + factor; // pixel droite
+        y1 = y - (y%int(factor)); // pixel haut
+        y2 = y1 + factor; // pixel bas
+
+        r1 = ((x2 - x)/factor)*img(x1/factor,y1/factor) + ((x - x1)/factor)*img(x2/factor,y1/factor);
+        r2 = ((x2 - x)/factor)*img(x1/factor,y2/factor) + ((x - x1)/factor)*img(x2/factor,y2/factor);
+
+        imgZ(x,y) = ((y - y1)/factor)*r2 + ((y2 - y)/factor)*r1;
+      }
     }
   }
   return imgZ;

@@ -13,6 +13,9 @@
 #include "image.h"
 #include "fileio.h"
 #include "treatments.h"
+#include <fstream>
+#include <sstream>
+#include <string>
 
 int main(int argc, const char * argv[]) {
     if(argc !=7) {
@@ -75,15 +78,27 @@ int main(int argc, const char * argv[]) {
     //E = readPGM(fichierPGM);
     //negation(E);
     //writePGM(E,"./resultats/negatif.pgm");
-    //E = readPGM(fichierPGM);
-    //quantize(E,k);
-    //writePGM(E,"quantize.pgm");
+    E = readPGM(fichierPGM);
+    quantize(E,k);
+    writePGM(E,"./resultats/quantize"+std::to_string(k)+".pgm");
     //int oneDimension[5]={1,3,5,7,9};
+    //E.print();
     //resampleOneDimension(oneDimension,2);
     //resampleOneDimensionBilinear(oneDimension,2);
-    //writePGM(resampleBilinearInterpolation(E,5),"BItest.PGM");
-    E = readPGM(fichierPGM);
-    writePGM(resampleNN(E,f),"./resultats/resampleNN"+std::to_string(f)+".PGM");
+    //uint8_t buf[] = {0,10,10,0};
+    //E = Image<uint8_t>(5,1,oneDimension);
+    /*E = resampleBilinearInterpolation(E,2);
+    E.print();
+    E = Image<uint8_t>(5,5,bufferQ);
+    E.print();
+    E = resampleBilinearInterpolation(E,2);
+    E.print();*/
+
+    //writePGM(resampleBilinearInterpolation(E,f),"./resultats/resampleBI"+std::to_string(f)+".PGM");
+    //E = readPGM(fichierPGM);
+    //E = resampleNN(E,2);
+    //E.print();
+
 
 
 
