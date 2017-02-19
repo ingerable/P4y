@@ -1,5 +1,10 @@
 # VAN ASSCHE Jules OS2
 
+## Quantize
+
+Quantifier consiste à réduire le nombre de niveaux de gris (dans notre cas) d'une image
+en fonction d'un facteur k.
+
 ## Seuillage
 
 L'opération de seuillage consiste à affecter les valeurs 255 ou 0 aux pixels 
@@ -20,6 +25,8 @@ Si valeurPixel>seuil le pixel prends la valeur 255 sinon 0.
 
 
 ## Negatif
+
+Pour faire le négatif d'une image il faut soustraire la valeur de chaque pixel à 255.
 
 ![Negatif](./src/resultats/negatif.pgm)
 
