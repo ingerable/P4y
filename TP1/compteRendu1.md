@@ -103,6 +103,17 @@ Pour faire le négatif d'une image il faut soustraire la valeur de chaque pixel 
 Cette fois ci on veut redimensionner une image (2D).  On parcours de nouveau
 l'image à l'aide d'une double boucle.
 
+```C++
+for(int y = 0; y < imgZ.getDy(); y++) // on parcourt chaque pixel
+  {
+    for(int x = 0; x < imgZ.getDx(); x++)
+    {//on choisit le pixel le plus proche dans l'image d'origine
+      imgZ(x,y)=img(int(float(x)/factor), int(float(y)/factor));
+    }
+  }
+```
+Cette fois ci on utilise une méthode plus simple, on divise par le facteur pour retomber 
+sur le pixel de l'image d'origine. L'arrondi permet de trouver le pixel le plus proche.
 * **Image d'origine**
 ![Image d'origine](./src/lena.pgm)
  
