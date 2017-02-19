@@ -136,7 +136,7 @@ sur le pixel de l'image d'origine. L'arrondi permet de trouver le pixel le plus 
 ## Resample Bilinear Interpolation
 
 
-
+![interpolation](https://i.stack.imgur.com/a9ssZ.png)
 
 
 
