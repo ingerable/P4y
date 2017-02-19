@@ -115,6 +115,8 @@ l'image à l'aide d'une double boucle.
 * Redimensionnement **facteur 8**
 ![ResampleNN 2](./src/resultats/resampleNN8.PGM)
 
+## Resample Bilinear Interpolation
+
 
 
 
