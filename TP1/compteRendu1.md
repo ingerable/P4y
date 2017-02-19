@@ -129,6 +129,10 @@ sur le pixel de l'image d'origine. L'arrondi permet de trouver le pixel le plus 
 * Redimensionnement **facteur 8**
 ![ResampleNN 2](./src/resultats/resampleNN8.PGM)
 
+### Test avec une image de synthèse 2D (résultat visible à l'oeil nu)
+
+![resultat NN1D](https://git.unistra.fr/j.vanassche/P4y/tree/master/tests/resampleNN.png)
+
 ## Resample Bilinear Interpolation
 
 
