@@ -69,8 +69,8 @@ Ensuite on parcours une nouvelle fois en cherchant le voisin le plus proche à c
     }
 ```
 
-***i-(i%factor)*** permet de determiner la position du voisin de gauche
-tandis que ***i+(factor-(i%factor))*** permet de determiner la position du voisin de droite
+**i-(i%factor)** permet de determiner la position du voisin de gauche
+tandis que **i+(factor-(i%factor))** permet de determiner la position du voisin de droite
 ensuite il suffit de comparer les 2 et de choisir le plus proche.
 
 ## Seuillage
