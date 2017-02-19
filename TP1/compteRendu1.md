@@ -179,6 +179,6 @@ Puis on calcule la valeur interpolée :
 ![ResampleBI](https://git.unistra.fr/j.vanassche/P4y/tree/master/TP1/src/resultats/resampleBI4.PGM)
 
 * Redimensionnement **facteur 6**
-![ResampleBI](https://git.unistra.fr/j.vanassche/P4y/tree/master/TP1/src/resultats/resampleBU6.PGM)
+![ResampleBI](https://git.unistra.fr/j.vanassche/P4y/tree/master/TP1/src/resultats/resampleBI6.PGM)
 
 
