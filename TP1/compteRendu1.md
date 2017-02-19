@@ -4,6 +4,9 @@
 
 Quantifier consiste à réduire le nombre de niveaux de gris (dans notre cas) d'une image
 en fonction d'un facteur k.
+On commence par définir le nouveau nombre de valeurs de gris qui sera 256/2^k.
+Ensuite on affecte une nouvelle valeur à chaque pixel qui sera compris dans l'intervalle [0,256/2^k] 
+et qui sera bien entendu dépendant de son ancienne valeur.
 
 ## Seuillage
 
@@ -31,6 +34,7 @@ Pour faire le négatif d'une image il faut soustraire la valeur de chaque pixel 
 ![Negatif](./src/resultats/negatif.pgm)
 
 ## ResampleNN
+
 
 * **Image d'origine**
 ![Image d'origine](./src/lena.pgm)
