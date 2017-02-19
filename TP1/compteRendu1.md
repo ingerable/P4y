@@ -21,8 +21,16 @@ Image <uint8_t> D(dx,dy);
 Quantifier consiste à réduire le nombre de niveaux de gris (dans notre cas) d'une image
 en fonction d'un facteur k.
 On commence par définir le nouveau nombre de valeurs de gris qui sera 256/2^k.
+```C++
+int v = 256/(1<<(8-k))-1;
+```
 Ensuite on affecte une nouvelle valeur à chaque pixel qui sera compris dans l'intervalle [0,256/2^k] 
 et qui sera bien entendu dépendant de son ancienne valeur.
+
+```C++
+double px1 = image(x,y)/(256/v);
+image(x,y) = (px1*255)/(floor(255/(k<<2)));
+```
 
 ## Seuillage
 
