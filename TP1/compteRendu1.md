@@ -172,5 +172,13 @@ Puis on calcule la valeur interpolée :
     imgZ(x,y) = ((y - y1)/factor)*r2 + ((y2 - y)/factor)*r1;
 ```
 
+* Redimensionnement **facteur 2**
+![ResampleBI](https://git.unistra.fr/j.vanassche/P4y/tree/master/TP1/src/resultats/resampleBI2.PGM)
+
+* Redimensionnement **facteur 4**
+![ResampleBI](https://git.unistra.fr/j.vanassche/P4y/tree/master/TP1/src/resultats/resampleBI4.PGM)
+
+* Redimensionnement **facteur 6**
+![ResampleBI](https://git.unistra.fr/j.vanassche/P4y/tree/master/TP1/src/resultats/resampleBU6.PGM)
 
 
