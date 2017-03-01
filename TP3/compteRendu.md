@@ -5,7 +5,7 @@
 La convolution consiste à calculer la valeur de chaque pixel à l'aide d'un masque donnée. 
 Le masque est centrée sur le pixel, la valeur du pixel au centre est égal à la somme des produits de chaque pixel voisin par la valeur du masque au coordonnée de ce même pixel (le pixel voisin).
 
-![Illustration](../IMagesCompteRendu/convolution.png)
+![Illustration](https://git.unistra.fr/j.vanassche/P4y/blob/master/TP3/ImagesCompteRendu/convolution.png)
 
 Le masque sera une image de type double.
 
@@ -48,8 +48,8 @@ sum += mask(mx,my)*img(x+mx-(mask.getDx()/2),y+my-(mask.getDy()/2));
 
 Il faut faire attention à bien calculer la position du pixel voisin.
 
-![LissageM1](../IMagesCompteRendu/LissageM1.png)
-![LissageM2](../IMagesCompteRendu/LissageM2.png)
+![LissageM1](https://git.unistra.fr/j.vanassche/P4y/blob/master/TP3/ImagesCompteRendu/LissageM1.png)
+![LissageM2](https://git.unistra.fr/j.vanassche/P4y/blob/master/TP3/ImagesCompteRendu/LissageM1.png)
 
 ##Masque gaussien
 
