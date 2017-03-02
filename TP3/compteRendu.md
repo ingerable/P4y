@@ -126,9 +126,13 @@ Image<uint8_t> toUint8(Image<double> &img)
   return res;
 }
 ```
-
+$`sigma=1`$
 ![GaussLena1](ImagesCompteRendu/LenaGauss1.png)
+
+$`sigma=2`$
 ![GaussLena2](ImagesCompteRendu/LenaGauss2.png)
+
+$`sigma=1/2`$
 ![GaussLena1/2](ImagesCompteRendu/LenaGauss05.png)
 
 
@@ -136,13 +140,21 @@ Image<uint8_t> toUint8(Image<double> &img)
 
 Réhaussement de contours avec les masques M3 et M4:
 
+Rehaussement M3 :
 ![RehaussementM3](ImagesCompteRendu/RehaussementM3.png)
+
+Rehaussement M4 :
 ![RehaussementM4](ImagesCompteRendu/RehaussementM4.png)
 
 Réhaussement de contours avec M3 sur image masque gaussien 1 2 3 :
 
+$`sigma=1`$
 ![RehaussementGauss1](ImagesCompteRendu/LenaGaussRehaussementContours1.png)
+
+$`sigma=2`$
 ![RehaussementGauss2](ImagesCompteRendu/LenaGaussRehaussementContours2.png)
+
+$`sigma=3`$
 ![RehaussementGauss3](ImagesCompteRendu/LenaGaussRehaussementContours3.png)
 
 ### Filtres détecteurs d'arêtes
@@ -187,7 +199,13 @@ if(sum<0)
       res(x,y)=sum;
 ```
 Voici les résultats avec le filtre détecteurs d'arêtes pour des image avec le masque gaussien appliqué pour plusieurs valeurs :
+
+$`sigma=1`$ 
 ![ArêtesGauss1](ImagesCompteRendu/LenaGaussAretes1.png)
+
+$`sigma=3`$
 ![ArêtesGauss3](ImagesCompteRendu/LenaGaussAretes3.png)
+
+$`sigma=5`$
 ![ArêtesGauss5](ImagesCompteRendu/LenaGaussAretes5.png)
 
