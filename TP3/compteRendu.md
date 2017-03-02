@@ -48,8 +48,11 @@ sum += mask(mx,my)*img(x+mx-(mask.getDx()/2),y+my-(mask.getDy()/2));
 
 Il faut faire attention à bien calculer la position du pixel voisin.
 
-![LissageM1](https://git.unistra.fr/j.vanassche/P4y/blob/master/TP3/ImagesCompteRendu/LissageM1.png)
-![LissageM2](https://git.unistra.fr/j.vanassche/P4y/blob/master/TP3/ImagesCompteRendu/LissageM2.png)
+Lissage M1 :
+![LissageM1](ImagesCompteRendu/LissageM1.png)
+
+Lissage M2 :
+![LissageM2](ImagesCompteRendu/LissageM2.png)
 
 
 ##Masque gaussien
