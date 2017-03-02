@@ -2,10 +2,10 @@
 
 ## Convolution
 
-La convolution consiste à calculer la valeur de chaque pixel à l'aide d'un masque donnée. 
-Le masque est centrée sur le pixel, la valeur du pixel au centre est égal à la somme des produits de chaque pixel voisin par la valeur du masque au coordonnée de ce même pixel (le pixel voisin).
+La **convolution** consiste à calculer la valeur de **chaque pixel** à l'aide d'un **masque donnée**. 
+Le masque est **centrée** sur le pixel, la valeur du pixel au centre est égal à la **somme des produits de chaque pixel voisin par la valeur du masque au coordonnée de ce même pixel (le pixel voisin)**.
 
-![Illustration](https://git.unistra.fr/j.vanassche/P4y/blob/master/TP3/ImagesCompteRendu/convolution.png)
+![Illustration](ImagesCompteRendu/convolution.png)
 
 Le masque sera une image de type double.
 
@@ -30,8 +30,8 @@ for(int my = 0; my<mask.getDy(); my++)
       }
 ```
 Il faut aussi faire attention aux valeurs en dehors de l'image ,en effet lorsque l'on parcours
-le masque il se peut que l'on se situe en dehors de l'image la condition suivante permet de faire
-attention aux cas ou l'on sort de l'image (gauche/droite/haut/bas), ce qui nous fais un total de 4 conditions.
+le masque il se peut que l'on se situe en **dehors de l'image** la condition suivante permet de faire
+attention aux cas ou l'on sort de l'image (gauche/droite/haut/bas), ce qui nous fais un total de **4 conditions**.
 
 ```
 if( ((x-(mask.getDx()/2)+mx)<0) || ((y-(mask.getDy()/2)+my)<0) || 
@@ -55,9 +55,9 @@ Lissage M2 :
 ![LissageM2](ImagesCompteRendu/LissageM2.png)
 
 
-##Masque gaussien
+## Masque gaussien
 
-On nous donne la fonction gaussienne et on nous savons que nous devons approcher le support par un masque de taille $`N\times N`$ avec $`N\approx 6\sigma`$, impair. Il faudra ensuite normaliser les coefficients pour que la somme des des poids du masque soit égale à 1, on décompose donc le tout en plusieurs opérations.
+On nous donne la fonction gaussienne et on nous savons que nous devons approcher le support par un masque de taille $`N\times N`$ avec $`N\approx 6\sigma`$, impair. Il faudra ensuite normaliser les coefficients pour que la **somme des des poids du masque soit égale à 1**, on décompose donc le tout en plusieurs opérations.
 Premièrement on approche $`N\approx 6\sigma`$, en faisant bien attention à ce que $`sigma`$ soit impair,
 on peut ensuite déclarer le masque de taille $`N\times N`$.
 
