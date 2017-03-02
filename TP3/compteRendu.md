@@ -49,8 +49,145 @@ sum += mask(mx,my)*img(x+mx-(mask.getDx()/2),y+my-(mask.getDy()/2));
 Il faut faire attention à bien calculer la position du pixel voisin.
 
 ![LissageM1](https://git.unistra.fr/j.vanassche/P4y/blob/master/TP3/ImagesCompteRendu/LissageM1.png)
-![LissageM2](https://git.unistra.fr/j.vanassche/P4y/blob/master/TP3/ImagesCompteRendu/LissageM1.png)
+![LissageM2](https://git.unistra.fr/j.vanassche/P4y/blob/master/TP3/ImagesCompteRendu/LissageM2.png)
+
 
 ##Masque gaussien
 
+On nous donne la fonction gaussienne et on nous savons que nous devons approcher le support par un masque de taille $`N\times N`$ avec $`N\approx 6\sigma`$, impair. Il faudra ensuite normaliser les coefficients pour que la somme des des poids du masque soit égale à 1, on décompose donc le tout en plusieurs opérations.
+Premièrement on approche $`N\approx 6\sigma`$, en faisant bien attention à ce que $`sigma`$ soit impair,
+on peut ensuite déclarer le masque de taille $`N\times N`$.
+
+```
+if( int(6*sigma)%2==0) // cas pair
+  {
+    N = int(6*sigma)+1;
+  }
+  else
+  {
+    N = 6*sigma;
+  }
+
+  double sum=0;
+
+  Image<double> res(N,N); // masque
+```
+
+Ensuite on parcours le masque en appliquant la fonction gausienne pour chaque pixel,on passe par une fonction intermédiaire appelé gaussF. On réalise la somme des poids des coefficients (il ne faut pas oublier de normaliser) :
+
+```
+for(int y=0; y<N; y++)
+  {
+    for(int x=0; x<N; x++)
+    {
+      res(x,y)=gaussF(x,y,sigma);
+      sum += res(x,y);
+    }
+  }
+```
+
+
+La fonction gaussF :
+
+```
+double gaussF(int x,int y, double sigma)
+{
+  double res = 0;
+  res=exp(-(pow(x,2)+pow(y,2))/(2*pow(sigma,2)));
+  return res;
+}
+```
+
+Il ne reste plus qu'à normaliser : 
+```
+for(int y=0; y<N; y++)
+  {
+    for(int x=0; x<N; x++)
+    {
+      res(x,y)=(res(x,y)/sum);
+    }
+  }
+```
+
+Il ne faut pas oublier de convertir les images résultant de la convolution qui sont de type double
+en image de type uint_8, il suffit de faire une fonction de conversion :
+
+```
+Image<uint8_t> toUint8(Image<double> &img)
+{
+  Image<uint8_t> res(img.getDx(),img.getDy());
+  for(int y = 0; y<img.getDy(); y++)
+  {
+    for(int x = 0; x<img.getDx(); x++)
+    {
+      res(x,y)=floor(img(x,y));
+    }
+  }
+  return res;
+}
+```
+
+![GaussLena1](ImagesCompteRendu/LenaGauss1.png)
+![GaussLena2](ImagesCompteRendu/LenaGauss2.png)
+![GaussLena1/2](ImagesCompteRendu/LenaGauss05.png)
+
+
+### Filtres de réhaussement de contours
+
+Réhaussement de contours avec les masques M3 et M4:
+
+![RehaussementM3](ImagesCompteRendu/RehaussementM3.png)
+![RehaussementM4](ImagesCompteRendu/RehaussementM4.png)
+
+Réhaussement de contours avec M3 sur image masque gaussien 1 2 3 :
+
+![RehaussementGauss1](ImagesCompteRendu/LenaGaussRehaussementContours1.png)
+![RehaussementGauss2](ImagesCompteRendu/LenaGaussRehaussementContours2.png)
+![RehaussementGauss3](ImagesCompteRendu/LenaGaussRehaussementContours3.png)
+
+### Filtres détecteurs d'arêtes
+
+Les masques horizontal et vertical de Sobel permettent de mettre en évidence les arêtes. Néanmonins il faut faire attention car les valeurs peuvent être négatives et sortir de l'intervalle de valeurs de l'image initiale. Pour visualiser le résultat sur une image 8bit il faudra calculer la valeur absolue et normaliser par la somme des poids positifs.
+
+La première chose à faire est de calculer la somme des poids positif du masque : 
+
+```
+  //somme des poids positifs
+  for(int my = 0; my<mask.getDy(); my++)
+  {
+    for(int mx = 0; mx<mask.getDx(); mx++)
+    {
+      if(mask(mx,my)>0)
+      {
+        weightSum += mask(mx,my);
+      }
+    }
+  }
+```
+
+Ensuite comme pour la convolution on vérifie que l'on ne sort pas de l'image à l'aide de conditions :
+```
+if( ((x-(mask.getDx()/2)+mx)<0) || ((y-(mask.getDy()/2)+my)<0) || ((x-(mask.getDx()/2)+mx)>img.getDx()) || ((y-(mask.getDy()/2)+my)>img.getDy()) )
+          {
+            sum += 0;
+          }else
+          {
+              sum += mask(mx,my)*img(x+mx-(mask.getDx()/2),y+my-(mask.getDy()/2));
+          }
+```
+
+Une fois la somme calculé on calcule la valeur absolue de la somme et on la normalise par la somme des poids positifs précédemment calculé :
+```
+if(sum<0)
+      {
+        sum = (-sum)/weightSum;
+      }else{
+        sum = sum/weightSum;
+      }
+      res(x,y)=sum;
+```
+Voici les résultats avec le filtre détecteurs d'arêtes pour des image avec le masque gaussien appliqué pour plusieurs valeurs :
+![ArêtesGauss1](ImagesCompteRendu/LenaGaussAretes1.png)
+![ArêtesGauss3](ImagesCompteRendu/LenaGaussAretes3.png)
+![ArêtesGauss5](ImagesCompteRendu/LenaGaussAretes5.png)
 
