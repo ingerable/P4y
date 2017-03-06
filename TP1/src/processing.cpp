@@ -13,6 +13,8 @@
 #include "image.h"
 #include "processing.h"
 #include <math.h>
+#include <vector>
+#include <algorithm>
 
 //thresholding function with uint8_t picture, parameters are a picture and a thresholding value (0-255)
 
@@ -195,6 +197,7 @@ Image<double> convolve(Image<uint8_t> &img, Image<double> &mask)
         }
       }
       res(x,y)=sum;
+
     }
   }
   return res;
@@ -254,3 +257,89 @@ Image<uint8_t> toUint8(Image<double> &img)
   }
   return res;
 }
+
+
+Image<uint8_t> contours(Image<uint8_t> img, Image<double> mask)
+{
+  Image<uint8_t> res(img.getDx(), img.getDy());
+  int weightSum=0;
+  //somme des poids positifs
+  for(int my = 0; my<mask.getDy(); my++)
+  {
+    for(int mx = 0; mx<mask.getDx(); mx++)
+    {
+      if(mask(mx,my)>0)
+      {
+        weightSum += mask(mx,my);
+      }
+    }
+  }
+
+  for(int y=0; y<img.getDy(); y++)
+  {
+    for(int x=0; x<img.getDx(); x++)
+    {
+        int sum=0;
+      for(int my = 0; my<mask.getDy(); my++)
+      {
+        for(int mx = 0; mx<mask.getDx(); mx++)
+        {
+          if( ((x-(mask.getDx()/2)+mx)<0) || ((y-(mask.getDy()/2)+my)<0) || ((x-(mask.getDx()/2)+mx)>img.getDx()) || ((y-(mask.getDy()/2)+my)>img.getDy()) )
+          {
+            sum += 0;
+          }else
+          {
+              sum += mask(mx,my)*img(x+mx-(mask.getDx()/2),y+my-(mask.getDy()/2));
+          }
+        }
+      }
+      if(sum<0)
+      {
+        sum = (-sum)/weightSum;
+      }else{
+        sum = sum/weightSum;
+      }
+      res(x,y)=sum;
+
+    }
+  }
+  return res;
+}
+
+Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
+{
+  Image<uint8_t> res(img.getDx(),img.getDy()); // image résultat
+  std::vector<uint8_t> list; // liste des valeurs contenus dans la fenêtre
+  if(N%2==0)
+  {
+    N = N+1;
+  }
+  for(int y=0; y<img.getDy(); y++)
+  {
+    for(int x=0; x<img.getDx(); x++)
+    {
+        for(int ny=0; ny<N; ny++)
+        {
+          for(int nx=0; nx<N; nx++)
+          {
+            if( ((x-(N/2)+nx)<0) || ((y-(N/2)+ny)<0) || ((x-(N/2)+nx)>=img.getDx()) || ((y-(N/2)+ny)>=img.getDy()) )
+            {
+
+            }else{
+              list.push_back(img(x+nx-(N/2), y+ny-(N/2)));
+              //printf("%d\n",img(x+nx-(N/2), y+ny-(N/2)));
+            }
+          }
+        }
+        /*for(int k=0; k<list.size(); k++)
+        {
+          printf("%d",list[k]);
+        }*/
+        std::sort (list.begin(), list.end());
+        //printf("\n");
+        res(x,y)=list.at((list.size()/2)-1);
+        list.clear();
+      }
+    }
+      return res;
+  }

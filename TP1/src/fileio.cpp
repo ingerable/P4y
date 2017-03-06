@@ -12,7 +12,7 @@
 #include "image.h"
 #include "fileio.h"
 
-// read binary grayscale PGM 
+// read binary grayscale PGM
 Image <uint8_t> readPGM(const std::string &inputFile)
 {
     Image <uint8_t> result;
@@ -25,7 +25,7 @@ Image <uint8_t> readPGM(const std::string &inputFile)
             int dx,dy,maxValue;
             std::getline(file,line);
             // remove comments beginning by '#'
-            while(line[0]=='#') 
+            while(line[0]=='#')
                 std::getline(file,line);
             std::stringstream ss(line);
             ss >> dx >> dy;
@@ -40,11 +40,11 @@ Image <uint8_t> readPGM(const std::string &inputFile)
             Image <uint8_t> result(dx,dy,buffer);
             delete[] buffer;
             return result;
-            
+
         }
         file.close();
     }
-   
+
     return result;
 }
 
@@ -54,22 +54,21 @@ int writePGM(const Image<uint8_t> &image, const std::string &outputFile)
     std::ofstream file(outputFile,std::ios_base::trunc  | std::ios_base::binary);
     if(file.is_open()) {
         std::string line;
-        
+
         int dx=image.getDx();
         int dy=image.getDy();
         int size=dx*dy;
-        
+
         file << "P5\n" << dx << " " << dy << "\n" << "255" ;
         file << "\n";
-        
+
         file.write((char *)image.getData(),size);
-        
+
         file << "\n";
-        
+
         file.close();
     }
     else return -1;
-    
+
     return 0;
 }
-

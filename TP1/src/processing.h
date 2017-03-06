@@ -22,5 +22,7 @@ Image<uint8_t> resampleBilinearInterpolation(Image<uint8_t> &img, int factor);
 Image<double> convolve(Image<uint8_t> &img, Image<double> &mask);
 Image<double> gaussianMask(float sigma);
 Image<uint8_t> toUint8(Image<double> &img);
+Image<uint8_t> contours(Image<uint8_t> img, Image<double> mask);
+Image<uint8_t> medianFilter(Image<uint8_t> img, int N);
 
 #endif /* treatments_h */
