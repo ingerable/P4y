@@ -213,9 +213,18 @@ $`sigma=5`$
 ![ArêtesGauss5](ImagesCompteRendu/LenaGaussAretes5.png)
 
 
+## Extraction des contours pour chaque valeur de sigma
+
+$`sigma=1`$ 
 ![seuillageContoursGauss1](ImagesCompteRendu/seuillageGaussContours1.png)
+
+$`sigma=2`$ 
 ![seuillageContoursGauss2](ImagesCompteRendu/seuillageGaussContours2.png)
+
+$`sigma=3`$ 
 ![seuillageContoursGauss3](ImagesCompteRendu/seuillageGaussContours3.png)
+
+$`sigma=5`$ 
 ![seuillageContoursGauss5](ImagesCompteRendu/seuillageGaussContours5.png)
 
 On remarque pour une même valeur de seuillage plus la valeur du masque gaussien est élevée plus les contours sont moins visibles.
