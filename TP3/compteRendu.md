@@ -212,3 +212,12 @@ $`sigma=3`$
 $`sigma=5`$
 ![ArêtesGauss5](ImagesCompteRendu/LenaGaussAretes5.png)
 
+
+![seuillageContoursGauss1](ImagesCompteRendu/seuillageGaussContours1.png)
+![seuillageContoursGauss2](ImagesCompteRendu/seuillageGaussContours2.png)
+![seuillageContoursGauss3](ImagesCompteRendu/seuillageGaussContours3.png)
+![seuillageContoursGauss5](ImagesCompteRendu/seuillageGaussContours5.png)
+
+On remarque pour une même valeur de seuillage plus la valeur du masque gaussien est élevée plus les contours sont moins visibles.
+
+
