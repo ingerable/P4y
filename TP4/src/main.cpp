@@ -13,6 +13,7 @@
 #include "image.h"
 #include "fileio.h"
 #include "processing.h"
+#include "Structel.h"
 #include <fstream>
 #include <sstream>
 #include <string>
@@ -72,59 +73,15 @@ int main(int argc, const char * argv[]) {
 
     Image<uint8_t> E = readPGM(fichierPGM);
     std::cout<<"Image PGM :\n";
-    //writePGM(readPGM(fichierPGM),"tst.pgm");
 
-    thresholding(E,10);
-    writePGM(E,"./seuillageGaussContours5.pgm");
-
-    //E = readPGM(fichierPGM);
-    //negation(E);
-    //writePGM(E,"./resultats/negatif.pgm");
-
-    //E = readPGM(fichierPGM);
-    //quantize(E,k);
-    //writePGM(E,"./resultats/quantize"+std::to_string(k)+".pgm");
-
-    /*E = resampleBilinearInterpolation(E,2);
-    E.print();
-    E = Image<uint8_t>(5,5,bufferQ);
-    E.print();
-    E = resampleBilinearInterpolation(E,2);
-    E.print();*/
-
-    //writePGM(resampleBilinearInterpolation(E,f),"./resultats/resampleBI"+std::to_string(f)+".PGM");
-    //E = readPGM(fichierPGM);
-    //E = resampleNN(E,2);
-    //E.print();
-
-
-    // TP3
-    //double bufZ[] ={1.0/9,1.0/9,1.0/9,1.0/9,1.0/9,1.0/9,1.0/9,1.0/9,1.0/9,};  //M1
-    //double bufZ[] ={1.0/16,2.0/16,1.0/16,2.0/16,4.0/16,2.0/16,1.0/16,2.0/16,1.0/16};  //M2
-    //double bufZ[] ={0,-1,0,-1,5,-1,0,-1,0};  //M3
-    //double bufZ[] ={-1,-1,-1,-1,9,-1,-1,-1,-1};  //M4
-    //double bufZ[] ={-1,0,1,-2,0,2,-1,0,1};  //Sx
-    //Image<double> mask(3,3,bufZ);
-    //Image<double> maskG = gaussianMask(3.0);
-    //Image<double> resD = convolve(E,maskG);
-    //Image<uint8_t> res = toUint8(resD);
-    //Image<double> resDD = convolve(res,mask);
-
-    //Image<uint8_t> resF = contours(res,mask);
-    //writePGM(toUint8(resDD),"../../TP3/LenaGaussRehaussementContours3.pgm");
-
-    /*
-    Image<double> res = convolve(B,mask);
-    res.print();
-    Image<double> res = gaussianMask(0.8);
-    res.print();*/
 
     // TP4
-    //writePGM(medianFilter(E,3),"./resultatTP4/median"+fichierPGM+".pgm");
+    writePGM(medianFilter(E,7),"./imagesResultat/median7Lena.pgm");
     /*uint8_t bufferMedian[] = {1,2,3,4,5,6,7,8,9}; // buffer de l'image à tester
     Image<uint8_t> medianTest(3,3,bufferMedian);
     medianFilter(medianTest,3).print();
     medianTest.print();*/
+    Structel::carre(2);
 
 
     return 0;
