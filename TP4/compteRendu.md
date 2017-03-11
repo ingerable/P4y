@@ -101,7 +101,7 @@ Structel Structel::carre(int n)
 
 Vérification pour un carré n = 2:
 
-![carreN=2](src/imagesResultat/carre2.png)
+![carreN=2](src/imagesCompteRendu/carre2.png)
 
 On vérifie le résultat en affichant le carré au fur et à mesure de sa construction.
 
@@ -129,7 +129,7 @@ de vérifier pour chaque point si il se situe dans le disque.
 
 Vérification pour un disque R = 2:
 
-![disqueR=2](src/imagesResultat/disque2.png)
+![disqueR=2](src/imagesCompteRendu/disque2.png)
 
 
 
