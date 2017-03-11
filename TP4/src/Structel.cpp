@@ -59,3 +59,13 @@ std::vector<Couple> points;
     }
   return Structel(points);
 }
+
+Image<uint8_t> dilate(Image<uint8_t> &img)
+{
+  Image<uint8_t> res(img.getDx(), img.getDy());
+
+
+
+
+  return res;
+}

@@ -20,7 +20,7 @@ Image<T>::Image(int dx, int dy, T *data):dx(0),dy(0),data(0)
         if(data != 0) {
             memcpy(this->data, data, size*sizeof(T));
         }
-    }    
+    }
 }
 
 template<class T>
@@ -33,10 +33,10 @@ Image<T>::Image(const Image<T> &image)
     for(int i=0; i<dx*dy; ++i) {
         this->data[i]=image.data[i];
     }
-    
+
 }
 
-template<class T>  
+template<class T>
 Image<T> &Image<T>::operator=(const Image<T> &image)
 {
     if(this!=&image)
@@ -56,7 +56,7 @@ Image<T> &Image<T>::operator=(const Image<T> &image)
     return *this;
 }
 
-template<class T>    
+template<class T>
 Image<T>::~Image()
 {
     if(data!=0)
@@ -77,13 +77,13 @@ int Image<T>::getDy() const
     return dy;
 }
 
-template<class T> 
+template<class T>
 int Image<T>::getSize() const
 {
     return size;
 }
-    
-template<class T> 
+
+template<class T>
 T* Image<T>::getData() const
 {
     return data;
@@ -92,13 +92,13 @@ T* Image<T>::getData() const
 template<class T>
 void Image<T>::print() const
 {
-    
+
     for(int x=0; x<dx; x++) {
         std::cout.width(3);
         std::cout << "----";
     }
     std::cout << "\n";
-    
+
     for(int y=0; y<dy; y++) {
         for(int x=0; x<dx; x++) {
             std::cout.width(3);
@@ -112,7 +112,7 @@ void Image<T>::print() const
         std::cout << "\n";
     }
 }
-    
+
 template<class T>
 T &Image<T>::operator()(const int &x, const int &y)
 {
@@ -124,4 +124,3 @@ T Image<T>::operator() (const int &x, const int &y) const
 {
     return data[y*dx+x];
 }
-    

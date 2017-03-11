@@ -129,7 +129,7 @@ de vérifier pour chaque point si il se situe dans le disque.
 
 Vérification pour un disque R = 2:
 
-![disqueR=2](src/imagesCompteRendu/disque2.png)
+![disqueR=2](src/imagesCompteRendu/disqueRayon2.png)
 
 
 
