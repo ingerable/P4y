@@ -22,7 +22,7 @@ La taille est dynamique et l'on peut "pousser" des objets dans un vecteurs, nous
 soucier de la taille. Une fonction de tri est déja implanté pour les vecteurs et il est possible d'accéder à
 un objet stocké dans une liste grace à son index ce qui nous permet de trouver facilement la médiane.
 
-```
+```c++
   if( ((x-(N/2)+nx)<0) || ((y-(N/2)+ny)<0) || ((x-(N/2)+nx)>=img.getDx()) || ((y-(N/2)+ny)>=img.getDy()) )
             { // dans ce cas le pixel est en dehors de l'image on ne fait rien
 
@@ -43,8 +43,7 @@ objet ayant une liste de points définis par des coordonnées. La classe structe
 un vecteur de ***points***. Les points seront représentés par une structure nommé ***Couple*** qui à pour
 attributs 2 entier x et y.
 
-```
-
+```c++
 struct Couple
 {
     int x;
@@ -74,7 +73,7 @@ Je me suis inspiré de la convolution pour implanter la méthode statique qui
 retourne un élément structurant carré. On peut utiliser la même méthode pour 
 parcourir les pixels voisins pour construire le carré.
 
-```
+```c++
 Structel Structel::carre(int n)
 {
   if(n>0)
@@ -109,7 +108,7 @@ Pour construire le disque de rayon r rien de très compliqué. L'équation de di
 euclidien de rayon r nous est donnée. Il suffit de parcourir un carré de coté R et
 de vérifier pour chaque point si il se situe dans le disque.
 
-```
+```c++
   for(y=-r; y<=r; y++)
       {
         for(x=-r; x<=r; x++)
@@ -223,8 +222,8 @@ disque et carré. On fait aussi varier la taille des éléments.
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
-***Carré*** | ![erode](src/imagesCompteRendu/erodeLenaCarre2.png)  |![erode](src/imagesCompteRendu/erodeLenaCarre4.png)   | ![erode](src/imagesCompteRendu/erodeLenaCarre8.png)  |
-***Disque*** |  ![erode](src/imagesCompteRendu/erodeLenaDisque2.png) | ![erode](src/imagesCompteRendu/erodeLenaDisque4.png)  |  ![erode](src/imagesCompteRendu/erodeLenaDisque8.png) | 
+**Carré** | ![erode](src/imagesCompteRendu/erodeLenaCarre2.png)  |![erode](src/imagesCompteRendu/erodeLenaCarre4.png)   | ![erode](src/imagesCompteRendu/erodeLenaCarre8.png)  |
+**Disque** |  ![erode](src/imagesCompteRendu/erodeLenaDisque2.png) | ![erode](src/imagesCompteRendu/erodeLenaDisque4.png)  |  ![erode](src/imagesCompteRendu/erodeLenaDisque8.png) | 
 
 On voit bien que la taille de la zone érodée est proportionnelle à la taille 
 de l'élément structurant et que la forme de la zone dépend de l'élement.
@@ -233,8 +232,8 @@ de l'élément structurant et que la forme de la zone dépend de l'élement.
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
-***Carré*** | ![dilate](src/imagesCompteRendu/dilateLenaCarre2.png)  |![dilate](src/imagesCompteRendu/dilateLenaCarre4.png)   | ![dilate](src/imagesCompteRendu/dilateLenaCarre8.png)  |
-***Disque*** |  ![dilate](src/imagesCompteRendu/dilateLenaDisque2.png) | ![dilate](src/imagesCompteRendu/dilateLenaDisque4.png)  |  ![dilate](src/imagesCompteRendu/dilateLenaDisque8.png) |
+**Carré** | ![dilate](src/imagesCompteRendu/dilateLenaCarre2.png)  |![dilate](src/imagesCompteRendu/dilateLenaCarre4.png)   | ![dilate](src/imagesCompteRendu/dilateLenaCarre8.png)  |
+**Disque** |  ![dilate](src/imagesCompteRendu/dilateLenaDisque2.png) | ![dilate](src/imagesCompteRendu/dilateLenaDisque4.png)  |  ![dilate](src/imagesCompteRendu/dilateLenaDisque8.png) |
 
 
 
