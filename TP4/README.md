@@ -223,9 +223,18 @@ disque et carré. On fait aussi varier la taille des éléments.
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
-Carré | ![erode](src/imagesCompteRendu/erodeLenaCarre2.png)  |![erode](src/imagesCompteRendu/erodeLenaCarre4.png)   | ![erode](src/imagesCompteRendu/erodeLenaCarre8.png)  |
-Disque |  ![erode](src/imagesCompteRendu/erodeLenaDisque2.png) | ![erode](src/imagesCompteRendu/erodeLenaDisque4.png)  |  ![erode](src/imagesCompteRendu/erodeLenaDisque8.png) | 
+***Carré*** | ![erode](src/imagesCompteRendu/erodeLenaCarre2.png)  |![erode](src/imagesCompteRendu/erodeLenaCarre4.png)   | ![erode](src/imagesCompteRendu/erodeLenaCarre8.png)  |
+***Disque*** |  ![erode](src/imagesCompteRendu/erodeLenaDisque2.png) | ![erode](src/imagesCompteRendu/erodeLenaDisque4.png)  |  ![erode](src/imagesCompteRendu/erodeLenaDisque8.png) | 
 
+On voit bien que la taille de la zone érodée est proportionnelle à la taille 
+de l'élément structurant et que la forme de la zone dépend de l'élement.
+
+#### Dilatation
+
+Type d'élément|  2 |  4 |  8 | 
+|---|---|---|---|---|
+***Carré*** | ![dilate](src/imagesCompteRendu/dilateLenaCarre2.png)  |![dilate](src/imagesCompteRendu/dilateLenaCarre4.png)   | ![dilate](src/imagesCompteRendu/dilateLenaCarre8.png)  |
+***Disque*** |  ![dilate](src/imagesCompteRendu/dilateLenaDisque2.png) | ![dilate](src/imagesCompteRendu/dilateLenaDisque4.png)  |  ![dilate](src/imagesCompteRendu/dilateLenaDisque8.png) |
 
 
 
