@@ -76,13 +76,13 @@ int main(int argc, const char * argv[]) {
 
 
     // TP4
-    writePGM(medianFilter(E,7),"./imagesResultat/median7Lena.pgm");
+    //writePGM(medianFilter(E,7),"./imagesResultat/median7Lena.pgm");
     /*uint8_t bufferMedian[] = {1,2,3,4,5,6,7,8,9}; // buffer de l'image à tester
     Image<uint8_t> medianTest(3,3,bufferMedian);
     medianFilter(medianTest,3).print();
     medianTest.print();*/
-    Structel::carre(2);
-
+    E = Structel::carre(3).externalGradient(E);
+    writePGM(E,"./extGradientCarre3.pgm");
 
     return 0;
 }

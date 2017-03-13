@@ -10,6 +10,7 @@ Structel::Structel(std::vector<Couple> &p)
   this->points=p;
 }
 
+
 //méthode static renvoyant un carré de coté 2n+1
 Structel Structel::carre(int n)
 {
@@ -26,8 +27,6 @@ Structel Structel::carre(int n)
         point.x=x-((2*n+1)/2);
         point.y=y-((2*n+1)/2);
         points.push_back(point);
-        std::cout<<point.x<<point.y;
-        printf("\n");
       }
     }
   }
@@ -51,8 +50,6 @@ std::vector<Couple> points;
             point.x=x;
             point.y=y;
             points.push_back(point);
-            std::cout<<point.x<<point.y;
-            printf("\n");
           }
         }
       }
@@ -60,12 +57,108 @@ std::vector<Couple> points;
   return Structel(points);
 }
 
-Image<uint8_t> dilate(Image<uint8_t> &img)
+Image<uint8_t> Structel::erode(Image<uint8_t> &img)
+{
+  std::vector<Couple> points = this->points; // on passe par un tableau intermediaire
+
+  Image<uint8_t> res(img.getDx(), img.getDy());
+  for(int y=0; y<img.getDy(); y++)
+  {
+    for(int x=0; x<img.getDx(); x++)
+    {
+        uint8_t min=255; // on initialise le minimum
+        for(int pt=0; pt<points.size(); pt++) // on cherche la valeur minimum des points "recouvert" par l'élément
+        {
+          if( ((x+points[pt].x)<img.getDx()) && ((y+points[pt].y)<img.getDy()) && ((y+points[pt].y)>=0) && ((x+points[pt].x)>=0) )//si le point est en dehors de l'image
+          {
+            if( img(x+points[pt].x, y+points[pt].y)<min)
+            {
+              min = img(x+points[pt].x, y+points[pt].y);
+            }
+          }
+        }
+        res(x,y) = min;
+    }
+  }
+  return res;
+}
+
+
+Image<uint8_t> Structel::dilate(Image<uint8_t> &img)
+{
+  std::vector<Couple> points = this->points; // on passe par un tableau intermediaire
+  Image<uint8_t> res(img.getDx(), img.getDy());
+  for(int y=0; y<img.getDy(); y++)
+  {
+    for(int x=0; x<img.getDx(); x++)
+    {
+        uint8_t max=0; // on initialise le maximum
+        for(int pt=0; pt<points.size(); pt++) // on cherche la valeur minimum des points "recouvert" par l'élément
+        {
+            if( ((x+points[pt].x)<img.getDx()) && ((y+points[pt].y)<img.getDy()) && ((y+points[pt].y)>=0) && ((x+points[pt].x)>=0) )//si le point est en dehors de l'image
+            {
+              if( img(x-points[pt].x, y-points[pt].y)>max)
+              {
+                max = img(x-points[pt].x, y-points[pt].y);
+              }
+            }
+        }
+        res(x,y) = max;
+    }
+  }
+  return res;
+}
+
+Image<uint8_t> Structel::opening(Image<uint8_t> &img)
 {
   Image<uint8_t> res(img.getDx(), img.getDy());
+  res = this->erode(img);
+  res = this->dilate(res);
+  return res;
+}
 
+Image<uint8_t> Structel::closure(Image<uint8_t> &img)
+{
+  Image<uint8_t> res(img.getDx(), img.getDy());
+  res = this->dilate(img);
+  res = this->erode(res);
+  return res;
+}
 
+Image<uint8_t> Structel::externalGradient(Image<uint8_t> &img)
+{
+  Image<uint8_t> res(img.getDx(), img.getDy());
+  Image<uint8_t> dilated(img.getDx(), img.getDy());
+  Image<uint8_t> eroded(img.getDx(), img.getDy());
 
+  dilated = this->dilate(img);
+  eroded = this->erode(img);
 
+  for(int y=0; y<img.getDy(); y++)
+  {
+    for(int x=0; x<img.getDx(); x++)
+    {
+      res(x,y)=dilated(x,y)-eroded(x,y);
+    }
+  }
+  return res;
+}
+
+Image<uint8_t> Structel::internalGradient(Image<uint8_t> &img)
+{
+  Image<uint8_t> res(img.getDx(), img.getDy());
+  Image<uint8_t> dilated(img.getDx(), img.getDy());
+  Image<uint8_t> eroded(img.getDx(), img.getDy());
+
+  dilated = this->dilate(img);
+  eroded = this->erode(img);
+
+  for(int y=0; y<img.getDy(); y++)
+  {
+    for(int x=0; x<img.getDx(); x++)
+    {
+      res(x,y)=eroded(x,y)-dilated(x,y);
+    }
+  }
   return res;
 }

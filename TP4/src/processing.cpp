@@ -17,7 +17,6 @@
 #include <algorithm>
 
 //thresholding function with uint8_t picture, parameters are a picture and a thresholding value (0-255)
-
 void thresholding(Image<uint8_t> &image, const int value)
 {
   for(int y=0; y<image.getDy(); ++y) // on parcourt les pixels de l'image entrée
@@ -279,7 +278,7 @@ Image<uint8_t> contours(Image<uint8_t> img, Image<double> mask)
   {
     for(int x=0; x<img.getDx(); x++)
     {
-        int sum=0;
+      int sum=0;
       for(int my = 0; my<mask.getDy(); my++)
       {
         for(int mx = 0; mx<mask.getDx(); mx++)

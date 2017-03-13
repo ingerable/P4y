@@ -131,6 +131,21 @@ Vérification pour un disque R = 2:
 
 ![disqueR=2](src/imagesCompteRendu/disqueRayon2.png)
 
+## Méthodes d'érosion et de dilatation
+
+On implante les méthodes d'érosion et de dilatation qui seront des méthodes d'instance
+de la classe Structel. 
+
+```
+  Image<uint8_t> opening(Image<uint8_t> &img);
+  Image<uint8_t> closure(Image<uint8_t> &img);
+```
+
+Comme décrit dans le sujet de TP on parcours tous les points
+(x+i, y+j) ou (x,y) un point de l'image et (i,j) un point de 
+l'élément structurant. Pour la dilatation on cherche le minimum
+dans l'ensemble des points parcourus alors que pour l'érosion on
+cherche le maximum.
 
 
 
