@@ -285,3 +285,25 @@ Type d'élément|  2 |  4 |  8 |
 **Disque** |  ![closure](src/imagesCompteRendu/closureLenaDisque2.png) | ![closure](src/imagesCompteRendu/closureLenaDisque4.png)  |  ![closure](src/imagesCompteRendu/closureLenaDisque8.png) 
 
 
+### Gradient interne et externe
+
+Le gradient externe consiste à soustraire le résultat de la dilution
+par le résultat de l'érosion d'une même image (Pas de composée, les opérations
+sont réalisées à part). Le gradient interne consiste à soustraire le résultat
+de l'érosion par le résultat de la dilution.
+
+
+#### Tests gradient externe
+
+Type d'élément|  2 |  4 |  8 | 
+|---|---|---|---|---|
+**Carré** | ![extGrad](src/imagesCompteRendu/extGradLenaCarre2.png)  |![extGrad](src/imagesCompteRendu/extGradLenaCarre4.png)   | ![extGrad](src/imagesCompteRendu/extGradLenaCarre8.png)  |
+**Disque** |  ![extGrad](src/imagesCompteRendu/extGradLenaDisque2.png) | ![extGrad](src/imagesCompteRendu/extGradLenaDisque4.png)  |  ![extGrad](src/imagesCompteRendu/extGradLenaDisque8.png) 
+
+
+#### Tests gradient interne
+
+Type d'élément|  2 |  4 |  8 | 
+|---|---|---|---|---|
+**Carré** | ![intGrad](src/imagesCompteRendu/intGradLenaCarre2.png)  |![intGrad](src/imagesCompteRendu/intGradLenaCarre4.png)   | ![extGrad](src/imagesCompteRendu/intGradLenaCarre8.png)  |
+**Disque** |  ![intGrad](src/imagesCompteRendu/intGradLenaDisque2.png) | ![intGrad](src/imagesCompteRendu/intGradLenaDisque4.png)  |  ![intGrad](src/imagesCompteRendu/intGradLenaDisque8.png) 
