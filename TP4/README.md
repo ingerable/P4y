@@ -217,6 +217,7 @@ Image<uint8_t> Structel::erode(Image<uint8_t> &img)
 
 #### Érosion
 
+
 On vérifie le résultat de l'érosion pour les 2 éléments structurants
 disque et carré. On fait aussi varier la taille des éléments.
 
@@ -225,16 +226,62 @@ Type d'élément|  2 |  4 |  8 |
 **Carré** | ![erode](src/imagesCompteRendu/erodeLenaCarre2.png)  |![erode](src/imagesCompteRendu/erodeLenaCarre4.png)   | ![erode](src/imagesCompteRendu/erodeLenaCarre8.png)  |
 **Disque** |  ![erode](src/imagesCompteRendu/erodeLenaDisque2.png) | ![erode](src/imagesCompteRendu/erodeLenaDisque4.png)  |  ![erode](src/imagesCompteRendu/erodeLenaDisque8.png) | 
 
-On voit bien que la taille de la zone érodée est proportionnelle à la taille 
-de l'élément structurant et que la forme de la zone dépend de l'élement.
+On voit bien que la taille des zones érodées sont proportionnelles à la taille 
+de l'élément structurant et que leurs forme dépendent de l'élement.
 
 #### Dilatation
+
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
 **Carré** | ![dilate](src/imagesCompteRendu/dilateLenaCarre2.png)  |![dilate](src/imagesCompteRendu/dilateLenaCarre4.png)   | ![dilate](src/imagesCompteRendu/dilateLenaCarre8.png)  |
 **Disque** |  ![dilate](src/imagesCompteRendu/dilateLenaDisque2.png) | ![dilate](src/imagesCompteRendu/dilateLenaDisque4.png)  |  ![dilate](src/imagesCompteRendu/dilateLenaDisque8.png) |
 
+Encore une fois on remarque que la taille des zones dilatées sont
+proportionnelles à la taille de l'élément. On arrive clairement à
+distinguer la forme de l'élement structurant entre les 2 images
+dilatées de taille d'élément 8.
 
+### Ouverture et fermeture
+
+Rien de très compliqué pour l'ouverture et la fermeture. IL suffit 
+dans un cas d'érodér l'image puis de la dilatér et vice-versa dans 
+l'autre cas.
+
+```c++
+Image<uint8_t> Structel::opening(Image<uint8_t> &img)
+{
+  Image<uint8_t> res(img.getDx(), img.getDy());
+  res = this->erode(img);
+  res = this->dilate(res);
+  return res;
+}
+
+Image<uint8_t> Structel::closure(Image<uint8_t> &img)
+{
+  Image<uint8_t> res(img.getDx(), img.getDy());
+  res = this->dilate(img);
+  res = this->erode(res);
+  return res;
+}
+```
+
+#### Tests ouverture
+
+Type d'élément|  2 |  4 |  8 | 
+|---|---|---|---|---|
+**Carré** | ![opening](src/imagesCompteRendu/openingLenaCarre2.png)  |![opening](src/imagesCompteRendu/openingLenaCarre4.png)   | ![opening](src/imagesCompteRendu/openingLenaCarre8.png)  |
+**Disque** |  ![opening](src/imagesCompteRendu/openingLenaDisque2.png) | ![opening](src/imagesCompteRendu/openingLenaDisque4.png)  |  ![opening](src/imagesCompteRendu/openingLenaDisque8.png) 
+
+
+
+
+
+#### Tests fermeture
+
+Type d'élément|  2 |  4 |  8 | 
+|---|---|---|---|---|
+**Carré** | ![closure](src/imagesCompteRendu/closureLenaCarre2.png)  |![closure](src/imagesCompteRendu/closureLenaCarre4.png)   | ![closure](src/imagesCompteRendu/closureLenaCarre8.png)  |
+**Disque** |  ![closure](src/imagesCompteRendu/closureLenaDisque2.png) | ![closure](src/imagesCompteRendu/closureLenaDisque4.png)  |  ![closure](src/imagesCompteRendu/closureLenaDisque8.png) 
 
 
