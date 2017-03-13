@@ -1,7 +1,9 @@
 #!/bin/sh
 
-for file in *.png; do
+for file in *.pgm; do
 	convert ./"$file" ./"${file%.pgm}.png"
-	mv ./"$file" ../imagesCompteRendu/
+done
+for fileP in *.png; do
+	mv ./"$fileP" ./../imagesCompteRendu
 done
 

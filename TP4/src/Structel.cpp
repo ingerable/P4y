@@ -69,7 +69,7 @@ Image<uint8_t> Structel::erode(Image<uint8_t> &img)
         uint8_t min=255; // on initialise le minimum
         for(int pt=0; pt<points.size(); pt++) // on cherche la valeur minimum des points "recouvert" par l'élément
         {
-          if( ((x+points[pt].x)<img.getDx()) && ((y+points[pt].y)<img.getDy()) && ((y+points[pt].y)>=0) && ((x+points[pt].x)>=0) )//si le point est en dehors de l'image
+          if( ((x+points[pt].x)<img.getDx()) && ((y+points[pt].y)<img.getDy()) && ((y+points[pt].y)>=0) && ((x+points[pt].x)>=0) )//bords de l'image
           {
             if( img(x+points[pt].x, y+points[pt].y)<min)
             {
@@ -95,7 +95,7 @@ Image<uint8_t> Structel::dilate(Image<uint8_t> &img)
         uint8_t max=0; // on initialise le maximum
         for(int pt=0; pt<points.size(); pt++) // on cherche la valeur minimum des points "recouvert" par l'élément
         {
-            if( ((x+points[pt].x)<img.getDx()) && ((y+points[pt].y)<img.getDy()) && ((y+points[pt].y)>=0) && ((x+points[pt].x)>=0) )//si le point est en dehors de l'image
+            if( ((x-points[pt].x)<img.getDx()) && ((y-points[pt].y)<img.getDy()) && ((y-points[pt].y)>=0) && ((x-points[pt].x)>=0) )//bords de l'image
             {
               if( img(x-points[pt].x, y-points[pt].y)>max)
               {
@@ -158,6 +158,29 @@ Image<uint8_t> Structel::internalGradient(Image<uint8_t> &img)
     for(int x=0; x<img.getDx(); x++)
     {
       res(x,y)=eroded(x,y)-dilated(x,y);
+    }
+  }
+  return res;
+}
+
+Image<uint8_t> Structel::allOrNothing(Image<uint8_t> &img, Structel a, Structel b)
+{
+  Image<uint8_t> eroded(img.getDx(), img.getDy());
+  eroded = a.erode(img);
+  Image<uint8_t> dilated(img.getDx(), img.getDy());
+  dilated = b.dilate(img);
+  Image<uint8_t> res(img.getDx(), img.getDy());
+
+  for(int y=0; y<img.getDy(); y++)
+  {
+    for(int x=0; x<img.getDx(); x++)
+    {
+      if(eroded(x,y)-dilated(x,y)<=0)
+      {
+        res(x,y)=0;
+      }else{
+        res(x,y)=eroded(x,y)-dilated(x,y);
+      }
     }
   }
   return res;

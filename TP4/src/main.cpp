@@ -81,8 +81,11 @@ int main(int argc, const char * argv[]) {
     Image<uint8_t> medianTest(3,3,bufferMedian);
     medianFilter(medianTest,3).print();
     medianTest.print();*/
-    E = Structel::carre(3).externalGradient(E);
-    writePGM(E,"./extGradientCarre3.pgm");
+    E = Structel::carre(8).erode(E);
+    writePGM(E,"./erodeLenaCarre8.pgm");
+    E = readPGM(fichierPGM);
+    E = Structel::disque(2).erode(E);
+    writePGM(E,"./erodeLenaDisque2.pgm");
 
     return 0;
 }
