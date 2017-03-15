@@ -31,11 +31,14 @@ public:
   Image<uint8_t> internalGradient(Image<uint8_t> &img);
   Image<uint8_t> externalGradient(Image<uint8_t> &img);
 
+
   static Image<uint8_t> allOrNothing(Image<uint8_t> &img, Structel a, Structel b);
   // construit un élément structurant carré de coté 2n+1
   static Structel carre(int n);
   // construit un disque de rayon r
   static Structel disque(int r);
+
+  static void granulometry(Image<uint8_t> &img);
 
 };
 

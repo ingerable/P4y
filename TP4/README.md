@@ -17,9 +17,9 @@ L'implantation n'est pas très compliqué, nous avons déja implanté et utilis�
 Ce qui était un peu plus compliqué était la gestion de la taille du tableau qui varie en fonction
 du cas ou l'on se situe (bords haut droit/gauche ... ,bords, "centre"). Car cette fois ci on ne peut
 pas remplacer les pixels en dehors de l'image par des 0 car cela fausserait le calcul de la médiane.
-On choisit d'utiliser des vecteurs dans ce cas. Les vecteurs agissent comme une pile et comme une liste.
-La taille est dynamique et l'on peut "pousser" des objets dans un vecteurs, nous n'avons alors pas à nous 
-soucier de la taille. Une fonction de tri est déja implanté pour les vecteurs et il est possible d'accéder à
+On choisit d'utiliser des vector dans ce cas (structure de données). Les vector agissent à la fois comme une pile et comme une liste.
+La taille est dynamique et l'on peut "pousser" des objets dans un vectir, nous n'avons alors pas à nous 
+soucier de la taille. Une fonction de tri est déja implanté pour les vector et il est possible d'accéder à
 un objet stocké dans une liste grace à son index ce qui nous permet de trouver facilement la médiane.
 
 ```c++
@@ -40,7 +40,7 @@ un objet stocké dans une liste grace à son index ce qui nous permet de trouver
 
 Pour pouvoir définir une classe représentant un élément structurant nous avons besoin d'un
 objet ayant une liste de points définis par des coordonnées. La classe structel aura donc en attributs
-un vecteur de ***points***. Les points seront représentés par une structure nommé ***Couple*** qui à pour
+un vector de **points**. Les points seront représentés par une structure nommé ***Couple*** qui à pour
 attributs 2 entier x et y.
 
 ```c++
@@ -301,9 +301,64 @@ Type d'élément|  2 |  4 |  8 |
 **Disque** |  ![extGrad](src/imagesCompteRendu/extGradLenaDisque2.png) | ![extGrad](src/imagesCompteRendu/extGradLenaDisque4.png)  |  ![extGrad](src/imagesCompteRendu/extGradLenaDisque8.png) 
 
 
-#### Tests gradient interne
+#### Tests gradient interne
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
 **Carré** | ![intGrad](src/imagesCompteRendu/intGradLenaCarre2.png)  |![intGrad](src/imagesCompteRendu/intGradLenaCarre4.png)   | ![extGrad](src/imagesCompteRendu/intGradLenaCarre8.png)  |
 **Disque** |  ![intGrad](src/imagesCompteRendu/intGradLenaDisque2.png) | ![intGrad](src/imagesCompteRendu/intGradLenaDisque4.png)  |  ![intGrad](src/imagesCompteRendu/intGradLenaDisque8.png) 
+
+#### Transformée en tout-ou-rien par l'élément structurant composite (A,B)
+
+
+
+
+
+
+### Applications
+
+#### Filtrage morphologique 
+
+Les disques étant blanc, une dilatation semble être le bon opérateur. Un élément structurant à peine
+plus grand que les structures noires permettrait d'éclaircir ses mêmes structures. Les disques serait 
+néamoins un peu agrandis. L'élément structurant ne doit pas être un carré ou alors les disques blanc
+auront une formé carré après l'opéaration. La dilatation ne changera pas la couleur des disques car ils 
+ont déja la couleur max, néanmoins les structures étant plus sombres la dilatation va éclaircir les structures à l'aide de l'élémment structurant (c'est pour cela que l'élément structurant doit être plus grand que les structures sinon la valeur max sera la couleur des structures).
+
+![original](src/imagesCompteRendu/pcb_gray.png)
+![dilate](src/imagesCompteRendu/dilatedPcb.png)
+
+#### Restauration
+
+Ici on cherche à enlever les rayures noires (tout en essayant de conserver l'image d'origine). La dilatation semble encore l'opérateur le plus approprié. Les rayures étant noire, la dilatation permettra
+avec l'élément structurant approprié de trouver une valeur max qui permettra d'éclaircir les rayures.
+Il faut un élément assez grand sinon la valeur max sera le niveau de gris de la rayure.
+
+![original](src/imagesCompteRendu/barrat4.png)
+![dilate](src/imagesCompteRendu/BarratDilate.png)
+
+#### Fissures 
+
+Un peu plus compliqué cette fois ci. Pour faire apparaître les fissures on 
+utilise l'opérateur de gradient externe. On utilise un élément structurant
+de type disque et de taille 1 pour essayer de garder la taille des fissures 
+aussi grande que la taille originale.
+Cet opérateur agit en 3 temps : 
+
+* L'image d'origine va être dilatée, les zones claires vont restées claire pas de changement
+majeurs à ce niveau la. Par contre les bords des fissures (ou l'ensemble des fissures
+ si l'élément structurant est assez grand) vont êtres éclaircis. En effet les bords des fissures étant noires, lors de la dilatation la valeur max sera celle de la terre claire au voisinage. 
+
+* L'image d'origine va être érodée. Les zones ou la terre est claire ne seront pas modifiées
+car il n'y à pas de points sombres aux alentours de ses zones. Les points claires adjacent aux 
+fissures noires seront assombris. 
+
+* On soustrait le dilatée par l'érodée. A ce moment les zones claires sans voisinages sombres deviendront 
+noires car les points ont la même valeur après les opérations d'érosion et de dilatation. Les bords des fissures qui s'étaient éclaircies resteront clairs car ses même bords s'étaient assombris lors de l'érosion, résultat cela permet de mettre en avant les fissures.
+
+![original](src/imagesCompteRendu/soil.png)
+![open](src/imagesCompteRendu/externalGradientSoil.png)
+
+#### Granulométrie
+
+

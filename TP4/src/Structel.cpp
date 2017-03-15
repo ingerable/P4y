@@ -27,6 +27,8 @@ Structel Structel::carre(int n)
         point.x=x-((2*n+1)/2);
         point.y=y-((2*n+1)/2);
         points.push_back(point);
+        std::cout<<point.x << point.y;
+        printf("\n");
       }
     }
   }
@@ -185,3 +187,26 @@ Image<uint8_t> Structel::allOrNothing(Image<uint8_t> &img, Structel a, Structel 
   }
   return res;
 }
+
+  void Structel::granulometry(Image<uint8_t> &img)
+  {
+    long weight;
+    for(int i=1; i<=10; i++)
+    {
+      weight = 0;
+      Structel elem = Structel::disque(i);
+      Image<uint8_t> inter(img.getDx(), img.getDy()); //image intermediaire
+      inter = elem.opening(img); // ouverture
+
+      for(int y=0; y<img.getDy(); y++) // calcul du poids
+      {
+        for(int x=0; x<img.getDx(); x++)
+        {
+          weight += inter(x,y);
+        }
+      }
+      printf("%s %d %ld\n","taille de l'élément ",i, weight );
+    }
+
+
+  }

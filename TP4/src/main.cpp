@@ -26,49 +26,7 @@ int main(int argc, const char * argv[]) {
     int dx = atoi(argv[1]);
     int dy = atoi(argv[2]);
     std::string fichierPGM = argv[3];
-    /*int seuil = atoi(argv[4]);
-    int k = atoi(argv[5]);
-    int f = atoi(argv[6]);*/
 
-    Image<uint8_t> A(dx,dy);
-
-    for(int y=0; y<A.getDy(); ++y) {
-        for(int x=0; x<A.getDx(); ++x) {
-            A(x,y)=(x+y)%10;
-        }
-    }
-
-    std::cout <<"Image A :\n";
-    A.print();
-
-    uint8_t buffer[]={0,1,2,
-                     3,4,5,
-                     6,7,8,
-                     9,10,11};
-
-    Image<uint8_t> B(3,4,buffer);
-
-    std::cout <<"Image B :\n";
-    B.print();
-
-    double buffer2[]={0.1,0.2,0.3,
-                     0.4,0.5,0.6};
-
-    Image <double> C(3,2,buffer2);
-    std::cout <<"Image C :\n";
-    C.print();
-
-    Image <uint8_t> D(dx,dy);
-    for(int y=0; y<D.getDy(); ++y)
-    {
-      int mod = 0;
-        for(int x=0; x<D.getDx(); ++x)
-        {
-          D(x,y)=((x+y)%2)*255;
-        }
-    }
-    std::cout <<"Image D :\n";
-    D.print();
 
 
     Image<uint8_t> E = readPGM(fichierPGM);
@@ -81,11 +39,14 @@ int main(int argc, const char * argv[]) {
     Image<uint8_t> medianTest(3,3,bufferMedian);
     medianFilter(medianTest,3).print();
     medianTest.print();*/
-    E = Structel::carre(8).erode(E);
-    writePGM(E,"./erodeLenaCarre8.pgm");
-    E = readPGM(fichierPGM);
-    E = Structel::disque(2).erode(E);
-    writePGM(E,"./erodeLenaDisque2.pgm");
+    std::vector<Couple> pB = { {10,10},{9,10},{8,10},{7,10},{6,10},{5,10},
+                                    {6,5},{7,5},{8,5},{9,5},{10,5},
+                                    {5,9},{5,8},{5,7},{5,6},{5,5},
+                                  {10,6},{10,7},{10,8},{10,9} };
 
+   Structel b = Structel(pB);
+   Structel a = Structel::disque(2);
+   //writePGM(a.externalGradient(E),"./../images/externalGradientSoil.pgm");
+   Structel::granulometry(E);
     return 0;
 }
