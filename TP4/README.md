@@ -325,18 +325,18 @@ néamoins un peu agrandis. L'élément structurant ne doit pas être un carré o
 auront une formé carré après l'opéaration. La dilatation ne changera pas la couleur des disques car ils 
 ont déja la couleur max, néanmoins les structures étant plus sombres la dilatation va éclaircir les structures à l'aide de l'élémment structurant (c'est pour cela que l'élément structurant doit être plus grand que les structures sinon la valeur max sera la couleur des structures).
 
-|Original|Corrigée|
+|Original|Résultat|
 |---|---|
-|![original](src/imagesCompteRendu/pcb_gray.png)|![dilate](src/imagesCompteRendu/dilatedPcb.png)|
+| ![original](src/imagesCompteRendu/pcb_gray.png) | ![dilate](src/imagesCompteRendu/dilatedPcb.png) |
 
 #### Restauration
 
 Ici on cherche à enlever les rayures noires (tout en essayant de conserver l'image d'origine). La dilatation semble encore l'opérateur le plus approprié. Les rayures étant noire, la dilatation permettra
 avec l'élément structurant approprié de trouver une valeur max qui permettra d'éclaircir les rayures.
 Il faut un élément assez grand sinon la valeur max sera le niveau de gris de la rayure.
-
-![original](src/imagesCompteRendu/barrat4.png)
-![dilate](src/imagesCompteRendu/BarratDilate.png)
+|Original|Résultat|
+|---|---|
+| ![original](src/imagesCompteRendu/barrat4.png) | ![dilate](src/imagesCompteRendu/BarratDilate.png) |
 
 #### Fissures 
 
@@ -356,9 +356,9 @@ fissures noires seront assombris.
 
 * On soustrait le dilatée par l'érodée. A ce moment les zones claires sans voisinages sombres deviendront 
 noires car les points ont la même valeur après les opérations d'érosion et de dilatation. Les bords des fissures qui s'étaient éclaircies resteront clairs car ses même bords s'étaient assombris lors de l'érosion, résultat cela permet de mettre en avant les fissures.
-
-![original](src/imagesCompteRendu/soil.png)
-![open](src/imagesCompteRendu/externalGradientSoil.png)
+| Original | Résultat |
+|---|---|
+| ![original](src/imagesCompteRendu/soil.png) | ![open](src/imagesCompteRendu/externalGradientSoil.png) |
 
 #### Granulométrie
 
