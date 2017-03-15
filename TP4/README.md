@@ -325,8 +325,7 @@ néamoins un peu agrandis. L'élément structurant ne doit pas être un carré o
 auront une formé carré après l'opéaration. La dilatation ne changera pas la couleur des disques car ils 
 ont déja la couleur max, néanmoins les structures étant plus sombres la dilatation va éclaircir les structures à l'aide de l'élémment structurant (c'est pour cela que l'élément structurant doit être plus grand que les structures sinon la valeur max sera la couleur des structures).
 
-![original](src/imagesCompteRendu/pcb_gray.png)
-![dilate](src/imagesCompteRendu/dilatedPcb.png)
+|![original](src/imagesCompteRendu/pcb_gray.png)|![dilate](src/imagesCompteRendu/dilatedPcb.png)|
 
 #### Restauration
 
