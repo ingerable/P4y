@@ -227,6 +227,9 @@ Les valeurs aux bords de l'image sont bien abaissées au minimum (ici 0).
 On vérifie le résultat de l'érosion pour les 2 éléments structurants
 disque et carré. On fait aussi varier la taille des éléments.
 
+
+##### Application 
+
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
 **Carré** | ![erode](src/imagesCompteRendu/erodeLenaCarre2.png)  |![erode](src/imagesCompteRendu/erodeLenaCarre4.png)   | ![erode](src/imagesCompteRendu/erodeLenaCarre8.png)  |
@@ -244,6 +247,9 @@ On test la dilatation sur une image de synthèse avec le même élément structu
 
 Les points aux bords de l'image ( à l'exception des coins du au fait que l'élément structurant est une croix) ont désormais une valeur de 255 (la valeur max).
 
+
+##### Application
+ 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
 **Carré** | ![dilate](src/imagesCompteRendu/dilateLenaCarre2.png)  |![dilate](src/imagesCompteRendu/dilateLenaCarre4.png)   | ![dilate](src/imagesCompteRendu/dilateLenaCarre8.png)  |
@@ -286,6 +292,9 @@ On test l'ouverture avec une image de synthèse et le même élément structuran
 
 L'ouverture à l'effet escompté. On remarque que la valeurs des coins de l'image est abaissé au minimum.
 
+
+##### Application
+ 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
 **Carré** | ![opening](src/imagesCompteRendu/openingLenaCarre2.png)  |![opening](src/imagesCompteRendu/openingLenaCarre4.png)   | ![opening](src/imagesCompteRendu/openingLenaCarre8.png)  |
@@ -306,6 +315,8 @@ on se rend compte que l'érosion aura juste pour effet de faire revenir l'image 
 
 ![test](src/imagesCompteRendu/dilatation.png)
 
+
+##### Application 
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
@@ -330,6 +341,8 @@ image dilatée| - | image d'origine | = | gradient externe|
 ![test](src/imagesCompteRendu/dilatation.png) | | ![test](src/imagesCompteRendu/imageOriginale.png) | | ![test](src/imagesCompteRendu/testExtGrad.png) |
 
 
+##### Application 
+
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
 **Carré** | ![extGrad](src/imagesCompteRendu/extGradLenaCarre2.png)  |![extGrad](src/imagesCompteRendu/extGradLenaCarre4.png)   | ![extGrad](src/imagesCompteRendu/extGradLenaCarre8.png)  |
@@ -342,14 +355,19 @@ On vérifie aussi l'implémentation du gradient interne :
 
 Image d'origine | - | image érodée | = | gradient interne | 
 |---|---|---|---|---|
-![test](src/imagesCompteRendu/imageOrigine.png) | - | ![test](src/imagesCompteRendu/erosion.png) | =  | ![test](src/imagesCompteRendu/testIntGrad.png) |
+![test](src/imagesCompteRendu/imageOriginal.png) | - | ![test](src/imagesCompteRendu/erosion.png) | =  | ![test](src/imagesCompteRendu/testIntGrad.png) |
+
+
+##### Application 
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
 **Carré** | ![intGrad](src/imagesCompteRendu/intGradLenaCarre2.png)  |![intGrad](src/imagesCompteRendu/intGradLenaCarre4.png)   | ![extGrad](src/imagesCompteRendu/intGradLenaCarre8.png)  |
 **Disque** |  ![intGrad](src/imagesCompteRendu/intGradLenaDisque2.png) | ![intGrad](src/imagesCompteRendu/intGradLenaDisque4.png)  |  ![intGrad](src/imagesCompteRendu/intGradLenaDisque8.png) 
 
-#### Tests gradient morphologique
+
+#### Tests gradient morphologique
+
 
 Gradient mophologique avec élément structurant carre de coté 3 
 ![croix](src/imagesCompteRendu/gradMorphoCarre.png)
