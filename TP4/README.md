@@ -218,6 +218,11 @@ Image<uint8_t> Structel::erode(Image<uint8_t> &img)
 
 #### Érosion
 
+On test en premier lieu l'érosion sur une image de synthèse avec un élément structurant disque (r=1 => croix), on constate que l'implémentation de l'opérateur est correcte : 
+
+![test](src/imagesCompteRendu/testErosion.png)
+
+Les valeurs aux bords de l'image sont bien abaissées au minimum (ici 0).
 
 On vérifie le résultat de l'érosion pour les 2 éléments structurants
 disque et carré. On fait aussi varier la taille des éléments.
@@ -232,6 +237,12 @@ de l'élément structurant et que leurs forme dépendent de l'élement.
 
 #### Dilatation
 
+
+On test la dilatation sur une image de synthèse avec le même élément structurant en forme de croix (disque r=1), on constate que la dilatation fonctionne correctement :
+
+![test](src/imagesCompteRendu/testDilatation.png) 
+
+Les points aux bords de l'image ( à l'exception des coins du au fait que l'élément structurant est une croix) ont désormais une valeur de 255 (la valeur max).
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
@@ -269,6 +280,12 @@ Image<uint8_t> Structel::closure(Image<uint8_t> &img)
 
 #### Tests ouverture
 
+On test l'ouverture avec une image de synthèse et le même élément structurant en forme de croix (disque avec r=1) :
+
+![test](src/imagesCompteRendu/testOpening.png)
+
+L'ouverture à l'effet escompté. On remarque que la valeurs des coins de l'image est abaissé au minimum.
+
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
 **Carré** | ![opening](src/imagesCompteRendu/openingLenaCarre2.png)  |![opening](src/imagesCompteRendu/openingLenaCarre4.png)   | ![opening](src/imagesCompteRendu/openingLenaCarre8.png)  |
@@ -279,6 +296,16 @@ Type d'élément|  2 |  4 |  8 |
 
 
 #### Tests fermeture
+
+Pareil pour la fermeture, on test avec le même élément structurant que pour les autres test :
+
+![test](src/imagesCompteRendu/testClosure.png)
+
+L'image ne change pas et cela est normale, quand on regarde la dilatation par ce même élément structurant 
+on se rend compte que l'érosion aura juste pour effet de faire revenir l'image dilatée à l'image d'origine :
+
+![test](src/imagesCompteRendu/dilatation.png)
+
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
@@ -296,6 +323,13 @@ entre l'image dilatée et l'image érodée.
 
 #### Tests gradient externe
 
+On réalise de nouveau le test sur l'image de synthèse pour valider l'implémentation de l'opérateur :
+
+image dilatée| - | image d'origine | = | gradient externe| 
+|---|---|---|---|---|
+![test](src/imagesCompteRendu/dilatation.png) | | ![test](src/imagesCompteRendu/imageOriginale.png) | | ![test](src/imagesCompteRendu/testExtGrad.png) |
+
+
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
 **Carré** | ![extGrad](src/imagesCompteRendu/extGradLenaCarre2.png)  |![extGrad](src/imagesCompteRendu/extGradLenaCarre4.png)   | ![extGrad](src/imagesCompteRendu/extGradLenaCarre8.png)  |
@@ -303,6 +337,12 @@ Type d'élément|  2 |  4 |  8 |
 
 
 #### Tests gradient interne
+
+On vérifie aussi l'implémentation du gradient interne : 
+
+Image d'origine | - | image érodée | = | gradient interne | 
+|---|---|---|---|---|
+![test](src/imagesCompteRendu/imageOrigine.png) | - | ![test](src/imagesCompteRendu/erosion.png) | =  | ![test](src/imagesCompteRendu/testIntGrad.png) |
 
 Type d'élément|  2 |  4 |  8 | 
 |---|---|---|---|---|
@@ -351,7 +391,7 @@ avec l'élément structurant approprié (donc plus large que les rayures) de tro
 #### Fissures 
 
 Un peu plus compliqué cette fois ci. Pour faire apparaître les fissures on 
-utilise l'opérateur de gradient externe. On utilise un élément structurant
+utilise l'opérateur de gradient morphologique. On utilise un élément structurant
 de type disque et de taille 1 pour essayer de garder la taille des fissures 
 aussi grande que la taille originale.
 Cet opérateur agit en 3 temps : 
