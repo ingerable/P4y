@@ -4,12 +4,12 @@
 
 Le principe du filtre médian est de remplacer le pixel au centre du filtre
 par la médiane de tout les pixels contenus dans le filtre. Ce procédé permet 
-de d'améliorer la qualité d'image dégradées. La taille de la fenêtre sera
+d'améliorer la qualité d'image dégradées. La taille de la fenêtre sera
 de taille $`sigma\times sigma`$ avec $`sigma`$ impair pour que le pixel qui va être modifié
 puisse être au centre du filtre. On va lister les pixels dans une liste puis trier la 
 liste avant de choisir la médiane. La valeur médiane permet de choisir une valeur de pixel 
 qui s'accorde bien avec les pixels voisins, la liste étant triée par ordre croissant. Si l'on veux
-reconstituer une image il ne faut pas choisir de valeurs trop proches de 0 ou 255.
+reconstituer une image on va toujours essayer de prendre des valeurs moyennes.
 
 ### Implantation
 
@@ -18,7 +18,7 @@ Ce qui était un peu plus compliqué était la gestion de la taille du tableau q
 du cas ou l'on se situe (bords haut droit/gauche ... ,bords, "centre"). Car cette fois ci on ne peut
 pas remplacer les pixels en dehors de l'image par des 0 car cela fausserait le calcul de la médiane.
 On choisit d'utiliser des vector dans ce cas (structure de données). Les vector agissent à la fois comme une pile et comme une liste.
-La taille est dynamique et l'on peut "pousser" des objets dans un vectir, nous n'avons alors pas à nous 
+La taille est dynamique et l'on peut "pousser" des objets dans un vector, nous n'avons alors pas à nous 
 soucier de la taille. Une fonction de tri est déja implanté pour les vector et il est possible d'accéder à
 un objet stocké dans une liste grace à son index ce qui nous permet de trouver facilement la médiane.
 
@@ -40,7 +40,7 @@ un objet stocké dans une liste grace à son index ce qui nous permet de trouver
 
 Pour pouvoir définir une classe représentant un élément structurant nous avons besoin d'un
 objet ayant une liste de points définis par des coordonnées. La classe structel aura donc en attributs
-un vector de **points**. Les points seront représentés par une structure nommé ***Couple*** qui à pour
+un vector de **points**. Les points seront représentés par une structure nommé **Couple** qui a pour
 attributs 2 entier x et y.
 
 ```c++
@@ -106,7 +106,8 @@ On vérifie le résultat en affichant le carré au fur et à mesure de sa constr
 
 Pour construire le disque de rayon r rien de très compliqué. L'équation de disque
 euclidien de rayon r nous est donnée. Il suffit de parcourir un carré de coté R et
-de vérifier pour chaque point si il se situe dans le disque.
+de vérifier pour chaque point si il se situe dans le disque. Les points du carré qui
+n'appartiennent pas au disque seront éléminés lors de leur passage dans la condition.
 
 ```c++
   for(y=-r; y<=r; y++)
@@ -245,7 +246,7 @@ dilatées de taille d'élément 8.
 ### Ouverture et fermeture
 
 Rien de très compliqué pour l'ouverture et la fermeture. IL suffit 
-dans un cas d'érodér l'image puis de la dilatér et vice-versa dans 
+dans un cas d'éroder l'image puis de la dilater et vice-versa dans 
 l'autre cas.
 
 ```c++
@@ -285,12 +286,12 @@ Type d'élément|  2 |  4 |  8 |
 **Disque** |  ![closure](src/imagesCompteRendu/closureLenaDisque2.png) | ![closure](src/imagesCompteRendu/closureLenaDisque4.png)  |  ![closure](src/imagesCompteRendu/closureLenaDisque8.png) 
 
 
-### Gradient interne et externe
+### Gradient interne, externe et morphologique
 
-Le gradient externe consiste à soustraire le résultat de la dilution
-par le résultat de l'érosion d'une même image (Pas de composée, les opérations
-sont réalisées à part). Le gradient interne consiste à soustraire le résultat
-de l'érosion par le résultat de la dilution.
+Le gradient externe consiste à soustraire la dilatation de l'image par
+l'image d'origine. Le gradient interne consiste à soustraire l'image d'origine
+par l'image érodée. Ensuite le gradient morphologique est le résultat de la différence 
+entre l'image dilatée et l'image érodée.
 
 
 #### Tests gradient externe
@@ -308,6 +309,11 @@ Type d'élément|  2 |  4 |  8 |
 **Carré** | ![intGrad](src/imagesCompteRendu/intGradLenaCarre2.png)  |![intGrad](src/imagesCompteRendu/intGradLenaCarre4.png)   | ![extGrad](src/imagesCompteRendu/intGradLenaCarre8.png)  |
 **Disque** |  ![intGrad](src/imagesCompteRendu/intGradLenaDisque2.png) | ![intGrad](src/imagesCompteRendu/intGradLenaDisque4.png)  |  ![intGrad](src/imagesCompteRendu/intGradLenaDisque8.png) 
 
+#### Tests gradient morphologique
+
+![croix](src/imagesCompteRendu/gradMorphoCarre.png)
+![carre](src/imagesCompteRendu/grandMorphoCroix.png)
+
 #### Transformée en tout-ou-rien par l'élément structurant composite (A,B)
 
 
@@ -323,7 +329,8 @@ Les disques étant blanc, une dilatation semble être le bon opérateur. Un él�
 plus grand que les structures noires permettrait d'éclaircir ses mêmes structures. Les disques serait 
 néamoins un peu agrandis. L'élément structurant ne doit pas être un carré ou alors les disques blanc
 auront une formé carré après l'opéaration. La dilatation ne changera pas la couleur des disques car ils 
-ont déja la couleur max, néanmoins les structures étant plus sombres la dilatation va éclaircir les structures à l'aide de l'élémment structurant (c'est pour cela que l'élément structurant doit être plus grand que les structures sinon la valeur max sera la couleur des structures).
+ont déja la couleur max, néanmoins les structures étant plus sombres, la dilatation va éclaircir les structures à l'aide de l'élément structurant (c'est pour cela que l'élément structurant doit être plus grand que les structures sinon la valeur max sera la couleur des structures et elles ne changeront pas de
+"couleur").
 
 |Original|Résultat|
 |---|---|
@@ -332,8 +339,7 @@ ont déja la couleur max, néanmoins les structures étant plus sombres la dilat
 #### Restauration
 
 Ici on cherche à enlever les rayures noires (tout en essayant de conserver l'image d'origine). La dilatation semble encore l'opérateur le plus approprié. Les rayures étant noire, la dilatation permettra
-avec l'élément structurant approprié de trouver une valeur max qui permettra d'éclaircir les rayures.
-Il faut un élément assez grand sinon la valeur max sera le niveau de gris de la rayure.
+avec l'élément structurant approprié (donc plus large que les rayures) de trouver une valeur max qui permettra d'éclaircir les rayures. Il faut un élément assez grand sinon la valeur max sera le niveau de gris de la rayure.
 
 |Original|Résultat|
 |---|---|

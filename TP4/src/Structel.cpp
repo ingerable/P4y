@@ -127,7 +127,7 @@ Image<uint8_t> Structel::closure(Image<uint8_t> &img)
   return res;
 }
 
-Image<uint8_t> Structel::externalGradient(Image<uint8_t> &img)
+Image<uint8_t> Structel::gradient(Image<uint8_t> &img)
 {
   Image<uint8_t> res(img.getDx(), img.getDy());
   Image<uint8_t> dilated(img.getDx(), img.getDy());
@@ -149,17 +149,32 @@ Image<uint8_t> Structel::externalGradient(Image<uint8_t> &img)
 Image<uint8_t> Structel::internalGradient(Image<uint8_t> &img)
 {
   Image<uint8_t> res(img.getDx(), img.getDy());
-  Image<uint8_t> dilated(img.getDx(), img.getDy());
   Image<uint8_t> eroded(img.getDx(), img.getDy());
 
-  dilated = this->dilate(img);
   eroded = this->erode(img);
 
   for(int y=0; y<img.getDy(); y++)
   {
     for(int x=0; x<img.getDx(); x++)
     {
-      res(x,y)=eroded(x,y)-dilated(x,y);
+      res(x,y)=img(x,y)-eroded(x,y);
+    }
+  }
+  return res;
+}
+
+Image<uint8_t> Structel::externalGradient(Image<uint8_t> &img)
+{
+  Image<uint8_t> res(img.getDx(), img.getDy());
+  Image<uint8_t> dilated(img.getDx(), img.getDy());
+
+  dilated = this->dilate(img);
+
+  for(int y=0; y<img.getDy(); y++)
+  {
+    for(int x=0; x<img.getDx(); x++)
+    {
+      res(x,y)=dilated(x,y)-img(x,y);
     }
   }
   return res;

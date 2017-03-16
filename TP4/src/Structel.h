@@ -30,6 +30,7 @@ public:
   Image<uint8_t> closure(Image<uint8_t> &img);
   Image<uint8_t> internalGradient(Image<uint8_t> &img);
   Image<uint8_t> externalGradient(Image<uint8_t> &img);
+  Image<uint8_t> gradient(Image<uint8_t> &img);
 
 
   static Image<uint8_t> allOrNothing(Image<uint8_t> &img, Structel a, Structel b);
