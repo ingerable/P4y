@@ -25,12 +25,12 @@ int main(int argc, const char * argv[]) {
     }
     int dx = atoi(argv[1]);
     int dy = atoi(argv[2]);
-    std::string fichierPGM = argv[3];
+    //std::string fichierPGM = argv[3];
 
 
 
     Image<uint8_t> E = readPGM(fichierPGM);
-    std::cout<<"Image PGM :\n";
+    //std::cout<<"Image PGM :\n";
 
 
     // TP4
@@ -42,7 +42,7 @@ int main(int argc, const char * argv[]) {
     /*std::vector<Couple> pB = { {10,10},{9,10},{8,10},{7,10},{6,10},{5,10},
                                     {6,5},{7,5},{8,5},{9,5},{10,5},
                                     {5,9},{5,8},{5,7},{5,6},{5,5},
-                                  {10,6},{10,7},{10,8},{10,9} };*/
+                                  {10,6},{10,7},{10,8},{10,9} };
 
    uint8_t buffer[]={
      0,0,0,0,0,0,0,0,0,0,
@@ -56,26 +56,17 @@ int main(int argc, const char * argv[]) {
      0,0,0,0,0,0,0,0,0,0,
      0,0,0,0,0,0,0,0,0,0
    };
-   Image<uint8_t> T(10,10,buffer);
+   Image<uint8_t> T(10,10,buffer);*/
 
 
 
-   //Structel b = Structel(pB);
-   Structel b = Structel::disque(1);
-   /*
-   writePGM(b.internalGradient(E),"./imagesResultat/intGradLenaDisque2.pgm");
-   b = Structel::disque(4);
-    writePGM(b.internalGradient(E),"./imagesResultat/intGradLenaDisque4.pgm");
-  b = Structel::disque(8);
-     writePGM(b.internalGradient(E),"./imagesResultat/intGradLenaDisque8.pgm");*/
+   /*Structel a = Structel::disque(3);
+   Structel b = Structel(pB);
+   Structel c = Structel::disque(1);*/
 
-   //writePGM(a.externalGradient(E),"./../images/externalGradientSoil.pgm");
-   //Structel::granulometry(E);
 
-   printf("%s\n","Image originale :");
-   T.print();
-   T = b.closure(T);
-   printf("%s\n","Image modifié :" );
-   T.print();
+   Structel::granulometry(E);
+
+
     return 0;
 }

@@ -209,7 +209,7 @@ Image<uint8_t> Structel::allOrNothing(Image<uint8_t> &img, Structel a, Structel 
     for(int i=1; i<=10; i++)
     {
       weight = 0;
-      Structel elem = Structel::disque(i);
+      Structel elem = Structel::disque(i); // élement structurant
       Image<uint8_t> inter(img.getDx(), img.getDy()); //image intermediaire
       inter = elem.opening(img); // ouverture
 
@@ -220,7 +220,7 @@ Image<uint8_t> Structel::allOrNothing(Image<uint8_t> &img, Structel a, Structel 
           weight += inter(x,y);
         }
       }
-      printf("%s %d %ld\n","taille de l'élément ",i, weight );
+      printf("%d %ld\n",i, weight );
     }
 
 

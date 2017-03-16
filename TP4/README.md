@@ -355,7 +355,7 @@ On vérifie aussi l'implémentation du gradient interne :
 
 Image d'origine | - | image érodée | = | gradient interne | 
 |---|---|---|---|---|
-![test](src/imagesCompteRendu/imageOriginal.png) | - | ![test](src/imagesCompteRendu/erosion.png) | =  | ![test](src/imagesCompteRendu/testIntGrad.png) |
+![test](src/imagesCompteRendu/imageOriginale.png) | - | ![test](src/imagesCompteRendu/erosion.png) | =  | ![test](src/imagesCompteRendu/testIntGrad.png) |
 
 
 ##### Application 
@@ -377,7 +377,7 @@ Gradient morphologique avec élément structurant croix
 
 #### Transformée en tout-ou-rien par l'élément structurant composite (A,B)
 
-
+**To do**
 
 
 
@@ -431,4 +431,34 @@ noires car les points ont la même valeur après les opérations d'érosion et d
 
 #### Granulométrie
 
+Pour pouvoir construire une courbe granulométrique on doit calculer la somme des valeurs des points d'un image pour un élément structurant dont la taille varie. Ici nous allons faire varier la taille d'un disque de 1 à 10 en effectuant une succesions d'ouverture. A chaque ouverture nous allons afficher la taille de l'élement et le volume de l'image après ouverture. 
+
+```c++
+void Structel::granulometry(Image<uint8_t> &img)
+  {
+    long weight;
+    for(int i=1; i<=10; i++)
+    {
+      weight = 0;
+      Structel elem = Structel::disque(i); // élement structurant
+      Image<uint8_t> inter(img.getDx(), img.getDy()); //image intermediaire
+      inter = elem.opening(img); // ouverture
+
+      for(int y=0; y<img.getDy(); y++) // calcul du poids
+      {
+        for(int x=0; x<img.getDx(); x++)
+        {
+          weight += inter(x,y);
+        }
+      }
+      printf("%d %ld\n",i, weight );
+    }
+```
+
+On redirige la sortie standard vers un fichier .dat qui sera exploité en utilisant R pour tracer la courbe
+granulométrique.
+
+![smooth](src/imagesCompteRendu/granulometry.png)
+
+Plus l'élément structurant augmente plus la somme des valeurs des pixels diminue. 
 
