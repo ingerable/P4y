@@ -45,9 +45,12 @@ int main(int argc, const char * argv[]) {
                                   {10,6},{10,7},{10,8},{10,9} };
 
    //Structel b = Structel(pB);
-   Structel a = Structel::carre(1);
-   Structel b = Structel::disque(1);
-   writePGM(b.gradient(E),"./imagesResultat/gradMorphoCroix.pgm");
+   Structel b = Structel::disque(2);
+   writePGM(b.internalGradient(E),"./imagesResultat/intGradLenaDisque2.pgm");
+   b = Structel::disque(4);
+    writePGM(b.internalGradient(E),"./imagesResultat/intGradLenaDisque4.pgm");
+  b = Structel::disque(8);
+     writePGM(b.internalGradient(E),"./imagesResultat/intGradLenaDisque8.pgm");
 
    //writePGM(a.externalGradient(E),"./../images/externalGradientSoil.pgm");
    //Structel::granulometry(E);

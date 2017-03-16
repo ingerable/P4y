@@ -311,8 +311,11 @@ Type d'élément|  2 |  4 |  8 |
 
 #### Tests gradient morphologique
 
+Gradient mophologique avec élément structurant carre de coté 3 
 ![croix](src/imagesCompteRendu/gradMorphoCarre.png)
-![carre](src/imagesCompteRendu/grandMorphoCroix.png)
+
+Gradient morphologique avec élément structurant croix 
+![carre](src/imagesCompteRendu/gradMorphoCroix.png)
 
 #### Transformée en tout-ou-rien par l'élément structurant composite (A,B)
 
