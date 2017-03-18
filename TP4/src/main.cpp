@@ -25,7 +25,7 @@ int main(int argc, const char * argv[]) {
     }
     int dx = atoi(argv[1]);
     int dy = atoi(argv[2]);
-    //std::string fichierPGM = argv[3];
+    std::string fichierPGM = argv[3];
 
 
 
@@ -39,34 +39,31 @@ int main(int argc, const char * argv[]) {
     Image<uint8_t> medianTest(3,3,bufferMedian);
     medianFilter(medianTest,3).print();
     medianTest.print();*/
-    /*std::vector<Couple> pB = { {10,10},{9,10},{8,10},{7,10},{6,10},{5,10},
-                                    {6,5},{7,5},{8,5},{9,5},{10,5},
-                                    {5,9},{5,8},{5,7},{5,6},{5,5},
-                                  {10,6},{10,7},{10,8},{10,9} };
+    std::vector<Couple> pB = {{-2,-2},{-2,-1},{-2,0},{-2,1},{-2,2},
+                                {-1,2},{0,2},{1,2},{2,2},
+                              {2,1},{2,0},{2,-1},{2,-2},
+                            {1,-2},{0,-2},{-1,-2}};
 
    uint8_t buffer[]={
      0,0,0,0,0,0,0,0,0,0,
      0,0,0,0,0,0,0,0,0,0,
-     0,0,0,255,255,255,255,0,0,0,
-     0,0,0,255,255,255,255,0,0,0,
-     0,0,0,255,255,255,255,0,0,0,
-     0,0,0,255,255,255,255,0,0,0,
-     0,0,0,255,255,255,255,0,0,0,
+     0,0,0,255,255,255,0,0,0,0,
+     0,0,0,255,255,255,0,0,0,0,
+     0,0,0,255,255,255,0,0,0,0,
+     0,0,0,255,255,255,0,0,0,0,
+     0,0,0,0,0,0,0,0,0,0,
      0,0,0,0,0,0,0,0,0,0,
      0,0,0,0,0,0,0,0,0,0,
      0,0,0,0,0,0,0,0,0,0
    };
-   Image<uint8_t> T(10,10,buffer);*/
+   Image<uint8_t> T(10,10,buffer);
 
 
 
-   /*Structel a = Structel::disque(3);
+   Structel a = Structel::carre(1);
    Structel b = Structel(pB);
-   Structel c = Structel::disque(1);*/
-
-
+   //writePGM(Structel::hitOrMiss(E,a,b), "./hitOrMiss.pgm");
    Structel::granulometry(E);
-
 
     return 0;
 }

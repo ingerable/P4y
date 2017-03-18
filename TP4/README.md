@@ -431,12 +431,26 @@ noires car les points ont la même valeur après les opérations d'érosion et d
 
 #### Granulométrie
 
-Pour pouvoir construire une courbe granulométrique on doit calculer la somme des valeurs des points d'un image pour un élément structurant dont la taille varie. Ici nous allons faire varier la taille d'un disque de 1 à 10 en effectuant une succesions d'ouverture. A chaque ouverture nous allons afficher la taille de l'élement et le volume de l'image après ouverture. 
+Pour pouvoir construire une courbe granulométrique on doit calculer la somme des valeurs des points d'un image pour un élément structurant dont la taille varie. Ici nous allons faire varier la taille d'un disque de 1 à 10 en effectuant une succesions d'ouverture. A chaque ouverture nous allons afficher le pourcentage de pixels restant après ouverture par rapport à l'image d'origine, la taille de l'élement et le volume de l'image après ouverture. 
+
+On calcule le volume de l'image originale
+```c++
+  long baseWeight=0;
+    for(int y=0; y<img.getDy(); y++) // calcul du poids total de l'image originale
+    {
+      for(int x=0; x<img.getDx(); x++)
+      {
+        baseWeight += img(x,y);
+      }
+    }
+
+```
+
+Ensuite on effectue notre successions d'ouvertures en calculant pour chaque ouverture délément i le volume de l'image. On affiche pourcentage de pixels restant / taille de l'élément / volume de l'image
 
 ```c++
-void Structel::granulometry(Image<uint8_t> &img)
-  {
-    long weight;
+
+  long weight;
     for(int i=1; i<=10; i++)
     {
       weight = 0;
@@ -451,14 +465,15 @@ void Structel::granulometry(Image<uint8_t> &img)
           weight += inter(x,y);
         }
       }
-      printf("%d %ld\n",i, weight );
+      //std::cout<<(100*weight)/baseWeight;
+      printf("%ld %d %ld\n",(100*weight)/(baseWeight) ,i, weight );
     }
 ```
 
 On redirige la sortie standard vers un fichier .dat qui sera exploité en utilisant R pour tracer la courbe
-granulométrique.
+granulométrique. Voici la courbe produite avec les résultats obtenus :
 
 ![smooth](src/imagesCompteRendu/granulometry.png)
 
-Plus l'élément structurant augmente plus la somme des valeurs des pixels diminue. 
+Comme nous l'avions vu prédecemment l'ouverture permet de faire disparaitre les cotées de certaines régions tout comme l'érosion mais en plus modéré. Forcement lorsque le taille de l'élément structurant augmente, l'ouverture sera plus importante et le volume de l'image va diminuer.
 

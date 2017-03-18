@@ -5,9 +5,11 @@ taille <- perf[,1]
 volume <- perf[,2]
 
 png("granulometry.png")
-i<-qplot(taille, volume, data=perf, main="courbe granulométrique pour taille de disque variante", geom="smooth", method="loess") + labs(y="volume de l'image", x="taille de l'élément structurant")
+i<-qplot(taille, p, data=perf, main="courbe granulométrique pour taille de disque variante", geom="smooth", method="loess") + labs(y="pourcentage de pixel restant", x="taille de l'élément structurant") +
+  scale_x_continuous(breaks = seq(0, 10, 1))
 print(i)
 dev.off()
+
 
 
 png("dérivé.png")

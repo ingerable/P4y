@@ -33,7 +33,7 @@ public:
   Image<uint8_t> gradient(Image<uint8_t> &img);
 
 
-  static Image<uint8_t> allOrNothing(Image<uint8_t> &img, Structel a, Structel b);
+  static Image<uint8_t> hitOrMiss(Image<uint8_t> &img, Structel a, Structel b);
   // construit un élément structurant carré de coté 2n+1
   static Structel carre(int n);
   // construit un disque de rayon r

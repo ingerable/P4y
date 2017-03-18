@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <math.h>
+#include "fileio.h"
 
 Structel::Structel(std::vector<Couple> &p)
 {
@@ -180,19 +181,18 @@ Image<uint8_t> Structel::externalGradient(Image<uint8_t> &img)
   return res;
 }
 
-Image<uint8_t> Structel::allOrNothing(Image<uint8_t> &img, Structel a, Structel b)
+Image<uint8_t> Structel::hitOrMiss(Image<uint8_t> &img, Structel a, Structel b)
 {
   Image<uint8_t> eroded(img.getDx(), img.getDy());
   eroded = a.erode(img);
   Image<uint8_t> dilated(img.getDx(), img.getDy());
   dilated = b.dilate(img);
   Image<uint8_t> res(img.getDx(), img.getDy());
-
   for(int y=0; y<img.getDy(); y++)
   {
     for(int x=0; x<img.getDx(); x++)
     {
-      if(eroded(x,y)-dilated(x,y)<=0)
+      if( (eroded(x,y)-dilated(x,y)) <=0)
       {
         res(x,y)=0;
       }else{
@@ -205,6 +205,15 @@ Image<uint8_t> Structel::allOrNothing(Image<uint8_t> &img, Structel a, Structel 
 
   void Structel::granulometry(Image<uint8_t> &img)
   {
+    long baseWeight=0;
+    for(int y=0; y<img.getDy(); y++) // calcul du poids total de l'image originale
+    {
+      for(int x=0; x<img.getDx(); x++)
+      {
+        baseWeight += img(x,y);
+      }
+    }
+
     long weight;
     for(int i=1; i<=10; i++)
     {
@@ -220,7 +229,8 @@ Image<uint8_t> Structel::allOrNothing(Image<uint8_t> &img, Structel a, Structel 
           weight += inter(x,y);
         }
       }
-      printf("%d %ld\n",i, weight );
+      //std::cout<<(100*weight)/baseWeight;
+      printf("%ld %d %ld\n",(100*weight)/(baseWeight) ,i, weight );
     }
 
 
