@@ -28,8 +28,8 @@ Structel Structel::carre(int n)
         point.x=x-((2*n+1)/2);
         point.y=y-((2*n+1)/2);
         points.push_back(point);
-        std::cout<<point.x << point.y;
-        printf("\n");
+        //std::cout<<point.x << point.y;
+        //printf("\n");
       }
     }
   }
@@ -53,6 +53,8 @@ std::vector<Couple> points;
             point.x=x;
             point.y=y;
             points.push_back(point);
+            //std::cout<<point.x << point.y;
+            //printf("\n");
           }
         }
       }
@@ -229,8 +231,8 @@ Image<uint8_t> Structel::hitOrMiss(Image<uint8_t> &img, Structel a, Structel b)
           weight += inter(x,y);
         }
       }
-      //std::cout<<(100*weight)/baseWeight;
-      printf("%ld %d %ld\n",(100*weight)/(baseWeight) ,i, weight );
+
+      printf("%ld %d %ld %s\n",(100*weight)/(baseWeight) ,i, weight, "o");
     }
 
 

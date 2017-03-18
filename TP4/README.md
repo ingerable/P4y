@@ -476,4 +476,18 @@ granulométrique. Voici la courbe produite avec les résultats obtenus :
 ![smooth](src/imagesCompteRendu/granulometry.png)
 
 Comme nous l'avions vu prédecemment l'ouverture permet de faire disparaitre les cotées de certaines régions tout comme l'érosion mais en plus modéré. Forcement lorsque le taille de l'élément structurant augmente, l'ouverture sera plus importante et le volume de l'image va diminuer.
+On peut déja constater une "diminution des valeurs" après ouverture avec un élément de taille 1. 
+
+![derivative](/src/imagesCompteRendu/dérivé.png)
+
+Si on se fie à la dérivé on pourrait déduire que la majorité des particules de l'image on une taille d'environ 7 (disque de rayon 7).
+
+#### Différence image seuillé / image originale
+
+On compare désormais la courbe granulométrique avec une image seuillée et une image en niveau de gris :
+
+![compare](src/imagesCompteRendu/comparison.png)
+
+On remarque qu'avec une image de seuillée (s = 120 ) le volume de l'image est plus affecté par la taille de l'élément.
+que l'image originale
 

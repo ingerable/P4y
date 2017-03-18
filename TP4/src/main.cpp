@@ -44,7 +44,7 @@ int main(int argc, const char * argv[]) {
                               {2,1},{2,0},{2,-1},{2,-2},
                             {1,-2},{0,-2},{-1,-2}};
 
-   uint8_t buffer[]={
+   /*uint8_t buffer[]={
      0,0,0,0,0,0,0,0,0,0,
      0,0,0,0,0,0,0,0,0,0,
      0,0,0,255,255,255,0,0,0,0,
@@ -56,13 +56,14 @@ int main(int argc, const char * argv[]) {
      0,0,0,0,0,0,0,0,0,0,
      0,0,0,0,0,0,0,0,0,0
    };
-   Image<uint8_t> T(10,10,buffer);
+   Image<uint8_t> T(10,10,buffer);*/
 
 
 
-   Structel a = Structel::carre(1);
-   Structel b = Structel(pB);
+   //Structel a = Structel::disque(1);
+   //Structel b = Structel(pB);
    //writePGM(Structel::hitOrMiss(E,a,b), "./hitOrMiss.pgm");
+   //thresholding(E,120);
    Structel::granulometry(E);
 
     return 0;
