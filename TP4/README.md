@@ -3,8 +3,8 @@
 ## Filtre médian
 
 Le principe du filtre médian est de remplacer le pixel au centre du filtre
-par la médiane de tout les pixels contenus dans le filtre. Ce procédé permet 
-d'améliorer la qualité d'image dégradées. La taille de la fenêtre sera
+par la médiane de tous les pixels contenus dans le filtre. Ce procédé permet 
+d'améliorer la qualité d'image dégradée. La taille de la fenêtre sera
 de taille $`sigma\times sigma`$ avec $`sigma`$ impair pour que le pixel qui va être modifié
 puisse être au centre du filtre. On va lister les pixels dans une liste puis trier la 
 liste avant de choisir la médiane. La valeur médiane permet de choisir une valeur de pixel 
@@ -15,11 +15,11 @@ reconstituer une image on va toujours essayer de prendre des valeurs moyennes.
 
 L'implantation n'est pas très compliqué, nous avons déja implanté et utilisé de nombreux filtres.
 Ce qui était un peu plus compliqué était la gestion de la taille du tableau qui varie en fonction
-du cas ou l'on se situe (bords haut droit/gauche ... ,bords, "centre"). Car cette fois ci on ne peut
+du cas où l'on se situe (bords haut droit/gauche ... ,bords, "centre"). Car cette fois ci on ne peut
 pas remplacer les pixels en dehors de l'image par des 0 car cela fausserait le calcul de la médiane.
 On choisit d'utiliser des vector dans ce cas (structure de données). Les vector agissent à la fois comme une pile et comme une liste.
 La taille est dynamique et l'on peut "pousser" des objets dans un vector, nous n'avons alors pas à nous 
-soucier de la taille. Une fonction de tri est déja implanté pour les vector et il est possible d'accéder à
+soucier de la taille. Une fonction de tri est déjà implanté pour les vector et il est possible d'accéder à
 un objet stocké dans une liste grace à son index ce qui nous permet de trouver facilement la médiane.
 
 ```c++
@@ -41,7 +41,7 @@ un objet stocké dans une liste grace à son index ce qui nous permet de trouver
 Pour pouvoir définir une classe représentant un élément structurant nous avons besoin d'un
 objet ayant une liste de points définis par des coordonnées. La classe structel aura donc en attributs
 un vector de **points**. Les points seront représentés par une structure nommé **Couple** qui a pour
-attributs 2 entier x et y.
+attributs 2 entiers x et y.
 
 ```c++
 struct Couple
@@ -71,7 +71,7 @@ public:
 
 Je me suis inspiré de la convolution pour implanter la méthode statique qui
 retourne un élément structurant carré. On peut utiliser la même méthode pour 
-parcourir les pixels voisins pour construire le carré.
+parcourir les pixels voisins que pour construire le carré.
 
 ```c++
 Structel Structel::carre(int n)
@@ -107,7 +107,7 @@ On vérifie le résultat en affichant le carré au fur et à mesure de sa constr
 Pour construire le disque de rayon r rien de très compliqué. L'équation de disque
 euclidien de rayon r nous est donnée. Il suffit de parcourir un carré de coté R et
 de vérifier pour chaque point si il se situe dans le disque. Les points du carré qui
-n'appartiennent pas au disque seront éléminés lors de leur passage dans la condition.
+n'appartiennent pas au disque seront éliminés lors de leur passage dans la condition.
 
 ```c++
   for(y=-r; y<=r; y++)
@@ -141,7 +141,7 @@ de la classe Structel.
   Image<uint8_t> closure(Image<uint8_t> &img);
 ```
 
-Comme décrit dans le sujet de TP on parcours tous les points
+Comme décrit dans le sujet de TP on parcourt tous les points
 (x-i, y-j) pour la dilatation et (x+i, x+j) pour l'érosion
 ou (x,y) un point de l'image et (i,j) un point de 
 l'élément structurant. Pour la dilatation on cherche le minimum
@@ -179,7 +179,7 @@ Pour chaque pixel de l'image on cherche le maximum
 dans l'ensemble des points (x-i, y-j) avec (x,y)
 le point de l'image et (i,j) le point de l'élément
 structurant. A chaque itération (dans la boucle qui
-parcours les points de l'élément structurant) on 
+parcourt les points de l'élément structurant) on 
 compare le point avec le max, il faut faire 
 attention à ne pas compter les points au bord de l'image.
 
@@ -290,7 +290,7 @@ On test l'ouverture avec une image de synthèse et le même élément structuran
 
 ![test](src/imagesCompteRendu/testOpening.png)
 
-L'ouverture à l'effet escompté. On remarque que la valeurs des coins de l'image est abaissé au minimum.
+L'ouverture a l'effet escompté. On remarque que les valeurs des coins de l'image sont abaissé au minimum.
 
 
 ##### Application
@@ -310,7 +310,7 @@ Pareil pour la fermeture, on test avec le même élément structurant que pour l
 
 ![test](src/imagesCompteRendu/testClosure.png)
 
-L'image ne change pas et cela est normale, quand on regarde la dilatation par ce même élément structurant 
+L'image ne change pas et cela est normal, quand on regarde la dilatation par ce même élément structurant 
 on se rend compte que l'érosion aura juste pour effet de faire revenir l'image dilatée à l'image d'origine :
 
 ![test](src/imagesCompteRendu/dilatation.png)
@@ -377,7 +377,36 @@ Gradient morphologique avec élément structurant croix
 
 #### Transformée en tout-ou-rien par l'élément structurant composite (A,B)
 
-**To do**
+Pour implémenter la transformée en tout-ou-rien on va regarder le résultat de la différence
+entre l'érosion de I par A et la dilatation de I par B, si la différence est supérieure à 0 on
+affecte cette différence au pixel sinon on lui affecte 0.
+
+```c++
+Image<uint8_t> Structel::hitOrMiss(Image<uint8_t> &img, Structel a, Structel b)
+{
+  // Image d'origine érodée et dilatée
+  Image<uint8_t> eroded(img.getDx(), img.getDy());
+  eroded = a.erode(img);
+  Image<uint8_t> dilated(img.getDx(), img.getDy());
+  dilated = b.dilate(img);
+  Image<uint8_t> res(img.getDx(), img.getDy());
+
+  //parcours pour chaque pixel
+  for(int y=0; y<img.getDy(); y++)
+  {
+    for(int x=0; x<img.getDx(); x++)
+    {
+      if( (eroded(x,y)-dilated(x,y)) <=0)
+      {
+        res(x,y)=0;
+      }else{
+        res(x,y)=eroded(x,y)-dilated(x,y);
+      }
+    }
+  }
+  return res;
+}
+```
 
 
 
@@ -387,8 +416,8 @@ Gradient morphologique avec élément structurant croix
 #### Filtrage morphologique 
 
 Les disques étant blanc, une dilatation semble être le bon opérateur. Un élément structurant à peine
-plus grand que les structures noires permettrait d'éclaircir ses mêmes structures. Les disques serait 
-néamoins un peu agrandis. L'élément structurant ne doit pas être un carré ou alors les disques blanc
+plus grand que les structures noires permettrait d'éclaircir ses mêmes structures. Les disques seraient 
+néamoins un peu agrandis. L'élément structurant ne doit pas être un carré ou alors les disques blancs
 auront une formé carré après l'opéaration. La dilatation ne changera pas la couleur des disques car ils 
 ont déja la couleur max, néanmoins les structures étant plus sombres, la dilatation va éclaircir les structures à l'aide de l'élément structurant (c'est pour cela que l'élément structurant doit être plus grand que les structures sinon la valeur max sera la couleur des structures et elles ne changeront pas de
 "couleur").
@@ -414,16 +443,16 @@ de type disque et de taille 1 pour essayer de garder la taille des fissures
 aussi grande que la taille originale.
 Cet opérateur agit en 3 temps : 
 
-* L'image d'origine va être dilatée, les zones claires vont restées claire pas de changement
+* L'image d'origine va être dilatée, les zones claires vont le rester, pas de changement
 majeurs à ce niveau la. Par contre les bords des fissures (ou l'ensemble des fissures
- si l'élément structurant est assez grand) vont êtres éclaircis. En effet les bords des fissures étant noires, lors de la dilatation la valeur max sera celle de la terre claire au voisinage. 
+ si l'élément structurant est assez grand) vont êtres éclaircis. En effet les bords des fissures étant noirs, lors de la dilatation la valeur max sera celle de la terre claire au voisinage. 
 
 * L'image d'origine va être érodée. Les zones ou la terre est claire ne seront pas modifiées
-car il n'y à pas de points sombres aux alentours de ses zones. Les points claires adjacent aux 
-fissures noires seront assombris. 
+car il n'y a pas de points sombres aux alentours de ses zones. Les points claires adjacent aux 
+fissures noirs seront assombris. 
 
-* On soustrait le dilatée par l'érodée. A ce moment les zones claires sans voisinages sombres deviendront 
-noires car les points ont la même valeur après les opérations d'érosion et de dilatation. Les bords des fissures qui s'étaient éclaircies resteront clairs car ses même bords s'étaient assombris lors de l'érosion, résultat cela permet de mettre en avant les fissures.
+* On soustrait le dilatée par l'érodée. A ce moment les zones claires sans voisinage sombres deviendront 
+noirs car les points ont la même valeur après les opérations d'érosion et de dilatation. Les bords des fissures qui s'étaient éclaircies resteront clairs car ses même bords s'étaient assombris lors de l'érosion, résultat cela permet de mettre en avant les fissures.
 
 | Original | Résultat |
 |---|---|
@@ -431,7 +460,7 @@ noires car les points ont la même valeur après les opérations d'érosion et d
 
 #### Granulométrie
 
-Pour pouvoir construire une courbe granulométrique on doit calculer la somme des valeurs des points d'un image pour un élément structurant dont la taille varie. Ici nous allons faire varier la taille d'un disque de 1 à 10 en effectuant une succesions d'ouverture. A chaque ouverture nous allons afficher le pourcentage de pixels restant après ouverture par rapport à l'image d'origine, la taille de l'élement et le volume de l'image après ouverture. 
+Pour pouvoir construire une courbe granulométrique on doit calculer la somme des valeurs des points d'une image pour un élément structurant dont la taille varie. Ici nous allons faire varier la taille d'un disque de 1 à 10 en effectuant une successions d'ouverture. A chaque ouverture nous allons afficher le pourcentage de pixels restant après ouverture par rapport à l'image d'origine, la taille de l'élement et le volume de l'image après ouverture. 
 
 On calcule le volume de l'image originale
 ```c++
@@ -446,7 +475,7 @@ On calcule le volume de l'image originale
 
 ```
 
-Ensuite on effectue notre successions d'ouvertures en calculant pour chaque ouverture délément i le volume de l'image. On affiche pourcentage de pixels restant / taille de l'élément / volume de l'image
+Ensuite on effectue notre successions d'ouvertures en calculant pour chaque ouverture d'élément i le volume de l'image. On affiche pourcentage de pixels restant / taille de l'élément / volume de l'image
 
 ```c++
 
@@ -480,7 +509,7 @@ On peut déja constater une "diminution des valeurs" après ouverture avec un é
 
 ![derivative](src/imagesCompteRendu/dérivé.png)
 
-Si on se fie à la dérivé on pourrait déduire que la majorité des particules de l'image on une taille d'environ 7 (disque de rayon 7).
+Si on se fie à la dérivée on pourrait déduire que la majorité des particules de l'image ont une taille d'environ 7 (disque de rayon 7).
 
 #### Différence image seuillé / image originale
 
@@ -488,6 +517,5 @@ On compare désormais la courbe granulométrique avec une image seuillée et une
 
 ![compare](src/imagesCompteRendu/comparison.png)
 
-On remarque qu'avec une image de seuillée (s = 120 ) le volume de l'image est plus affecté par la taille de l'élément.
-que l'image originale
+On remarque qu'avec une imageseuillée (s = 120 ) le volume de l'image est plus affecté par la taille de l'élément que l'image originale
 
