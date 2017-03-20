@@ -348,6 +348,7 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
   Image<uint8_t> impulseNoise(Image<uint8_t> &img, float p)
   {
     Image<uint8_t> res(img.getDx(), img.getDy());
+    srand(time(NULL));
 
     for(int y=0; y<img.getDy(); y++)
     {
@@ -371,7 +372,7 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
     return res;
   }
 
-  Image<uint8_t> bruitGaussien(Image<uint8_t> &img,float avg,float deviation)
+  Image<uint8_t> noiseGaussian(Image<uint8_t> &img,float avg,float deviation)
   {
     Image<uint8_t> res(img.getDx(), img.getDy());
 
@@ -386,6 +387,22 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
         res(x,y) = trunc(val+img(x,y));
       }
     }
+    return res;
+  }
+
+  double computeMSE(Image<uint8_t> &imgN, Image<uint8_t> &imgO)
+  {
+    int NM = imgN.getDx() * imgN.getDx();
+    int sum =0;
+    int res = 0;
+    for(int x=0; x<imgN.getDx(); x++)
+    {
+      for(int y=0; y<imgN.getDy(); y++)
+      {
+        sum += pow( (imgO(x,y)-(imgN(x,y))),2);
+      }
+    }
+    res = sum/NM;
     return res;
   }
 

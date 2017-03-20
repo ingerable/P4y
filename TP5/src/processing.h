@@ -30,6 +30,7 @@ Image<uint8_t> contours(Image<uint8_t> img, Image<double> mask);
 Image<uint8_t> medianFilter(Image<uint8_t> img, int N);
 //tp5
 Image<uint8_t> impulseNoise(Image<uint8_t> &img, float p);
-Image<uint8_t> bruitGaussien(Image<uint8_t> &img,float avg,float deviation);
+Image<uint8_t> noiseGaussian(Image<uint8_t> &img,float avg,float deviation);
+double computeMSE(Image<uint8_t> &imgN, Image<uint8_t> &imgO);
 
 #endif /* treatments_h */

@@ -83,7 +83,7 @@ et un écart type données.
 Le protoype de la classe ressemble à ça ;
 
 ```c++
-Image<uint8_t> bruitGaussien(Image<uint8_t> &img,float avg,float deviation);
+Image<uint8_t> noiseGaussian(Image<uint8_t> &img,float avg,float deviation);
 ```
 
 On va parcourir l'image d'origine puis pour chaque pixel ,nous allons lui attribuer une
@@ -133,7 +133,7 @@ for(int y=0; y<img.getDy(); y++)
 }
 ```
 
-### Validation et résultats
+#### Validation et résultats
 
 On test la fonction sur une image de synthèse :
 
@@ -147,3 +147,55 @@ On voit bien qu'on ajoute en moyenne 10 avec une variance de 2.
 Gaus | Originale |  m = 30 $`\sigma=15`$ | m = 60 $`\sigma=30`$ | m = 120 $`\sigma=60`$ |
 |---|---|---|---|---|
 | Images | ![gauss](src/imagesCompteRendu/boat.png)  | ![gauss](src/imagesCompteRendu/gauss30&15.png) | ![gauss](src/imagesCompteRendu/gauss60&30.png) | ![gauss](src/imagesCompteRendu/gauss120&60.png) |
+
+
+### Mean Square Error
+
+On veut pouvoir mesurer la différence moyenne entre une image
+bruitée et une image non bruitée. On va donc faire la somme de la difference élevée au carré pour chaque pixel de l'image bruitée et chaque pixel de l'image original. On divisera ensuite cette somme par le nombre de pixels dans une des 2 images (peu importe laquelle elles ont le même nombre de pixels).
+On va donc utiliser une double boucle pour pouvoir accedéder chaque pixel des 2 images. Ensuite il suffit de réaliser la différence entre le pixel de l'image bruitée et de l'image originale et d'élever au carré :
+
+```c++
+for(int x=0; x<imgN.getDx(); x++)
+{
+  for(int y=0; y<imgN.getDy(); y++)
+  {
+    sum += pow( (imgO(x,y)-(imgN(x,y))),2);
+  }
+}
+```
+
+Puis finalement on divise cette somme par le nombre de pixels des images qui à été préalablement initialisé.
+
+```c++
+int NM = imgN.getDx() * imgN.getDx();
+...
+...
+res = sum/NM;
+return res;
+```
+
+#### Validation
+
+On va tester la fonction sur une image de synthèse avec un bruit impulsionnel (p=0.1), on essaye d'avoir une seule valeur à 255 histoire de pouvoir facilement calculer le MSE à la main et comparer avec ce que la fonction renvoie.
+
+![MSE](src/imagesCompteRendu/MSE.png)
+
+Nous avons qu'une seule valeur qui est différente entre l'image d'origine et l'image bruitée, ce qui veut dire qu'hormis pour cette valeur toutes les différences entre les autres points donneront 0 et ne compteront pas pour le MSE. On réalise juste la différence pour le point différent, on élève cette différence au carré et on divise par le nombre de pixels (ici 25). ((255-1)^2)/25 = 2580
+On retombe sur la valeur renvoyé par la fonction.
+
+### Tests
+
+On obtient les résultats suivant pour le bruitage gaussien:
+
+Bruit gaussien | m = 0 $`\sigma=15`$ | m = 0 $`\sigma=30`$ |
+|---|---|---|---|---|
+**Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030.png)   |
+**MSE** | 263 | 1552 |
+
+Puis pour le bruitage impulsionnel :
+
+Bruit gaussien | m = 0 $`\sigma=15`$ | m = 0 $`\sigma=30`$ |
+|---|---|---|---|---|
+**Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040.png)   |
+**MSE** | 2999 | 7701 |

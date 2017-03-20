@@ -1,0 +1,5 @@
+
+MSE impulse noise 0.15 :2999
+MSE impulse noise 0.40 :7701
+MSE gaussian noise 0 & 15 :263
+MSE gaussian noise 0 & 30 :1552

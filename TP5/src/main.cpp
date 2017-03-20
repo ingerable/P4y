@@ -51,10 +51,18 @@ int main(int argc, const char * argv[]) {
     Image<uint8_t> E = readPGM(fichierPGM);
     //std::cout<<"Image PGM :\n";
 
+    /*writePGM(impulseNoise(E,0.15),"barbaraImpulseNoise015.pgm");
+    writePGM(impulseNoise(E,0.40),"barbaraImpulseNoise040.pgm");
+    writePGM(noiseGaussian(E,0,15),"barbaraGaussianNoise015.pgm");
+    writePGM(noiseGaussian(E,0,30),"barbaraGaussianNoise030.pgm");*/
+    Image <uint8_t> k = impulseNoise(E,0.15);
+    std::cout<<"MSE impulse noise 0.15 :"<<computeMSE(k,E)<<"\n";
+    k = impulseNoise(E,0.40);
+    std::cout<<"MSE impulse noise 0.40 :"<<computeMSE(k,E)<<"\n";
+    k = noiseGaussian(E,0,15);
+    std::cout<<"MSE gaussian noise 0 & 15 :"<<computeMSE(k,E)<<"\n";
+    k = noiseGaussian(E,0,30);
+    std::cout<<"MSE gaussian noise 0 & 30 :"<<computeMSE(k,E)<<"\n";
 
-    //bruitGaussien(T,10,4).print();
-    writePGM(bruitGaussien(E,30,15),"gauss30&15.pgm");
-    writePGM(bruitGaussien(E,60,30),"gauss60&30.pgm");
-    writePGM(bruitGaussien(E,120,60),"gauss120&60.pgm");
     return 0;
 }
