@@ -54,6 +54,6 @@ On regarde maintenant le résultat pour des vraies images :
 
 Probabilité |  0.1 |  0.4 |  0.8 | 
 |---|---|---|---|---|
-![impulseNoise](src/imagesCompteRendu/boatImpulseNoise1.png)  | ![impulseNoise](src/imagesCompteRendu/boatImpulseNoise4.png) | ![impulseNoise](src/imagesCompteRendu/boatImpulseNoise8.png) |
+|Images | ![impulseNoise](src/imagesCompteRendu/boatImpulseNoise1.png)  | ![impulseNoise](src/imagesCompteRendu/boatImpulseNoise4.png) | ![impulseNoise](src/imagesCompteRendu/boatImpulseNoise8.png) |
 
 
