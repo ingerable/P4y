@@ -146,7 +146,4 @@ On voit bien qu'on ajoute en moyenne 10 avec une variance de 2.
 
 Gaus | Originale |  m = 30 $`\sigma=15`$ | m = 60 $`\sigma=30`$ | m = 120 $`\sigma=60`$ |
 |---|---|---|---|---|
-|Images | ![gauss](src/imagesCompteRendu/boat.png)  | ![gauss](src/imagesCompteRendu/gauss30&15.png) | ![gauss](src/imagesCompteRendu/gauss60&30.png) |
-![gauss](src/imagesCompteRendu/gauss120&60.png) |
-
-On
+| Images | ![gauss](src/imagesCompteRendu/boat.png)  | ![gauss](src/imagesCompteRendu/gauss30&15.png) | ![gauss](src/imagesCompteRendu/gauss60&30.png) | ![gauss](src/imagesCompteRendu/gauss120&60.png) |
