@@ -185,11 +185,14 @@ Image<uint8_t> Structel::externalGradient(Image<uint8_t> &img)
 
 Image<uint8_t> Structel::hitOrMiss(Image<uint8_t> &img, Structel a, Structel b)
 {
+  // Image d'origine érodée et dilatée
   Image<uint8_t> eroded(img.getDx(), img.getDy());
   eroded = a.erode(img);
   Image<uint8_t> dilated(img.getDx(), img.getDy());
   dilated = b.dilate(img);
   Image<uint8_t> res(img.getDx(), img.getDy());
+
+  //parcours pour chaque pixel
   for(int y=0; y<img.getDy(); y++)
   {
     for(int x=0; x<img.getDx(); x++)

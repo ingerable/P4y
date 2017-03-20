@@ -39,32 +39,15 @@ int main(int argc, const char * argv[]) {
     Image<uint8_t> medianTest(3,3,bufferMedian);
     medianFilter(medianTest,3).print();
     medianTest.print();*/
-    std::vector<Couple> pB = {{-2,-2},{-2,-1},{-2,0},{-2,1},{-2,2},
-                                {-1,2},{0,2},{1,2},{2,2},
-                              {2,1},{2,0},{2,-1},{2,-2},
-                            {1,-2},{0,-2},{-1,-2}};
 
-   /*uint8_t buffer[]={
-     0,0,0,0,0,0,0,0,0,0,
-     0,0,0,0,0,0,0,0,0,0,
-     0,0,0,255,255,255,0,0,0,0,
-     0,0,0,255,255,255,0,0,0,0,
-     0,0,0,255,255,255,0,0,0,0,
-     0,0,0,255,255,255,0,0,0,0,
-     0,0,0,0,0,0,0,0,0,0,
-     0,0,0,0,0,0,0,0,0,0,
-     0,0,0,0,0,0,0,0,0,0,
-     0,0,0,0,0,0,0,0,0,0
-   };
-   Image<uint8_t> T(10,10,buffer);*/
+
+    writePGM(medianFilter(E,3),"./lenaMedian3.pgm");
+    writePGM(medianFilter(E,5),"./lenaMedian5.pgm");
+    writePGM(medianFilter(E,8),"./lenaMedian8.pgm");
 
 
 
-   //Structel a = Structel::disque(1);
-   //Structel b = Structel(pB);
-   //writePGM(Structel::hitOrMiss(E,a,b), "./hitOrMiss.pgm");
-   //thresholding(E,120);
-   Structel::granulometry(E);
+
 
     return 0;
 }

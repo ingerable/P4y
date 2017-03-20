@@ -36,6 +36,12 @@ un objet stocké dans une liste grace à son index ce qui nous permet de trouver
         list.clear();
 ```
 
+Résultat concrets :
+
+Taille |  3 |  5 |  8 |
+|---|---|---|---|---|
+|Images | ![median](src/imagesCompteRendu/lenaMedian3.png)  | ![median](src/imagesCompteRendu/lenaMedian5.png) | ![median](src/imagesCompteRendu/lenaMedian8.png) |
+
 ## Classe Structel
 
 Pour pouvoir définir une classe représentant un élément structurant nous avons besoin d'un
