@@ -15,6 +15,8 @@
 #include <math.h>
 #include <vector>
 #include <algorithm>
+#include <iostream>
+#include <random>
 
 //thresholding function with uint8_t picture, parameters are a picture and a thresholding value (0-255)
 void thresholding(Image<uint8_t> &image, const int value)
@@ -366,5 +368,40 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
         }
       }
     }
+    return res;
+  }
+
+  Image<uint8_t> bruitGaussien(Image<uint8_t> &img,float avg,float deviation)
+  {
+    Image<uint8_t> res(img.getDx(), img.getDy());
+
+    std::default_random_engine generator;
+    std::normal_distribution<float> distribution(avg, deviation);
+
+    for(int y=0; y<img.getDy(); y++)
+    {
+      for(int x=0; x<img.getDx(); x++)
+      {
+        uint8_t val = (uint8_t) distribution(generator);
+        res(x,y) = trunc(val+img(x,y));
+      }
+    }
+    return res;
+  }
+
+  uint8_t truncPixel(uint8_t val)
+  {
+    uint8_t res;
+
+    if(val<0)
+    {
+      res = 0;
+    }else if(val>255)
+    {
+        res = 255;
+    }else{
+      res = val;
+    }
+
     return res;
   }

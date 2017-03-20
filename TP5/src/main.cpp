@@ -28,12 +28,20 @@ int main(int argc, const char * argv[]) {
     std::string fichierPGM = argv[3];
 
 
-    uint8_t buffer[]={
+    /*uint8_t buffer[]={
       1,2,3,4,5,
       6,7,8,9,10,
       11,12,13,14,15,
       16,17,18,19,20,
       21,22,23,24,25,
+    };*/
+
+    uint8_t buffer[]={
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
     };
 
 
@@ -44,8 +52,9 @@ int main(int argc, const char * argv[]) {
     //std::cout<<"Image PGM :\n";
 
 
-    writePGM(impulseNoise(E,0.1),"boatImpulseNoise1.pgm");
-    //writePGM(impulseNoise(E,0.8),"boatImpulseNoise8.pgm");
-
+    //bruitGaussien(T,10,4).print();
+    writePGM(bruitGaussien(E,30,15),"gauss30&15.pgm");
+    writePGM(bruitGaussien(E,60,30),"gauss60&30.pgm");
+    writePGM(bruitGaussien(E,120,60),"gauss120&60.pgm");
     return 0;
 }
