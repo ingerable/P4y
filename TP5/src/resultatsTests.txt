@@ -4,27 +4,37 @@ dx : 512
 dy : 512
 maxValue : 255
 <<<<<<<<<<<<<<<<<<<< MSE bruit image original >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15  : 2988
-MSE impulse noise 0.40  : 7654
+MSE impulse noise 0.15  : 2992
+MSE impulse noise 0.40  : 7689
 MSE gaussian noise 0 & 15  : 263
 MSE gaussian noise 0 & 30 : 1552
 <<<<<<<<<<<<<<<<<<<< MSE médian 3 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Median 3 : 98
-MSE impulse noise 0.40 Median 3 : 1471
+MSE impulse noise 0.15 Median 3 : 106
+MSE impulse noise 0.40 Median 3 : 1454
 MSE gaussian noise 0 & 15 Median 3 : 84
 MSE gaussian noise 0 & 30 Median 3 : 241
 <<<<<<<<<<<<<<<<<<<< MSE médian 7 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Median 7 : 11
+MSE impulse noise 0.15 Median 7 : 10
 MSE impulse noise 0.40 Median 7 : 26
 MSE gaussian noise 0 & 15 Median 7 : 20
 MSE gaussian noise 0 & 30 Median 7 : 59
 <<<<<<<<<<<<<<<<<<<< MSE filtre moyenneur 3 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Convolve 3 : 392
-MSE impulse noise 0.40 Convolve 3 : 391
+MSE impulse noise 0.15 Convolve 3 : 395
+MSE impulse noise 0.40 Convolve 3 : 394
 MSE gaussian noise 0 & 15 Convolve 3 : 41
 MSE gaussian noise 0 & 30 Convolve 3 : 261
 <<<<<<<<<<<<<<<<<<<< MSE filtre moyenneur 7 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Convolve 7 : 169
-MSE impulse noise 0.40 Convolve 7 : 167
+MSE impulse noise 0.15 Convolve 7 : 171
+MSE impulse noise 0.40 Convolve 7 : 171
 MSE gaussian noise 0 & 15 Convolve 7 : 52
 MSE gaussian noise 0 & 30 Convolve 7 : 174
+<<<<<<<<<<<<<<<<<<<< MSE filtre gaussien 1 >>>>>>>>>>>>>>>>>>>>>>>
+MSE impulse noise 0.15 Gauss 1 : 300
+MSE impulse noise 0.40 Gauss 1 : 976
+MSE gaussian noise 0 & 15 Gauss 1 : 694
+MSE gaussian noise 0 & 30 Gauss 1 : 606
+<<<<<<<<<<<<<<<<<<<< MSE filtre gaussien 2 >>>>>>>>>>>>>>>>>>>>>>>
+MSE impulse noise 0.15 Gauss 2 : 161
+MSE impulse noise 0.40 Gauss 2 : 571
+MSE gaussian noise 0 & 15 Gauss 2 : 536
+MSE gaussian noise 0 & 30 Gauss 2 : 545

@@ -230,7 +230,8 @@ Image<double> gaussianMask(float sigma)
   {
     for(int x=0; x<N; x++)
     {
-      res(x,y)=gaussF(x,y,sigma);
+
+      res(x,y)=gaussF(x-N/2,y-N/2,sigma);
       sum += res(x,y);
     }
   }
