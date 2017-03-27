@@ -42,27 +42,176 @@ int main(int argc, const char * argv[]) {
       1,1,1,1,1,
       1,1,1,1,1,
       1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,10,5,1,
+      1,1,1,5,1,
+      1,1,1,5,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,10,5,1,
+      1,1,1,5,1,
+      1,1,1,5,1,
+      1,1,1,1,1,
     };
 
+    /*uint8_t buffer[]={
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+      1,1,1,1,1,
+    };*/
 
-    Image<uint8_t> T(5,5,buffer);
+
+    Image<uint8_t> T(10,10,buffer);
 
 
     Image<uint8_t> E = readPGM(fichierPGM);
     //std::cout<<"Image PGM :\n";
 
-    /*writePGM(impulseNoise(E,0.15),"barbaraImpulseNoise015.pgm");
-    writePGM(impulseNoise(E,0.40),"barbaraImpulseNoise040.pgm");
-    writePGM(noiseGaussian(E,0,15),"barbaraGaussianNoise015.pgm");
-    writePGM(noiseGaussian(E,0,30),"barbaraGaussianNoise030.pgm");*/
-    Image <uint8_t> k = impulseNoise(E,0.15);
-    std::cout<<"MSE impulse noise 0.15 :"<<computeMSE(k,E)<<"\n";
-    k = impulseNoise(E,0.40);
-    std::cout<<"MSE impulse noise 0.40 :"<<computeMSE(k,E)<<"\n";
-    k = noiseGaussian(E,0,15);
-    std::cout<<"MSE gaussian noise 0 & 15 :"<<computeMSE(k,E)<<"\n";
-    k = noiseGaussian(E,0,30);
-    std::cout<<"MSE gaussian noise 0 & 30 :"<<computeMSE(k,E)<<"\n";
+    //génération d'images
 
+
+    /*writePGM(impulseNoise(E,0.15),"barbaraImpulseNoise015Median3.pgm");
+    writePGM(impulseNoise(E,0.40),"barbaraImpulseNoise040Median3.pgm");
+    writePGM(noiseGaussian(E,0,15),"barbaraGaussianNoise015Median3.pgm");
+    writePGM(noiseGaussian(E,0,30),"barbaraGaussianNoise030Median3.pgm");
+
+    std::cout<<"<<<<<<<<<<<<<<<<<<<< MSE bruit image original >>>>>>>>>>>>>>>>>>>>>>>"<<"\n";
+    Image <uint8_t> k = impulseNoise(E,0.15);
+    std::cout<<"MSE impulse noise 0.15  : "<<computeMSE(k,E)<<"\n";
+    k = impulseNoise(E,0.40);
+    std::cout<<"MSE impulse noise 0.40  : "<<computeMSE(k,E)<<"\n";
+    k = noiseGaussian(E,0,15);
+    std::cout<<"MSE gaussian noise 0 & 15  : "<<computeMSE(k,E)<<"\n";
+    k = noiseGaussian(E,0,30);
+    std::cout<<"MSE gaussian noise 0 & 30 : "<<computeMSE(k,E)<<"\n";
+
+
+    E = medianFilter(E,3);
+
+    writePGM(medianFilter(impulseNoise(E,0.15),3),"barbaraImpulseNoise015Median3.pgm");
+    writePGM(medianFilter(impulseNoise(E,0.40),3),"barbaraImpulseNoise040Median3.pgm");
+    writePGM(medianFilter(noiseGaussian(E,0,15),3),"barbaraGaussianNoise015Median3.pgm");
+    writePGM(medianFilter(noiseGaussian(E,0,30),3),"barbaraGaussianNoise030Median3.pgm");
+
+    std::cout<<"<<<<<<<<<<<<<<<<<<<< MSE médian 3 >>>>>>>>>>>>>>>>>>>>>>>"<<"\n" ;
+
+     k = medianFilter(impulseNoise(E,0.15),3);
+    std::cout<<"MSE impulse noise 0.15 Median 3 : "<<computeMSE(k,E)<<"\n";
+    k = medianFilter(impulseNoise(E,0.40),3);
+    std::cout<<"MSE impulse noise 0.40 Median 3 : "<<computeMSE(k,E)<<"\n";
+    k = medianFilter(noiseGaussian(E,0,15),3);
+    std::cout<<"MSE gaussian noise 0 & 15 Median 3 : "<<computeMSE(k,E)<<"\n";
+    k = medianFilter(noiseGaussian(E,0,30),3);
+    std::cout<<"MSE gaussian noise 0 & 30 Median 3 : "<<computeMSE(k,E)<<"\n";
+
+    E = medianFilter(E,7);
+
+    writePGM(medianFilter(impulseNoise(E,0.15),7),"barbaraImpulseNoise015Median7.pgm");
+    writePGM(medianFilter(impulseNoise(E,0.40),7),"barbaraImpulseNoise040Median7.pgm");
+    writePGM(medianFilter(noiseGaussian(E,0,15),7),"barbaraGaussianNoise015Median7.pgm");
+    writePGM(medianFilter(noiseGaussian(E,0,30),7),"barbaraGaussianNoise030Median7.pgm");
+
+    std::cout<<"<<<<<<<<<<<<<<<<<<<< MSE médian 7 >>>>>>>>>>>>>>>>>>>>>>>"<<"\n";
+
+    k = medianFilter(impulseNoise(E,0.15),7);
+    std::cout<<"MSE impulse noise 0.15 Median 7 : "<<computeMSE(k,E)<<"\n";
+    k = medianFilter(impulseNoise(E,0.40),7);
+    std::cout<<"MSE impulse noise 0.40 Median 7 : "<<computeMSE(k,E)<<"\n";
+    k = medianFilter(noiseGaussian(E,0,15),7);
+    std::cout<<"MSE gaussian noise 0 & 15 Median 7 : "<<computeMSE(k,E)<<"\n";
+    k = medianFilter(noiseGaussian(E,0,30),7);
+    std::cout<<"MSE gaussian noise 0 & 30 Median 7 : "<<computeMSE(k,E)<<"\n";
+
+    std::cout<<"<<<<<<<<<<<<<<<<<<<< MSE filtre moyenneur 3 >>>>>>>>>>>>>>>>>>>>>>>"<<"\n";
+
+    double buf[]={
+      1.0/9,1.0/9,1.0/9,
+      1.0/9,1.0/9,1.0/9,
+      1.0/9,1/9,1/9,
+      1/9,1/9,1/9,
+      1/9,1/9,1/9,
+    };
+    Image<double> m3(3,3);
+
+    for(int y=0;y<3; y++)
+    {
+      for(int x=0;x<3; x++)
+      {
+        m3(x,y) = 1.0/9;
+      }
+    }
+
+    Image <uint8_t> n = impulseNoise(E,0.15);
+    Image <double> l = convolve(n,m3);
+    k = toUint8(l);
+    std::cout<<"MSE impulse noise 0.15 Convolve 3 : "<<computeMSE(k,E)<<"\n";
+    n = impulseNoise(E,0.15);
+    l = convolve(n,m3);
+    k = toUint8(l);
+    std::cout<<"MSE impulse noise 0.40 Convolve 3 : "<<computeMSE(k,E)<<"\n";
+    n = noiseGaussian(E,0,15);
+    l = convolve(n,m3);
+    k = toUint8(l);
+    std::cout<<"MSE gaussian noise 0 & 15 Convolve 3 : "<<computeMSE(k,E)<<"\n";
+    n = noiseGaussian(E,0,30);
+    l = convolve(n,m3);
+    k = toUint8(l);
+    std::cout<<"MSE gaussian noise 0 & 30 Convolve 3 : "<<computeMSE(k,E)<<"\n";
+
+    std::cout<<"<<<<<<<<<<<<<<<<<<<< MSE filtre moyenneur 7 >>>>>>>>>>>>>>>>>>>>>>>"<<"\n";
+
+    Image<double> m7(7,7);
+    for(int y=0;y<7; y++)
+    {
+      for(int x=0;x<7; x++)
+      {
+        m7(x,y)=(1.0/49);
+      }
+    }
+
+    n = impulseNoise(E,0.15);
+    l = convolve(n,m7);
+    k = toUint8(l);
+    std::cout<<"MSE impulse noise 0.15 Convolve 7 : "<<computeMSE(k,E)<<"\n";
+    n = impulseNoise(E,0.15);
+    l = convolve(n,m7);
+    k = toUint8(l);
+    std::cout<<"MSE impulse noise 0.40 Convolve 7 : "<<computeMSE(k,E)<<"\n";
+    n = noiseGaussian(E,0,15);
+    l = convolve(n,m7);
+    k = toUint8(l);
+    std::cout<<"MSE gaussian noise 0 & 15 Convolve 7 : "<<computeMSE(k,E)<<"\n";
+    n = noiseGaussian(E,0,30);
+    l = convolve(n,m7);
+    k = toUint8(l);
+    std::cout<<"MSE gaussian noise 0 & 30 Convolve 7 : "<<computeMSE(k,E)<<"\n";*/
+
+    //writePGM(computeNLMeans(E,21,7,50.0),"test.pgm");
+    Image<uint8_t> K = noiseGaussian(E,0,25);
+    writePGM(K,"bruiter.pgm");
+    Image<uint8_t> M = computeNLMeans(K,21,7,50.0);
+    writePGM(M,"lol.pgm");
     return 0;
 }

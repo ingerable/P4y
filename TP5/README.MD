@@ -45,6 +45,7 @@ else
 
 On teste avec une image de synthèse avec pour probabilité 0.4 et 0.8 :
 
+```
 proba :0.4--------------------
   1 |  2  |  3  |255  |  0  |
 --------------------
@@ -56,7 +57,9 @@ proba :0.4--------------------
 --------------------
   0 | 22  | 23  | 24  | 25  |
 --------------------
+```
 
+```
 proba :0.8--------------------
 255 | 255 | 255 |  0  |  0  |
 --------------------
@@ -68,6 +71,7 @@ proba :0.8--------------------
 --------------------
   0 |  0  | 255  |  255 |  0  |
 --------------------
+```
 
 On regarde maintenant le résultat pour des vraies images :
 
@@ -160,7 +164,7 @@ for(int x=0; x<imgN.getDx(); x++)
 {
   for(int y=0; y<imgN.getDy(); y++)
   {
-    sum += pow( (imgO(x,y)-(imgN(x,y))),2);
+    sum  += (imgO(x,y)-imgN(x,y)) * (imgO(x,y)-imgN(x,y));
   }
 }
 ```
@@ -188,14 +192,42 @@ On retombe sur la valeur renvoyé par la fonction.
 
 On obtient les résultats suivant pour le bruitage gaussien:
 
-Bruit gaussien | m = 0 $`\sigma=15`$ | m = 0 $`\sigma=30`$ |
+Bruit gaussien | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
 |---|---|---|---|---|
 **Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030.png)   |
-**MSE** | 263 | 1552 |
+**MSE** | **263** | 1552 |
 
 Puis pour le bruitage impulsionnel :
 
-Bruit gaussien | m = 0 $`\sigma=15`$ | m = 0 $`\sigma=30`$ |
+Bruit impulsionnel | p = 0.15 | p = 0.40 |
 |---|---|---|---|---|
 **Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040.png)   |
-**MSE** | 2999 | 7701 |
+**MSE** | **2999** | 7701 |
+
+On utilise désormais des filtres pour essayer de réduire le bruit :
+
+Avec le filtre median de taille 3 :
+
+Bruit gaussien + filtre median 3 | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
+|---|---|---|---|---|
+**Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015Median3.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030Median3.png)   |
+**MSE** | **293** | 454 |
+
+Puis pour le bruitage impulsionnel :
+
+Bruit impulsionnel + filtre median 3| p = 0.15 | p = 0.40 |
+|---|---|---|---|---|
+**Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015Median3.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040Median3.png)   |
+**MSE** | **354** | 1796 |
+
+Avec le filtre median de taille 7 :
+
+Bruit gaussien + filtre median 7 | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
+|---|---|---|---|---|
+**Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015Median7.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030Median7.png)   |
+**MSE** | **169** | **169** |
+
+Bruit impulsionnel + filtre median 7| p = 0.15 | p = 0.40 |
+|---|---|---|---|---|
+**Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015Median7.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040Median7.png)   |
+**MSE** | **52** | 174 |

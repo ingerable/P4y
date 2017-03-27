@@ -32,5 +32,7 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N);
 Image<uint8_t> impulseNoise(Image<uint8_t> &img, float p);
 Image<uint8_t> noiseGaussian(Image<uint8_t> &img,float avg,float deviation);
 double computeMSE(Image<uint8_t> &imgN, Image<uint8_t> &imgO);
-
+void impulseNoiseGraph(Image<uint8_t> &img);
+int computeSimilarity(Image<uint8_t> &img, int x1, int y1, int x2, int y2, int D);
+Image<uint8_t> computeNLMeans(Image<uint8_t> &img, int windowSize, int patchSize, double h);
 #endif /* treatments_h */
