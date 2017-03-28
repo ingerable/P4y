@@ -91,8 +91,8 @@ int main(int argc, const char * argv[]) {
 
     //génération d'images
 
-
-    /*writePGM(impulseNoise(E,0.15),"barbaraImpulseNoise015Median3.pgm");
+/*
+    writePGM(impulseNoise(E,0.15),"barbaraImpulseNoise015Median3.pgm");
     writePGM(impulseNoise(E,0.40),"barbaraImpulseNoise040Median3.pgm");
     writePGM(noiseGaussian(E,0,15),"barbaraGaussianNoise015Median3.pgm");
     writePGM(noiseGaussian(E,0,30),"barbaraGaussianNoise030Median3.pgm");
@@ -232,12 +232,12 @@ int main(int argc, const char * argv[]) {
     writePGM(k,"barbaraImpulseNoise040Gauss1.pgm");
     std::cout<<"MSE impulse noise 0.40 Gauss 1 : "<<computeMSE(k,E)<<"\n";
     n = noiseGaussian(E,0,15);
-    l = convolve(k,maskG);
+    l = convolve(n,maskG);
     k = toUint8(l);
     writePGM(k,"barbaraGaussianNoise015Gauss1.pgm");
     std::cout<<"MSE gaussian noise 0 & 15 Gauss 1 : "<<computeMSE(k,E)<<"\n";
     n = noiseGaussian(E,0,30);
-    l = convolve(k,maskG);
+    l = convolve(n,maskG);
     k = toUint8(l);
     writePGM(k,"barbaraGaussianNoise030Gauss1.pgm");
     std::cout<<"MSE gaussian noise 0 & 30 Gauss 1 : "<<computeMSE(k,E)<<"\n";
@@ -263,23 +263,23 @@ int main(int argc, const char * argv[]) {
     writePGM(k,"barbaraImpulseNoise040Gauss2.pgm");
     std::cout<<"MSE impulse noise 0.40 Gauss 2 : "<<computeMSE(k,E)<<"\n";
     n = noiseGaussian(E,0,15);
-    l = convolve(k,maskG);
+    l = convolve(n,maskG);
     k = toUint8(l);
     writePGM(k,"barbaraGaussianNoise015Gauss2.pgm");
     std::cout<<"MSE gaussian noise 0 & 15 Gauss 2 : "<<computeMSE(k,E)<<"\n";
     n = noiseGaussian(E,0,30);
-    l = convolve(k,maskG);
+    l = convolve(n,maskG);
     k = toUint8(l);
     writePGM(k,"barbaraGaussianNoise030Gauss2.pgm");
     std::cout<<"MSE gaussian noise 0 & 30 Gauss 2 : "<<computeMSE(k,E)<<"\n";
 
-
+*/
     //writePGM(computeNLMeans(E,21,7,50.0),"test.pgm");
 
-  */
-    Image<uint8_t> K = noiseGaussian(E,0,15);
-    Image<uint8_t> M = computeNLMeans(K,21,3,50.0);
-    writePGM(M,"NLBarbara025.pgm");
+
+
+    //Image<uint8_t> M = computeNLMeans(K,21,3,50.0);
+    //writePGM(M,"NLBarbara025.pgm");
 
     return 0;
 }

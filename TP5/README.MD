@@ -195,12 +195,12 @@ On retombe sur la valeur renvoyé par la fonction.
 Bruit gaussien | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
 |---|---|---|---|---|
 **Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030.png)   |
-**MSE** | **263** | 1552 |
+**MSE** | 224 | 870 |
 
 Bruit impulsionnel | p = 0.15 | p = 0.40 |
 |---|---|---|---|---|
 **Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040.png)   |
-**MSE** | **2992** | 7689 |
+**MSE** | 2965 | 7696 |
 
 On utilise désormais des filtres pour essayer de réduire le bruit :
 
@@ -209,24 +209,24 @@ On utilise désormais des filtres pour essayer de réduire le bruit :
 Bruit gaussien + filtre moyenneur 3 | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
 |---|---|---|---|---|
 **Visuel** | ![gaussian](src/imagesCompteRendu/barbaraImpulseGaussianNoise015Moyenneur3.png)  |![gaussian](src/imagesCompteRendu/barbaraImpulseGaussianNoise030Moyenneur3.png)   |
-**MSE** | **41** | 261 |
+**MSE** | 41 | 113 |
 
 Bruit impulsionnel + filtre moyenneur 3| p = 0.15 | p = 0.40 |
 |---|---|---|---|---|
 **Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015Moyenneur3.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040Moyenneur3.png)   |
-**MSE** | 395 | **394** |
+**MSE** | 401 | 401 |
 
 **Avec le filtre moyenneur de taille 7 :**
 
 Bruit gaussien + filtre moyenneur 7 | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
 |---|---|---|---|---|
 **Visuel** | ![gaussian](src/imagesCompteRendu/barbaraImpulseGaussianNoise015Moyenneur7.png)  |![gaussian](src/imagesCompteRendu/barbaraImpulseGaussianNoise030Moyenneur7.png)   |
-**MSE** | **52** | 174 |
+**MSE** | 52 | 174 |
 
 Bruit impulsionnel + filtre moyenneur 7 | p = 0.15 | p = 0.40 |
 |---|---|---|---|---|
 **Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015Moyenneur7.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040Moyenneur7.png)   |
-**MSE** | 171 | 171 |
+**MSE** | 179 | 176 |
 
 Le filtre moyenneur à plus de mal avec le bruit impulsionnel.
 
@@ -235,49 +235,47 @@ Le filtre moyenneur à plus de mal avec le bruit impulsionnel.
 Bruit gaussien + filtre median 3 | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
 |---|---|---|---|---|
 **Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015Median3.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030Median3.png)   |
-**MSE** | **84** | 241 |
+**MSE** | 94 | 265 |
 
 Bruit impulsionnel + filtre median 3| p = 0.15 | p = 0.40 |
 |---|---|---|---|---|
 **Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015Median3.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040Median3.png)   |
-**MSE** | **104** | 1454 |
+**MSE** | 99 | 1404 |
 
 **Avec le filtre median de taille 7 :**
 
 Bruit gaussien + filtre median 7 | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
 |---|---|---|---|---|
 **Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015Median7.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030Median7.png)   |
-**MSE** | **20** | 59 |
+**MSE** | **23** | **54** |
 
 Bruit impulsionnel + filtre median 7| p = 0.15 | p = 0.40 |
 |---|---|---|---|---|
 **Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015Median7.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040Median7.png)   |
-**MSE** | **10** | 26 |
+**MSE** | **11** | **26** |
 
-On remarque qu'avec un filtre médian plus grand on arrive à supprimer plus de bruit.
+Le filtre médian 7 est donc très efficace.
 
 **Avec le filtre gaussien de taille 1 :**
 
 Bruit gaussien + filtre gaussien 1 | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
 |---|---|---|---|---|
 **Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015Gauss1.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030Gauss1.png)   |
-**MSE** | **694** | 606 |
+**MSE** | 33 | 86 |
 
 Bruit impulsionnel + filtre gaussien 1| p = 0.15 | p = 0.40 |
 |---|---|---|---|---|
 **Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015Gauss1.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040Gauss1.png)   |
-**MSE** | **300** | 976 |
+**MSE** | 305 | 980 |
 
 **Avec le filtre gaussien de taille 2 :**
 
 Bruit gaussien + filtre gaussien 2 | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
 |---|---|---|---|---|
 **Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015Gauss2.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030Gauss2.png)   |
-**MSE** | **536** | 545 |
+**MSE** | 48 | 63 |
 
 Bruit impulsionnel + filtre gaussien 2 | p = 0.15 | p = 0.40 |
 |---|---|---|---|---|
 **Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015Gauss2.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040Gauss2.png)   |
-**MSE** | **161** | 571 |
-
-Le filtre gaussien n'est pas très efficace, en particulier pour le bruit gaussien.
+**MSE** | 164 | 584 |

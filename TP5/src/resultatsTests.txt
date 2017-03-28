@@ -1,0 +1,40 @@
+Reading header.
+File ./../imagesBase/barbara.pgm
+dx : 512
+dy : 512
+maxValue : 255
+<<<<<<<<<<<<<<<<<<<< MSE bruit image original >>>>>>>>>>>>>>>>>>>>>>>
+MSE impulse noise 0.15  : 2965
+MSE impulse noise 0.40  : 7696
+MSE gaussian noise 0 & 15  : 224
+MSE gaussian noise 0 & 30 : 870
+<<<<<<<<<<<<<<<<<<<< MSE médian 3 >>>>>>>>>>>>>>>>>>>>>>>
+MSE impulse noise 0.15 Median 3 : 99
+MSE impulse noise 0.40 Median 3 : 1404
+MSE gaussian noise 0 & 15 Median 3 : 94
+MSE gaussian noise 0 & 30 Median 3 : 265
+<<<<<<<<<<<<<<<<<<<< MSE médian 7 >>>>>>>>>>>>>>>>>>>>>>>
+MSE impulse noise 0.15 Median 7 : 11
+MSE impulse noise 0.40 Median 7 : 26
+MSE gaussian noise 0 & 15 Median 7 : 23
+MSE gaussian noise 0 & 30 Median 7 : 54
+<<<<<<<<<<<<<<<<<<<< MSE filtre moyenneur 3 >>>>>>>>>>>>>>>>>>>>>>>
+MSE impulse noise 0.15 Convolve 3 : 401
+MSE impulse noise 0.40 Convolve 3 : 401
+MSE gaussian noise 0 & 15 Convolve 3 : 41
+MSE gaussian noise 0 & 30 Convolve 3 : 113
+<<<<<<<<<<<<<<<<<<<< MSE filtre moyenneur 7 >>>>>>>>>>>>>>>>>>>>>>>
+MSE impulse noise 0.15 Convolve 7 : 179
+MSE impulse noise 0.40 Convolve 7 : 176
+MSE gaussian noise 0 & 15 Convolve 7 : 59
+MSE gaussian noise 0 & 30 Convolve 7 : 73
+<<<<<<<<<<<<<<<<<<<< MSE filtre gaussien 1 >>>>>>>>>>>>>>>>>>>>>>>
+MSE impulse noise 0.15 Gauss 1 : 305
+MSE impulse noise 0.40 Gauss 1 : 980
+MSE gaussian noise 0 & 15 Gauss 1 : 33
+MSE gaussian noise 0 & 30 Gauss 1 : 86
+<<<<<<<<<<<<<<<<<<<< MSE filtre gaussien 2 >>>>>>>>>>>>>>>>>>>>>>>
+MSE impulse noise 0.15 Gauss 2 : 164
+MSE impulse noise 0.40 Gauss 2 : 584
+MSE gaussian noise 0 & 15 Gauss 2 : 48
+MSE gaussian noise 0 & 30 Gauss 2 : 63

@@ -188,10 +188,7 @@ Image<double> convolve(Image<uint8_t> &img, Image<double> &mask)
       {
         for(int mx = 0; mx<mask.getDx(); mx++)
         {
-          if( ((x-(mask.getDx()/2)+mx)<0) || ((y-(mask.getDy()/2)+my)<0) || ((x-(mask.getDx()/2)+mx)>img.getDx()) || ((y-(mask.getDy()/2)+my)>img.getDy()) )
-          {
-            sum += 0;
-          }else
+          if( ((x-(mask.getDx()/2)+mx)>=0) && ((y-(mask.getDy()/2)+my)>=0) && ((x-(mask.getDx()/2)+mx)<img.getDx()) && ((y-(mask.getDy()/2)+my)<img.getDy()) )
           {
               sum += mask(mx,my)*img(x+mx-(mask.getDx()/2),y+my-(mask.getDy()/2));
           }
@@ -481,16 +478,15 @@ for(int y=0; y<img.getDy(); y++)
           if(sy!=y && sx!=x) // on est sur le point central
           {
             tempWeight = computeWeight(img, x, y, sx, sy, patchSize, h);
-            val = val + tempWeight*img(sx,sy);
-            sumWeight = sumWeight + tempWeight;
             max = std::max(max,tempWeight);
+            sumWeight = sumWeight + tempWeight;
+            val = val + tempWeight*img(sx,sy);
           }
         }
       }
     }
     sumWeight = sumWeight + max; // on ajoute le poids maximum qui est le poids du point xi=xj
-    max = img(x,y) * max; // puis on l'ajoute à la futur valeur du point courant
-    val = val + max;
+    val = val + max*img(x,y);// puis on l'ajoute à la futur valeur du point courant
     val = val/sumWeight;
     res(x,y) = (uint8_t) val;
 
