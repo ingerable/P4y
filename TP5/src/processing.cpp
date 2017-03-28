@@ -206,41 +206,35 @@ Image<double> convolve(Image<uint8_t> &img, Image<double> &mask)
 
 double gaussF(int x,int y, double sigma)
 {
-  double res = 0;
-  res=exp(-(pow(x,2)+pow(y,2))/(2*pow(sigma,2)));
-  return res;
+
+  return exp(-(x*x+y*y)/(2*(sigma*sigma)));
 }
 
 Image<double> gaussianMask(float sigma)
 {
-  int N = 0;
-  if( int(6*sigma)%2==0)
+  int N = floor((sigma*6));
+  if(N%2==0)
   {
-    N = int(6*sigma)+1;
-  }
-  else
-  {
-    N = 6*sigma;
+    N = floor((sigma*6)+1);
   }
   double sum=0;
 
   Image<double> res(N,N);
 
-  for(int y=0; y<N; y++)
+  for(int y=0; y<res.getDy(); y++)
   {
-    for(int x=0; x<N; x++)
+    for(int x=0; x<res.getDx(); x++)
     {
-
       res(x,y)=gaussF(x-N/2,y-N/2,sigma);
       sum += res(x,y);
     }
   }
 
-  for(int y=0; y<N; y++)
+  for(int y=0; y<res.getDy(); y++)
   {
-    for(int x=0; x<N; x++)
+    for(int x=0; x<res.getDx(); x++)
     {
-      res(x,y)=(res(x,y)/sum);
+      res(x,y)=res(x,y)/sum;
     }
   }
 
@@ -377,15 +371,24 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
   {
     Image<uint8_t> res(img.getDx(), img.getDy());
 
-    std::default_random_engine generator;
+    std::default_random_engine generator(time(NULL));
     std::normal_distribution<float> distribution(avg, deviation);
 
     for(int y=0; y<img.getDy(); y++)
     {
       for(int x=0; x<img.getDx(); x++)
       {
-        uint8_t val = (uint8_t) distribution(generator);
-        res(x,y) = trunc(val+img(x,y));
+        float val = distribution(generator) + img(x,y);
+
+        if(val<0)
+        {
+          val = 0;
+        }else if(val>255)
+        {
+            val = 255;
+        }
+
+        res(x,y) = (uint8_t) val;
       }
     }
     return res;
@@ -407,37 +410,36 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
     return res;
   }
 
-  uint8_t truncPixel(uint8_t val)
+
+/*  double computeSimilarity(Image<uint8_t> &img, int x1, int y1, int x2, int y2, int D)
   {
-    uint8_t res;
-
-    if(val<0)
-    {
-      res = 0;
-    }else if(val>255)
-    {
-        res = 255;
-    }else{
-      res = val;
-    }
-
-    return res;
-  }
-
-  int computeSimilarity(Image<uint8_t> &img, int x1, int y1, int x2, int y2, int D)
-  {
-    int res=0;
+    double res=0.0;
     for(int y=0; y<2*D+1; y++)
     {
       for(int x=0; x<2*D+1; x++)
       {
-        if( ((x1-D)>=0 && (y1-D)>=0 && (x1+D)<img.getDx() && (y1+D)<img.getDy())   &&   ((x2-D)>=0 && (y2-D)>=0 && (x2+D)<img.getDx() && (y2+D)<img.getDy()) )
+        if( (x1-D)>=0 && (y1-D)>=0 && (x1+D)<img.getDx() && (y1+D)<img.getDy()  &&   (x2-D)>=0 && (y2-D)>=0 && (x2+D)<img.getDx() && (y2+D)<img.getDy() )
         {
-          res = res +  (img(x1-D, y1-D) - img(x2-D, y2-D)) * (img(x1-D, y1-D) - img(x2-D, y2-D));
-          //std::cout<<res<<"\n";
-          //std::cout.flush();
-        }else{
+          double value =  (img(x1-D, y1-D) - img(x2-D, y2-D));
+          res = res + (value*value);
+        }
+      }
+    }
+    //printf("%d\n",res );
+    return res;
+  }*/
 
+  double computeSimilarity(Image<uint8_t> &img, int x1, int y1, int x2, int y2, int D)
+  {
+    double res=0.0;
+    for(int y=-D; y<D+1; y++)
+    {
+      for(int x=-D; x<D+1; x++)
+      {
+        if( (x1+D)>=0 && (y1+D)>=0 && (x1+D)<img.getDx() && (y1+D)<img.getDy()  &&   (x2+D)>=0 && (y2+D)>=0 && (x2+D)<img.getDx() && (y2+D)<img.getDy() )
+        {
+          double value =  (img(x1+D, y1+D) - img(x2+D, y2+D));
+          res = res + (value*value);
         }
       }
     }
@@ -448,51 +450,51 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
 
 double computeWeight(Image<uint8_t> &img, int x1, int y1, int x2, int y2, int D, double h)
 {
-  double res;
-  res = exp( (-(computeSimilarity(img, x1, y1, x2, y2, D) / (h*h))));
-  return res;
+  return exp( (-computeSimilarity(img, x1, y1, x2, y2, D)) / (h*h) );
 }
 
 
 Image<uint8_t> computeNLMeans(Image<uint8_t> &img, int windowSize, int patchSize, double h)
 {
-  Image<double> res(img.getDx(), img.getDy());
+  Image<uint8_t> res(img.getDx(), img.getDy());
 
-
+  double val;
+  double sumWeight;
+  double max;
+  double tempWeight;
 
 for(int y=0; y<img.getDy(); y++)
 {
   for(int x=0; x<img.getDy(); x++)
   {
     // espace de recherche
-    double weight=0;
-    double sumWeight=0;
-    double max=0;
-    double tempWeight=0;
-    for(int sy=-(windowSize/2); sy<=(windowSize/2)+1; sy++)
+     val=0.0;
+     sumWeight=0.0;
+     max=0.0;
+     tempWeight=0.0;
+    for(int sy=y-windowSize; sy<y+windowSize; sy++)
     {
-      for(int sx=(-windowSize/2); sx<=(windowSize/2)+1; sx++)
+      for(int sx=x-windowSize; sx<x+windowSize; sx++)
       {
-        if( (x+sx)>=0 && (x+sx)<img.getDx() && (y+sy)>=0 && (y+sy)<img.getDy() )
+        if( sx>=0 && sx<img.getDx() && sy>=0 && sy<img.getDy() )
         {
           if(sy!=y && sx!=x) // on est sur le point central
           {
             tempWeight = computeWeight(img, x, y, sx, sy, patchSize, h);
-            weight = weight + tempWeight*img(x+sx,y+sy);
-            //weight = weight + tempWeight*img(sx,sy);
+            val = val + tempWeight*img(sx,sy);
             sumWeight = sumWeight + tempWeight;
-              max = std::max(max,tempWeight);
-          }else{
-
+            max = std::max(max,tempWeight);
           }
         }
       }
     }
-    max = img(x,y) * max;
-    sumWeight = sumWeight + max;
-    res(x,y) = (weight/sumWeight);
-    //printf("%f\n",res(x,y));
+    sumWeight = sumWeight + max; // on ajoute le poids maximum qui est le poids du point xi=xj
+    max = img(x,y) * max; // puis on l'ajoute à la futur valeur du point courant
+    val = val + max;
+    val = val/sumWeight;
+    res(x,y) = (uint8_t) val;
+
   }
 }
-  return toUint8(res);
+  return res;
 }
