@@ -96,30 +96,20 @@ Il faut faire attention à bien ramener la nouvelle valeur à zéro si elle est 
 et ramener la valeur à 255 si elle est supérieure à 255.
 
 ```c++
-std::default_random_engine generator;
+std::default_random_engine generator(time(NULL));
 std::normal_distribution<float> distribution(avg, deviation);
 ```
 
 Après avoir initialisé la distribution on va pouvoir attribuer leur nouvelles valeurs
-à chaque pixel. On écrit une fonction qui permet de ramener à 0 ou 255 une valeur qui
-serait en dehors de cet ensemble.
+à chaque pixel.
 
 ```c++
-uint8_t truncPixel(uint8_t val)
+if(val<0)
 {
-  uint8_t res;
-
-  if(val<0)
-  {
-    res = 0;
-  }else if(val>255)
-  {
-      res = 255;
-  }else{
-    res = val;
-  }
-
-  return res;
+  val = 0;
+}else if(val>255)
+{
+    val = 255;
 }
 ```
 
@@ -131,8 +121,17 @@ for(int y=0; y<img.getDy(); y++)
 {
   for(int x=0; x<img.getDx(); x++)
   {
-    uint8_t val = (uint8_t) distribution(generator);
-    res(x,y) = trunc(val+img(x,y));
+    float val = distribution(generator) + img(x,y);
+
+    if(val<0)
+    {
+      val = 0;
+    }else if(val>255)
+    {
+        val = 255;
+    }
+
+    res(x,y) = (uint8_t) val;
   }
 }
 ```

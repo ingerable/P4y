@@ -281,5 +281,6 @@ int main(int argc, const char * argv[]) {
     //Image<uint8_t> M = computeNLMeans(K,21,3,50.0);
     //writePGM(M,"NLBarbara025.pgm");
 
+
     return 0;
 }
