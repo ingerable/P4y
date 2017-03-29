@@ -408,34 +408,17 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
   }
 
 
-/*  double computeSimilarity(Image<uint8_t> &img, int x1, int y1, int x2, int y2, int D)
-  {
-    double res=0.0;
-    for(int y=0; y<2*D+1; y++)
-    {
-      for(int x=0; x<2*D+1; x++)
-      {
-        if( (x1-D)>=0 && (y1-D)>=0 && (x1+D)<img.getDx() && (y1+D)<img.getDy()  &&   (x2-D)>=0 && (y2-D)>=0 && (x2+D)<img.getDx() && (y2+D)<img.getDy() )
-        {
-          double value =  (img(x1-D, y1-D) - img(x2-D, y2-D));
-          res = res + (value*value);
-        }
-      }
-    }
-    //printf("%d\n",res );
-    return res;
-  }*/
-
   double computeSimilarity(Image<uint8_t> &img, int x1, int y1, int x2, int y2, int D)
   {
     double res=0.0;
-    for(int y=-D; y<D+1; y++)
+    for(int y=-D; y<=D; y++)
     {
-      for(int x=-D; x<D+1; x++)
+      for(int x=-D; x<=D; x++)
       {
-        if( (x1+D)>=0 && (y1+D)>=0 && (x1+D)<img.getDx() && (y1+D)<img.getDy()  &&   (x2+D)>=0 && (y2+D)>=0 && (x2+D)<img.getDx() && (y2+D)<img.getDy() )
+        if( (x1+x)>=0 && (y1+y)>=0 && (x1+x)<img.getDx() && (y1+y)<img.getDy()
+        &&   (x2+x)>=0 && (y2+y)>=0 && (x2+x)<img.getDx() && (y2+y)<img.getDy() )
         {
-          double value =  (img(x1+D, y1+D) - img(x2+D, y2+D));
+          double value =  (double(img(x1+x, y1+y)) - double(img(x2+x, y2+y)));
           res = res + (value*value);
         }
       }
@@ -443,7 +426,6 @@ Image<uint8_t> medianFilter(Image<uint8_t> img, int N)
     //printf("%d\n",res );
     return res;
   }
-
 
 double computeWeight(Image<uint8_t> &img, int x1, int y1, int x2, int y2, int D, double h)
 {
@@ -462,7 +444,7 @@ Image<uint8_t> computeNLMeans(Image<uint8_t> &img, int windowSize, int patchSize
 
 for(int y=0; y<img.getDy(); y++)
 {
-  for(int x=0; x<img.getDy(); x++)
+  for(int x=0; x<img.getDx(); x++)
   {
     // espace de recherche
      val=0.0;
@@ -478,15 +460,15 @@ for(int y=0; y<img.getDy(); y++)
           if(sy!=y && sx!=x) // on est sur le point central
           {
             tempWeight = computeWeight(img, x, y, sx, sy, patchSize, h);
-            max = std::max(max,tempWeight);
+            max = std::max(tempWeight,max);
             sumWeight = sumWeight + tempWeight;
-            val = val + tempWeight*img(sx,sy);
+            val = val + tempWeight*double(img(sx,sy));
           }
         }
       }
     }
     sumWeight = sumWeight + max; // on ajoute le poids maximum qui est le poids du point xi=xj
-    val = val + max*img(x,y);// puis on l'ajoute à la futur valeur du point courant
+    val = val + max*double(img(x,y));// puis on l'ajoute à la futur valeur du point courant
     val = val/sumWeight;
     res(x,y) = (uint8_t) val;
 
