@@ -168,7 +168,7 @@ int main(int argc, const char * argv[]) {
     k = toUint8(l);
     writePGM(k,"barbaraImpulseNoise015Moyenneur3.pgm");
     std::cout<<"MSE impulse noise 0.15 Convolve 3 : "<<computeMSE(k,E)<<"\n";
-    n = impulseNoise(E,0.15);
+    n = impulseNoise(E,0.40);
     l = convolve(n,m3);
     k = toUint8(l);
     writePGM(k,"barbaraImpulseNoise040Moyenneur3.pgm");
@@ -200,7 +200,7 @@ int main(int argc, const char * argv[]) {
     k = toUint8(l);
     writePGM(k,"barbaraImpulseNoise015Moyenneur7.pgm");
     std::cout<<"MSE impulse noise 0.15 Convolve 7 : "<<computeMSE(k,E)<<"\n";
-    n = impulseNoise(E,0.15);
+    n = impulseNoise(E,0.40);
     l = convolve(n,m7);
     k = toUint8(l);
     writePGM(k,"barbaraImpulseNoise040Moyenneur7.pgm");

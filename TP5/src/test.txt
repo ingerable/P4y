@@ -4,37 +4,37 @@ dx : 512
 dy : 512
 maxValue : 255
 <<<<<<<<<<<<<<<<<<<< MSE bruit image original >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15  : 2991
-MSE impulse noise 0.40  : 7712
-MSE gaussian noise 0 & 15  : 225
-MSE gaussian noise 0 & 30 : 874
+MSE impulse noise 0.15  : 2983
+MSE impulse noise 0.40  : 7650
+MSE gaussian noise 0 & 15  : 224
+MSE gaussian noise 0 & 30 : 870
 <<<<<<<<<<<<<<<<<<<< MSE médian 3 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Median 3 : 355
-MSE impulse noise 0.40 Median 3 : 1849
+MSE impulse noise 0.15 Median 3 : 353
+MSE impulse noise 0.40 Median 3 : 1790
 MSE gaussian noise 0 & 15 Median 3 : 303
 MSE gaussian noise 0 & 30 Median 3 : 470
 <<<<<<<<<<<<<<<<<<<< MSE médian 7 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Median 7 : 297
+MSE impulse noise 0.15 Median 7 : 296
 MSE impulse noise 0.40 Median 7 : 336
-MSE gaussian noise 0 & 15 Median 7 : 299
-MSE gaussian noise 0 & 30 Median 7 : 328
+MSE gaussian noise 0 & 15 Median 7 : 298
+MSE gaussian noise 0 & 30 Median 7 : 326
 <<<<<<<<<<<<<<<<<<<< MSE filtre moyenneur 3 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Convolve 3 : 597
-MSE impulse noise 0.40 Convolve 3 : 597
-MSE gaussian noise 0 & 15 Convolve 3 : 234
-MSE gaussian noise 0 & 30 Convolve 3 : 306
+MSE impulse noise 0.15 Convolve 3 : 600
+MSE impulse noise 0.40 Convolve 3 : 1406
+MSE gaussian noise 0 & 15 Convolve 3 : 233
+MSE gaussian noise 0 & 30 Convolve 3 : 305
 <<<<<<<<<<<<<<<<<<<< MSE filtre moyenneur 7 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Convolve 7 : 450
-MSE impulse noise 0.40 Convolve 7 : 446
+MSE impulse noise 0.15 Convolve 7 : 449
+MSE impulse noise 0.40 Convolve 7 : 850
 MSE gaussian noise 0 & 15 Convolve 7 : 329
 MSE gaussian noise 0 & 30 Convolve 7 : 343
 <<<<<<<<<<<<<<<<<<<< MSE filtre gaussien 1 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Gauss 1 : 487
-MSE impulse noise 0.40 Gauss 1 : 1160
+MSE impulse noise 0.15 Gauss 1 : 492
+MSE impulse noise 0.40 Gauss 1 : 1170
 MSE gaussian noise 0 & 15 Gauss 1 : 204
 MSE gaussian noise 0 & 30 Gauss 1 : 257
 <<<<<<<<<<<<<<<<<<<< MSE filtre gaussien 2 >>>>>>>>>>>>>>>>>>>>>>>
-MSE impulse noise 0.15 Gauss 2 : 421
-MSE impulse noise 0.40 Gauss 2 : 823
+MSE impulse noise 0.15 Gauss 2 : 424
+MSE impulse noise 0.40 Gauss 2 : 828
 MSE gaussian noise 0 & 15 Gauss 2 : 302
 MSE gaussian noise 0 & 30 Gauss 2 : 316
