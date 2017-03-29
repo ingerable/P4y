@@ -436,3 +436,17 @@ for(int y=0; y<img.getDy(); y++)
   return res;
 }
 ```
+
+### Résultats NL-MEANS
+
+**patchSize=7** **windowSize=21** **h=50.0**
+
+Bruit gaussien + NL-MEANS | m = 0  et $`\sigma=15`$ | m = 0 et $`\sigma=30`$ |
+|---|---|---|---|---|
+**Visuel** | ![gaussian](src/imagesCompteRendu/barbaraGaussianNoise015NL.png)  |![gaussian](src/imagesCompteRendu/barbaraGaussianNoise030NL.png)   |
+**MSE** | 54 | 344 |
+
+Bruit impulsionnel + NL-MEANS | p = 0.15 | p = 0.40 |
+|---|---|---|---|---|
+**Visuel** | ![impulse](src/imagesCompteRendu/barbaraImpulseNoise015Gauss2.png)  |![impulse](src/imagesCompteRendu/barbaraImpulseNoise040Gauss2.png)   |
+**MSE** | 2079 | 5519 |

@@ -92,7 +92,7 @@ int main(int argc, const char * argv[]) {
     //génération d'images
 
 
-    writePGM(impulseNoise(E,0.15),"barbaraImpulseNoise015Median3.pgm");
+  /*  writePGM(impulseNoise(E,0.15),"barbaraImpulseNoise015Median3.pgm");
     writePGM(impulseNoise(E,0.40),"barbaraImpulseNoise040Median3.pgm");
     writePGM(noiseGaussian(E,0,15),"barbaraGaussianNoise015Median3.pgm");
     writePGM(noiseGaussian(E,0,30),"barbaraGaussianNoise030Median3.pgm");
@@ -271,12 +271,12 @@ int main(int argc, const char * argv[]) {
     l = convolve(n,maskG);
     k = toUint8(l);
     writePGM(k,"barbaraGaussianNoise030Gauss2.pgm");
-    std::cout<<"MSE gaussian noise 0 & 30 Gauss 2 : "<<computeMSE(k,E)<<"\n";
+    std::cout<<"MSE gaussian noise 0 & 30 Gauss 2 : "<<computeMSE(k,E)<<"\n";*/
 
 
     //writePGM(computeNLMeans(E,21,7,50.0),"test.pgm");
 
-    /*std::cout<<"NL MEANS : Patch size  7 | windowSize 21 | h=50.0:"<<"\n";
+    std::cout<<"NL MEANS : Patch size  7 | windowSize 21 | h=50.0:"<<"\n";
 
     Image<uint8_t> K = noiseGaussian(E,0,15);
     Image<uint8_t> M = computeNLMeans(K,21,2,50.0);
@@ -300,7 +300,7 @@ int main(int argc, const char * argv[]) {
     M = computeNLMeans(K,21,2,50.0);
     writePGM(M,"barbaraImpulseNoise040NL.pgm");
 
-    std::cout<<"MSE Impulse 040 NL MEANS :"<<computeMSE(E,M)<<"\n";*/
+    std::cout<<"MSE Impulse 040 NL MEANS :"<<computeMSE(E,M)<<"\n";
 
     return 0;
 }

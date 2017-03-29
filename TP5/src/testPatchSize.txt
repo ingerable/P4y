@@ -1,0 +1,1 @@
+windowSize patch strenght MSE
